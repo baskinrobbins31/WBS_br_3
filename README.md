@@ -17,7 +17,7 @@
 - **test/설명**: 테스트 관련 작업 시
   - 예시: `test/add-unit-tests`
 
-## Git Commit Me*ssage Convention
+## Git Commit Message Convention
 커밋 메시지는 아래와 같은 형식을 따릅니다:
 
 ### 타입(Type)*
