@@ -149,7 +149,8 @@ replay_pid*
 # Icon must end with two \r
 Icon
 
-test/database.properties
+resource/database.properties
+WBS_br_31.iml
 
 # Thumbnails
 ._*
