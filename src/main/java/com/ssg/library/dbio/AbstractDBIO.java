@@ -1,7 +1,6 @@
 package main.java.com.ssg.library.dbio;
 
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;

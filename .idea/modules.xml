@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WBS_br_31.iml" filepath="$PROJECT_DIR$/WBS_br_31.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ssg-wbs-prj.iml" filepath="$PROJECT_DIR$/ssg-wbs-prj.iml" />
     </modules>
   </component>
 </project>

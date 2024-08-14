@@ -1,6 +1,5 @@
 package main.java.com.ssg.library.dbio;
 
-import main.java.com.ssg.library.dbio.AbstractDBIO;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
@@ -17,19 +16,15 @@ class AbstractDBIOTest {
     @Test
     void getDatabaseConnection() throws IOException, SQLException, ClassNotFoundException {
         Properties properties = new Properties();
-
         FileInputStream fis = new FileInputStream("resource/database.properties");
-
         properties.load(fis);
 
         String driver = properties.getProperty("driver");
         String db_url = properties.getProperty("url");
         String db_id = properties.getProperty("username");
         String db_pwd = properties.getProperty("password");
-
         Class.forName(driver);
         Connection connection = DriverManager.getConnection(db_url, db_id, db_pwd);
-
         assertNotNull(connection);
     }
 
