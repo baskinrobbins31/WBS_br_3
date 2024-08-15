@@ -1,17 +1,21 @@
 package ssg.library.script;
 
-public class LoginScript {
+import lombok.Getter;
 
+
+@Getter
+public class LoginScript {
 
   StringBuilder sb =new StringBuilder();
   int index = 1;
 
-  private static LoginScript loginScriptInstance = new LoginScript();
+  private static final LoginScript loginScriptInstance = new LoginScript();
 
   public static LoginScript getLoginScriptInstance() {
     return loginScriptInstance;
   }
 
+  /** 프린트 출력및 sb 초기회 */
   public void printString() {
     String str = sb.toString();
     System.out.print(str);
@@ -25,9 +29,10 @@ public class LoginScript {
 
   /** 처음 실행시 뜨는 화면 */
   public void printStartMenu() {
+    index =1;
     sb.append("\t창고천국에 오신 것을 환영합니다!\n\n").
         append("============================================================================\n").
-        append("\t").append(index++).append(". 로그인\t").append(index++).append(". 출고관리\t").append(index++).append(". 고객센터\n").
+        append("\t").append(index++).append(". 로그인\t").append(index++).append(". 출고관리\t").append(index++).append(". 고객센터\t").
         append(index++).append(". 종료\n").
         append("============================================================================\n");
     printString();
@@ -48,7 +53,7 @@ public class LoginScript {
     index =1;
     sb.append("---로그인 전체 메뉴---\n").append("\t").
         append(index++).append(". 로그인\t").append(index++).append(". 아이디 찾기\t").append(index++).append(". 비밀번호 찾기\t").
-        append(index++).append(". 회원등록\t").append("\t").append(index++).append(". 이전화면\n");
+        append(index++).append(". 회원등록\n").append("\t").append(index++).append(". 이전화면\n");
     printString();
     printInputNumber();
   }
@@ -80,4 +85,8 @@ public class LoginScript {
     printInputNumber();
   }
 
+  public void printInputID() {
+    sb.append("아이디를 입력해 주세요. : ");
+    printString();
+  }
 }

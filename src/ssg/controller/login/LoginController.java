@@ -32,6 +32,7 @@ public class LoginController {
     }
   }
 
+
   /** 로그인 선택시 뜨는 메뉴 */
   private void loginMenu() {
 
@@ -41,9 +42,10 @@ public class LoginController {
 
       switch (select) {
         case 1 -> loginService.loginStart();
-        case 2 -> System.out.println("출고관리");
-        case 3 -> System.out.println("고객센터");
-        case 4 -> System.out.println("종료");
+        case 2 -> loginService.findID();
+        case 3 -> loginService.findPassWord();
+        case 4 -> loginService.createMember();
+        case 5 -> startMenu();
         default -> throw new NumberFormatException();
       }
     } catch (IOException e) {
