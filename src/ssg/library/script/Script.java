@@ -1,4 +1,4 @@
-package ssg.library;
+package ssg.library.script;
 
 public class Script {
   // 출력 메세지 및 스크립트를 포함하고 있는 클래스 입니다.

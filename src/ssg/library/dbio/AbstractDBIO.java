@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -40,13 +42,29 @@ public abstract class AbstractDBIO {
         }
     }
 
-    private void close() {
+    protected void close() {
         try {
             connection.close();
         } catch (SQLException se) {
             System.err.println(se.getMessage());
         }
     }
+
+    protected ResultSet excute(String query, ResultSet rs) {
+        return rs;
+    }
+
+    protected void excute(String query) {
+
+        try {
+            open();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     protected abstract void create(Object o);
 
