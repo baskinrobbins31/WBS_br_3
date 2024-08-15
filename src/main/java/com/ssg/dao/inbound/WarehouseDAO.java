@@ -1,7 +1,5 @@
 package main.java.com.ssg.dao.inbound;
 
-import java.util.ArrayList;
-
 public abstract class WarehouseDAO {
   //////////////////////////////////////////////////////////////////////
   //<Create>
