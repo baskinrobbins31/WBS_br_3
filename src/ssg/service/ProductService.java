@@ -17,6 +17,8 @@ public class ProductService {
   }
 
   public void createProduct(Product product) throws SQLException {
+
+
     productDAO.create(product);
     System.out.println("상품이 등록되었습니다.");
   }
