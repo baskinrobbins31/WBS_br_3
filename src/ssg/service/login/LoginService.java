@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import ssg.Main;
-import ssg.controller.memberMgr.MemberMgrController;
+import ssg.controller.allController.AllController;
 import ssg.dao.login.LoginDao;
 import ssg.dto.Member;
 import ssg.library.script.LoginScript;
@@ -15,7 +15,7 @@ public class LoginService implements LoginServiceInterface {
   LoginScript loginScript  = LoginScript.getLoginScriptInstance();
   private LoginDao loginDao = new LoginDao();
 
-  /** login */
+  /** 사용자 login */
   @Override
   public void loginStart() {
     try {
@@ -28,8 +28,8 @@ public class LoginService implements LoginServiceInterface {
       if(loginDao.read(userid, password) instanceof Member m) {
           System.out.println("로그인 성공");
           Main.loginOnMember = m;
-          MemberMgrController memberMgrController = new MemberMgrController();
-          memberMgrController.memberMgrMenu(Main.loginOnMember);
+        AllController allController = new AllController();
+        allController.allControllerMenu();
       }
       else {
         loginScript.printUnknownMember();

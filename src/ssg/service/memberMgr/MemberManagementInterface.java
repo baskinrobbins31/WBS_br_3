@@ -1,6 +1,6 @@
 package ssg.service.memberMgr;
 
-public interface MemberMgrInterface {
+public interface MemberManagementInterface {
   void confirmMemberCreate();
   void listMember();
   void listAdmin();

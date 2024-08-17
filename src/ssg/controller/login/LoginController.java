@@ -12,7 +12,8 @@ public class LoginController {
   private final LoginScript loginScript = LoginScript.getLoginScriptInstance();
   private LoginService loginService = new LoginService();
 
-  /** 처음 시작하는 메뉴 */
+
+  /** 프로그램 실행시 처음 시작하는 메뉴 */
   public void startMenu() {
     boolean isOn = true;
     while(isOn) {

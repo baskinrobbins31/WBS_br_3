@@ -1,6 +1,6 @@
 package ssg.service.memberMgr;
 
-public class MemberMgrService implements MemberMgrInterface{
+public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원 등록 승인 */
   @Override
