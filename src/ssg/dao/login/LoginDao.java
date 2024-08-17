@@ -67,7 +67,7 @@ public class LoginDao extends AbstractDBIO {
         tempMember = new Member(userID, userName, BRN, userType, createAt, phoneNumber, address, email);
       }
         rs.close();
-        close();
+      super.close();
         return tempMember;
     } catch (SQLException e) {
       throw new RuntimeException(e);
@@ -99,7 +99,6 @@ public class LoginDao extends AbstractDBIO {
           word = rs.getString("userid");
       }
       rs.close();
-      close();
       return word;
     } catch (SQLException e) {
       throw new RuntimeException(e);
