@@ -40,13 +40,36 @@ public class LoginService implements LoginServiceInterface {
     }
   }
 
-  /** id 찾기 */
+  /** 로그인id 찾기 */
   @Override
   public void findID() {
 
     try {
+      loginScript.printFindIDMenu();
+      int select = Integer.parseInt(br.readLine());
+      String find;
+      String word =null;
+      switch (select) {
+        case 1 -> {loginScript.printInputPhoneNumber();
+                    find = br.readLine();
+                    word = loginDao.read(find, 1);}
+        case 2 -> {loginScript.printInputEmail();
+                    find = br.readLine();
+                    word = loginDao.read(find, 2);}
+        case 3 -> {loginScript.printInputBRN();
+                    find = br.readLine();
+                    word = loginDao.read(find, 3);}
+        default -> loginScript.printFaultInput();
+      }
+
+      if (word == null)
+        loginScript.printNotFoundID();
+      else {
+        System.out.println("찾으시는 아이디는 " + word);
+      }
+
       br.close();
-    } catch (IOException e) {
+    } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
   }
@@ -54,8 +77,20 @@ public class LoginService implements LoginServiceInterface {
   /** 비밀번호 찾기 */
   @Override
   public void findPassWord() {
-
     try {
+      loginScript.printInputID();
+      String userid = br.readLine();
+
+      String findPass = loginDao.read(userid, 3);
+
+      if (findPass == null) {
+        loginScript.printNotFoundID();
+      }
+      else {
+        System.out.println(userid + " 계정의 비밀번호는 : " + findPass);
+      }
+
+
       br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -75,16 +110,16 @@ public class LoginService implements LoginServiceInterface {
         loginScript.printInputPassWord();
         String passWord = br.readLine();
 
-        System.out.print("이름을 입력하세요. : ");
+        loginScript.printInputName();
         String name = br.readLine();
 
-        System.out.print("전화번호를 입력하세요. : ");
+        loginScript.printInputPhoneNumber();
         String phone = br.readLine();
 
-        System.out.print("주소를 입력하세요 : ");
+        loginScript.printInputAddress();
         String address = br.readLine();
 
-        System.out.println("email을 입력하세요. : ");
+        loginScript.printInputEmail();
         String email = br.readLine();
 
         Member createMember = new Member(id, userid, passWord, name, phone, address, email);

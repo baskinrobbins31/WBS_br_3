@@ -38,7 +38,7 @@ public class LoginDao extends AbstractDBIO {
     return null;
   }
 
-  /** 아이디, 비밀번호로 조회 */
+  /** 아이디, 비밀번호로 조회 로그인 할때 사용*/
   public Object read(String userid, String password) {
     try {
       sb.append("SELECT * FROM member WHERE userid = '").append(userid).append("' AND password = '").append(password).append("'");
@@ -72,8 +72,41 @@ public class LoginDao extends AbstractDBIO {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-
   }
+
+
+
+  /** 비밀번호 찾기 에 사용 */
+  public String read(String string, int select) {
+    try {
+      switch (select) {
+        case 1 -> sb.append("SELECT userid FROM member WHERE phone_number = '").append(string).append("'");
+        case 2 -> sb.append("SELECT userid FROM member WHERE email = '").append(string).append("'");
+        case 3 -> sb.append("SELECT userid FROM member WHERE BRN = '").append(string).append("'");
+        case 4 -> sb.append("SELECT password FROM member WHERE userid = '").append(string).append("'");
+      }
+
+      String query = sb.toString();
+      ResultSet rs = null;
+      rs = super.excute(query, rs);
+      sb.delete(0, sb.length());
+
+      String word = null;
+      while (rs.next()) {
+        if(select == 4)
+          word = rs.getString("password");
+        else if(select  == 1 || select == 2 || select == 3)
+          word = rs.getString("userid");
+      }
+      rs.close();
+      close();
+      return word;
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+
 
   @Override
   public void update(Object o) {

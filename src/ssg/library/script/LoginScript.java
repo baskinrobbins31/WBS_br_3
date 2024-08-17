@@ -50,8 +50,8 @@ public class LoginScript extends Script{
   }
 
   /** 아이디가 없을시 출력문 */
-  public void printUnknownID() {
-    sb.append("해당 아이디가 없습니다.\n");
+  public void printNotFoundID() {
+    sb.append("일치하는 아이디가 없습니다.\n");
     printString(sb);
   }
 
@@ -78,5 +78,39 @@ public class LoginScript extends Script{
   public void printInputPassWord() {
     sb.append("비밀번호를 입력해 주세요. : ");
     printString(sb);
+  }
+  public void printInputName() {
+    sb.append("이름를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputPhoneNumber() {
+    sb.append("전화번호를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputAddress() {
+    sb.append("주소를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputEmail() {
+    sb.append("이메일을 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputBRN() {
+    sb.append("사업자 번호를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+
+  /** ID 찾기 매뉴 */
+  public void printFindIDMenu() {
+    index =1;
+    sb.append("---아이디 찾기---\n").append("\t").append(index++).append(". 전화번호\t").append(index++).append(". 이메일").
+        append(index++).append(". 사업자번호\n");
+    printString(sb);
+    printInputNumber();
   }
 }

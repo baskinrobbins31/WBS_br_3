@@ -19,7 +19,10 @@ public class Script {
     printString(sb);
   }
 
-
+  public void printFaultInput() {
+    sb.append("잘못 입력하셨습니다.");
+    printString(sb);
+  }
 
 
 /** 출고관리 메뉴(관리자) */

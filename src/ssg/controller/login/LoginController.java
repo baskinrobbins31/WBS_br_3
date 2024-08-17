@@ -29,7 +29,7 @@ public class LoginController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     } catch (NumberFormatException e) {
-      System.out.println("잘못 입력하셨습니다.");
+      loginScript.printFaultInput();
     }
   }
 
@@ -52,7 +52,7 @@ public class LoginController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     } catch (NumberFormatException e) {
-      System.out.println("잘못 입력하셨습니다.");
+      loginScript.printFaultInput();
     }
   }
 

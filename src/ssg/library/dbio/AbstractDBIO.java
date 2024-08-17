@@ -56,6 +56,7 @@ public abstract class AbstractDBIO {
             open();
             PreparedStatement ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -10,7 +10,7 @@ import ssg.service.memberMgr.MemberMgrService;
 public class MemberMgrController {
 
   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-  private MemberMgrScript memberMgrScript = MemberMgrScript.getMemberMgrScriptInstance();
+  private final MemberMgrScript memberMgrScript = MemberMgrScript.getMemberMgrScriptInstance();
   private MemberMgrService memberMgrService = new MemberMgrService();
 
   public void memberMgrMenu(Member member) {
