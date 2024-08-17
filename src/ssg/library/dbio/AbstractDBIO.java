@@ -10,60 +10,60 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public abstract class AbstractDBIO {
-    private Connection connection = null;
 
-    private Connection getDatabaseConnection() throws IOException, ClassNotFoundException, SQLException {
+  //프로퍼티
+    protected Connection getConnection () {
+      Connection connection = null;
+      try {
+            Properties properties = new Properties();
 
+            try(FileInputStream fis = new FileInputStream("resource/database.properties")) {
+              properties.load(fis);
+            }
 
-        Properties properties = new Properties();
+            String driver = properties.getProperty("driver");
+            String url = properties.getProperty("url");
+            String name = properties.getProperty("username");
+            String password = properties.getProperty("password");
 
-        FileInputStream fis = new FileInputStream("resource/database.properties");
-
-        properties.load(fis);
-
-        fis.close();
-
-        String driver = properties.getProperty("driver");
-        String db_url = properties.getProperty("url");
-        String db_id = properties.getProperty("username");
-        String db_pwd = properties.getProperty("password");
-
-        Class.forName(driver);
-        connection = DriverManager.getConnection(db_url, db_id, db_pwd);
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url, name, password);
+        } catch (SQLException | IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return connection;
     }
 
 
-    private void open() {
+    protected void close (Connection connection, PreparedStatement pStmt){
         try {
-            connection = getDatabaseConnection();
-        } catch (IOException | ClassNotFoundException | SQLException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    protected void close() {
-        try {
-            connection.close();
-        } catch (SQLException se) {
-            System.err.println(se.getMessage());
-        }
-    }
-
-    protected ResultSet excute(String query, ResultSet rs) {
-        return rs;
-    }
-
-    protected void excute(String query) {
-
-        try {
-            open();
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.executeUpdate();
+            if(pStmt != null) {
+              pStmt.close();
+            }
+            if(connection != null) {
+              connection.close();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+    protected void close (Connection connection, PreparedStatement pStmt, ResultSet rs){
+        try {
+            if(rs != null) {
+              rs.close();
+            }
+            if(pStmt != null) {
+              pStmt.close();
+            }
+            if(connection != null) {
+              connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
     protected abstract void create(Object o);
