@@ -1,4 +1,4 @@
-package main.java.com.ssg.dao.warehouse;
+package ssg.dao.warehouse;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
