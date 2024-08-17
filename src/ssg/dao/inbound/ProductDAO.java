@@ -86,7 +86,7 @@ public class ProductDAO extends AbstractDBIO {
         pStmt.setString(1, productName);
         pStmt.executeUpdate();
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        System.err.println(e);
       }
     }
   }

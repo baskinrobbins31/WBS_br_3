@@ -48,6 +48,7 @@ public abstract class AbstractDBIO {
         }
     }
 
+
     protected void close (Connection connection, PreparedStatement pStmt, ResultSet rs){
         try {
             if(rs != null) {
@@ -65,12 +66,19 @@ public abstract class AbstractDBIO {
     }
 
 
+  protected void create(Object o) {
 
-    protected abstract void create(Object o);
+  }
 
-    protected abstract Object read();
+  protected Object read(){
+      return null;
+  }
 
-    protected abstract void update(Object o );
+  protected void update(Object o){
 
-    protected abstract void delete(Object o);
+  }
+
+  protected void delete(Object o){
+
+  };
 }
