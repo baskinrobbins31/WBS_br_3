@@ -65,32 +65,6 @@ public abstract class AbstractDBIO {
         }
     }
 
-  protected void excute(String qurey) {
-
-    try {
-      PreparedStatement ps = null;
-      ps = getConnection().prepareStatement(qurey);
-      ps.executeUpdate();
-      close(getConnection(), ps);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  protected ResultSet excute(String query, ResultSet rs) {
-
-    try {
-      PreparedStatement ps = null;
-      ps = getConnection().prepareStatement(query);
-      rs = ps.executeQuery();
-      return rs;
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-
-  }
-
-
 
   protected void create(Object o) {
 
@@ -106,7 +80,7 @@ public abstract class AbstractDBIO {
 
   protected void delete(Object o){
 
-  };
+  }
 
 
 }

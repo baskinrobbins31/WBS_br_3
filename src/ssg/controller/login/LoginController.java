@@ -14,28 +14,38 @@ public class LoginController {
 
   /** 처음 시작하는 메뉴 */
   public void startMenu() {
+    boolean isOn = true;
+    while(isOn) {
+      try {
 
-    try {
-      loginScript.printStartMenu();
-      int select = Integer.parseInt(br.readLine());
+        loginScript.printStartMenu();
+        int select = Integer.parseInt(br.readLine());
 
-      switch (select) {
-        case 1 -> loginMenu();
-        case 2 -> System.out.println("출고관리");
-        case 3 -> System.out.println("고객센터");
-        case 4 -> System.out.println("종료");
-        default -> throw new NumberFormatException();
+        switch (select) {
+          case 1 -> {
+            loginMenu();
+            isOn = false;
+          }
+          case 2 -> System.out.println("출고관리");
+          case 3 -> System.out.println("고객센터");
+          case 4 -> {
+            System.out.println("종료");
+            isOn = false;
+          }
+          default -> throw new NumberFormatException();
+        }
+
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      } catch (NumberFormatException e) {
+        loginScript.printFaultInput();
       }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } catch (NumberFormatException e) {
-      loginScript.printFaultInput();
     }
   }
 
 
   /** 로그인 선택시 뜨는 메뉴 */
-  private void loginMenu() {
+  public void loginMenu() {
 
     try {
       loginScript.printLoginAllMenu();
@@ -47,6 +57,7 @@ public class LoginController {
         case 3 -> loginService.findPassWord();
         case 4 -> loginService.createMember();
         case 5 -> startMenu();
+        case 99 -> loginService.createAdmin();
         default -> throw new NumberFormatException();
       }
     } catch (IOException e) {

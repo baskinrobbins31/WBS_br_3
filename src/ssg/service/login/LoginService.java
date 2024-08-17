@@ -130,4 +130,8 @@ public class LoginService implements LoginServiceInterface {
         throw new RuntimeException(e);
       }
     }
+
+    public void createAdmin() {
+      loginDao.CreateAdmins();
+    }
 }
