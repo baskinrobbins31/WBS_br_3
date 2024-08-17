@@ -11,6 +11,7 @@ public class LoginController {
   private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   private final LoginScript loginScript = LoginScript.getLoginScriptInstance();
   private LoginService loginService = new LoginService();
+
   /** 처음 시작하는 메뉴 */
   public void startMenu() {
 

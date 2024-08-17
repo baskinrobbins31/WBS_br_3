@@ -3,6 +3,8 @@ package ssg.service.login;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import ssg.Main;
+import ssg.controller.memberMgr.MemberMgrController;
 import ssg.dao.login.LoginDao;
 import ssg.dto.Member;
 import ssg.library.script.LoginScript;
@@ -12,16 +14,33 @@ public class LoginService implements LoginServiceInterface {
   private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   LoginScript loginScript  = LoginScript.getLoginScriptInstance();
   private LoginDao loginDao = new LoginDao();
+
+  /** login */
   @Override
   public void loginStart() {
     try {
+      loginScript.printInputID();
+      String userid = br.readLine();
 
+      loginScript.printInputPassWord();
+      String password = br.readLine();
+
+      if(loginDao.read(userid, password) instanceof Member m) {
+          System.out.println("로그인 성공");
+          Main.loginOnMember = m;
+          MemberMgrController memberMgrController = new MemberMgrController();
+          memberMgrController.memberMgrMenu(Main.loginOnMember);
+      }
+      else {
+        loginScript.printUnknownMember();
+      }
       br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
 
+  /** id 찾기 */
   @Override
   public void findID() {
 
@@ -32,6 +51,7 @@ public class LoginService implements LoginServiceInterface {
     }
   }
 
+  /** 비밀번호 찾기 */
   @Override
   public void findPassWord() {
 
@@ -41,6 +61,8 @@ public class LoginService implements LoginServiceInterface {
       throw new RuntimeException(e);
     }
   }
+
+  /** 회원 등록 */
     @Override
   public void createMember() {
       try {
@@ -50,7 +72,7 @@ public class LoginService implements LoginServiceInterface {
         loginScript.printInputID();
         String userid = br.readLine();
 
-        System.out.print("비밀번호를 입력하세요. : ");
+        loginScript.printInputPassWord();
         String passWord = br.readLine();
 
         System.out.print("이름을 입력하세요. : ");

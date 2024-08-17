@@ -20,6 +20,8 @@ public class Member {
   private String email;         //회원 e메일
 
   Member() {}
+
+  /** 회원 등록 할때 사용 */
   public Member(int id, String userid, String passWord, String userName, String phoneNumber,
       String address, String email) {
     this.id = id;
@@ -31,35 +33,17 @@ public class Member {
     this.email = email;
   }
 
-  public int getId() {
-    return id;
-  }
 
-  public String getUserid() {
-    return userid;
-  }
-
-  public String getPassWord() {
-    return passWord;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public String getBRN() {
-    return BRN;
-  }
-
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public String getEmail() {
-    return email;
+  public Member(String userid, String userName, String BRN, UserType userType,
+       Timestamp createAt, String phoneNumber, String address,
+      String email) {
+    this.userid = userid;
+    this.userName = userName;
+    this.BRN = BRN;
+    this.userType = userType;
+    this.createAt = createAt;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.email = email;
   }
 }

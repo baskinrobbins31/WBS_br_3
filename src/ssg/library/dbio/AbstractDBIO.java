@@ -51,6 +51,14 @@ public abstract class AbstractDBIO {
     }
 
     protected ResultSet excute(String query, ResultSet rs) {
+
+        try {
+            open();
+            PreparedStatement ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return rs;
     }
 
@@ -60,6 +68,7 @@ public abstract class AbstractDBIO {
             open();
             PreparedStatement ps = connection.prepareStatement(query);
             ps.executeUpdate();
+            close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

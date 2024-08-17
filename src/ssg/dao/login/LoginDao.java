@@ -1,6 +1,12 @@
 package ssg.dao.login;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import ssg.dto.Member;
+import ssg.enums.UserType;
 import ssg.library.dbio.AbstractDBIO;
 
 public class LoginDao extends AbstractDBIO {
@@ -18,7 +24,11 @@ public class LoginDao extends AbstractDBIO {
       String qurey = sb.toString();
       System.out.println(qurey);
       super.excute(qurey);
-      super.close();
+      commit();
+      sb.delete(0, sb.length());
+    }
+    else {
+      System.out.println("회원 등록 실패");
     }
 
   }
@@ -26,6 +36,43 @@ public class LoginDao extends AbstractDBIO {
   @Override
   public Object read() {
     return null;
+  }
+
+  /** 아이디, 비밀번호로 조회 */
+  public Object read(String userid, String password) {
+    try {
+      sb.append("SELECT * FROM member WHERE userid = '").append(userid).append("' AND password = '").append(password).append("'");
+      String query = sb.toString();//"SELECT * FROM member WHERE userid = '" + userid + "' AND password = '" + password + "'";
+      ResultSet rs = null;
+      rs = super.excute(query, rs);
+      sb.delete(0, sb.length());
+
+      String userID = userid;
+      String userName = null;
+      String BRN;
+      UserType userType;
+      Timestamp createAt;
+      String phoneNumber;
+      String address;
+      String email;
+      Member tempMember = null;
+      while (rs.next()) {
+        userName = rs.getString("userName");
+        BRN = rs.getString("BRN");
+        userType = UserType.valueOf(rs.getString("userType"));
+        createAt = rs.getTimestamp("create_at");
+        phoneNumber = rs.getString("phone_number");
+        address = rs.getString("address");
+        email = rs.getString("email");
+        tempMember = new Member(userID, userName, BRN, userType, createAt, phoneNumber, address, email);
+      }
+        rs.close();
+        close();
+        return tempMember;
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
   @Override
@@ -36,5 +83,10 @@ public class LoginDao extends AbstractDBIO {
   @Override
   public void delete(Object o) {
 
+  }
+
+  public void commit() {
+    String query = "commit";
+    super.excute(query);
   }
 }
