@@ -3,29 +3,14 @@ package ssg.library.script;
 import lombok.Getter;
 
 
-@Getter
-public class LoginScript {
+public class LoginScript extends Script{
 
   StringBuilder sb =new StringBuilder();
   int index = 1;
 
+  @Getter
   private static final LoginScript loginScriptInstance = new LoginScript();
 
-  public static LoginScript getLoginScriptInstance() {
-    return loginScriptInstance;
-  }
-
-  /** 프린트 출력및 sb 초기회 */
-  public void printString() {
-    String str = sb.toString();
-    System.out.print(str);
-    sb.delete(0, sb.length());
-  }
-
-  public void printInputNumber() {
-    sb.append("번호를 입력해 주세요 :  ");
-    printString();
-  }
 
   /** 처음 실행시 뜨는 화면 */
   public void printStartMenu() {
@@ -35,7 +20,7 @@ public class LoginScript {
         append("\t").append(index++).append(". 로그인\t").append(index++).append(". 출고관리\t").append(index++).append(". 고객센터\t").
         append(index++).append(". 종료\n").
         append("============================================================================\n");
-    printString();
+    printString(sb);
     printInputNumber();
     /*System.out.println(
         "============================================================================");
@@ -54,26 +39,26 @@ public class LoginScript {
     sb.append("---로그인 전체 메뉴---\n").append("\t").
         append(index++).append(". 로그인\t").append(index++).append(". 아이디 찾기\t").append(index++).append(". 비밀번호 찾기\t").
         append(index++).append(". 회원등록\n").append("\t").append(index++).append(". 이전화면\n");
-    printString();
+    printString(sb);
     printInputNumber();
   }
 
   /** 아이디가 중복시 출력문 */
   public void printDuplicateID() {
     sb.append("중복되는 아이디가 있습니다.\n");
-    printString();
+    printString(sb);
   }
 
   /** 아이디가 없을시 출력문 */
-  public void printUnknownID() {
-    sb.append("해당 아이디가 없습니다.\n");
-    printString();
+  public void printNotFoundID() {
+    sb.append("일치하는 아이디가 없습니다.\n");
+    printString(sb);
   }
 
   /** 로그인 정보가 틀렸을떄 출력문 */
   public void printUnknownMember() {
     sb.append("아이디 혹은 비밀번호가 틀렸습니다.\n");
-    printString();
+    printString(sb);
   }
 
   /** 메인 메뉴 */
@@ -81,12 +66,51 @@ public class LoginScript {
     index =1;
     sb.append("---메인 메뉴---\n").append("\t").append(index++).append(". 회원관리\t").append(index++).append(". 입고관리").
         append(index++).append(". 재고관리").append(index++).append(". 창고관리").append(index++).append(". 고객센터").append(index++).append(". 로그아웃\n");
-    printString();
+    printString(sb);
     printInputNumber();
   }
 
   public void printInputID() {
     sb.append("아이디를 입력해 주세요. : ");
-    printString();
+    printString(sb);
+  }
+
+  public void printInputPassWord() {
+    sb.append("비밀번호를 입력해 주세요. : ");
+    printString(sb);
+  }
+  public void printInputName() {
+    sb.append("이름를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputPhoneNumber() {
+    sb.append("전화번호를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputAddress() {
+    sb.append("주소를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputEmail() {
+    sb.append("이메일을 입력해 주세요. : ");
+    printString(sb);
+  }
+
+  public void printInputBRN() {
+    sb.append("사업자 번호를 입력해 주세요. : ");
+    printString(sb);
+  }
+
+
+  /** ID 찾기 매뉴 */
+  public void printFindIDMenu() {
+    index =1;
+    sb.append("---아이디 찾기---\n").append("\t").append(index++).append(". 전화번호\t").append(index++).append(". 이메일").
+        append(index++).append(". 사업자번호\n");
+    printString(sb);
+    printInputNumber();
   }
 }

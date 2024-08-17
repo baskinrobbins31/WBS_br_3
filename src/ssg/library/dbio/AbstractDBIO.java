@@ -80,5 +80,7 @@ public abstract class AbstractDBIO {
 
   protected void delete(Object o){
 
-  };
+  }
+
+
 }
