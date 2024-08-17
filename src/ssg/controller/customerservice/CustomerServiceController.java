@@ -1,6 +1,7 @@
 package ssg.controller.customerservice;
 
 import ssg.library.script.CustomerServiceScript;
+import ssg.service.customerservice.CustomerServiceService;
 
 import java.util.Scanner;
 
@@ -36,6 +37,7 @@ public class CustomerServiceController {
     }
 
     private void noticeMenu(Scanner scanner) {
+        CustomerServiceService customerServiceService = new CustomerServiceService();
         boolean isQuit = false;
         while (!isQuit) {
             System.out.print("원하는 메뉴를 입력하세요.: ");
