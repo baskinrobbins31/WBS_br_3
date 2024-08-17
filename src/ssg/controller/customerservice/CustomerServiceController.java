@@ -1,8 +1,11 @@
 package ssg.controller.customerservice;
 
+import ssg.dto.customerservice.Inquiry;
 import ssg.library.script.CustomerServiceScript;
 import ssg.service.customerservice.CustomerServiceService;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class CustomerServiceController {
@@ -19,11 +22,11 @@ public class CustomerServiceController {
                 case 1 -> {
                     customerServiceScript.printNoticeMenu();
                     System.out.println("--공지사항 메뉴입니다.--");
-
                 }
                 case 2 -> {
                     customerServiceScript.printInquiryMenu();
                     System.out.println("--문의글 메뉴입니다.--");
+                    inquiryMenu(scanner);
                     System.out.print("원하는 메뉴를 입력하세요.: ");
 
                 }
@@ -36,7 +39,7 @@ public class CustomerServiceController {
 
     }
 
-    private void noticeMenu(Scanner scanner) {
+    private void inquiryMenu(Scanner scanner) {
         CustomerServiceService customerServiceService = new CustomerServiceService();
         boolean isQuit = false;
         while (!isQuit) {
@@ -47,13 +50,26 @@ public class CustomerServiceController {
                     customerServiceService.getInquiries();
                 }
                 case 2 -> {
-                    customerServiceService.createInquiry();
+                    System.out.println("문의글 등록: ");
+                    System.out.print("1. 제목: ");
+                    String title = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("2. 내용: ");
+                    String content = scanner.nextLine();
+
+                    Inquiry inquiry = Inquiry.builder()
+                            .title(title)
+                            .content(content)
+                            .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                            .build();
+
+                    customerServiceService.createInquiry(inquiry);
                 }
                 case 3 -> {
-                    customerServiceService.updateInquiry();
+                    customerServiceService.updateInquiry(1);
                 }
                 case 4 -> {
-                    customerServiceService.deleteInquiry();
+                    customerServiceService.deleteInquiry(1);
                 }
                 case 5 -> {
                     isQuit = true;
