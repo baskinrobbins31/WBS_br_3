@@ -25,56 +25,6 @@ public class Script {
   }
 
 
-/** 출고관리 메뉴(관리자) */
-  public void printAdminOutboundMenu() {
-    index =1;
-    sb.append("---출고 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 출고요청승인\t").append(index++).append(". 출고지시서 조회\t").append(index++).append(". 출고상품검색\t").
-        append(index++).append(". 출고리스트 조회\n").append("\t").append(index++).append(". 출고리스트 검색\n").append(index++).append(". 배차관리\t").
-        append(index++).append(". 운송장 관리\t").append(index++).append(". 이전화면\n");
-    printString(sb);
-    printInputNumber();
-  }
-
-  /** 출고관리 메뉴(회원) */
-  public void printMemberOutboundMenu() {
-    index =1;
-    sb.append("---출고 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 출고요청\t").append(index++).append(". 출고지시서 조회\t").append(index++).append(". 출고상품검색\t").
-        append(index++).append(". 출고리스트 조회\n").append("\t").append(index++).append(". 출고리스트 검색\t").
-        append(index++).append(". 운송장 관리\t").append(index++).append(". 이전화면\n");
-    printString(sb);
-    printInputNumber();
-  }
-
-  /** 배차관리 메뉴(관리자) */
-  public void printAdminVehicleAssignmentMenu() {
-    index =1;
-    sb.append("---배차 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 배차등록\t").append(index++).append(". 배차조회\t").append(index++).append(". 배차수정\t").
-        append(index++).append(". 배차취소\n").append("\t").append(index++).append(". 이전화면\t").append(index++).append(". 이전화면\n");
-    printString(sb);
-    printInputNumber();
-  }
-
-  /** 운송장 관리 메뉴(관리자) */
-  public void printAdminWaybillMenu() {
-    index =1;
-    sb.append("---운송장 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 운송장 등록\t").append(index++).append(". 운송장 조회\t").append(index++).append(". 운송장 수정\t").
-        append(index++).append(". 운송장 검색\n").append("\t").append(index++).append(". 이전화면\n");
-    printString(sb);
-    printInputNumber();
-  }
-
-  /** 운송장 관리 메뉴(회원) */
-  public void printMemberWaybillMenu() {
-    index =1;
-    sb.append("---운송장 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 운송장 검색\t").append(index++).append(". 이전화면\n");
-    printString(sb);
-    printInputNumber();
-  }
 
   /** 재고 관리 메뉴(관리자) */
   public void printAdminStockMenu() {

@@ -25,20 +25,29 @@ public class LoginController {
 
         switch (select) {
           case 1 -> {
-            loginMenu();
+            loginService.createMember();
+          }
+          case 2 -> {
+            loginService.loginStart();
             isOn = false;
           }
-          case 2 -> System.out.println("출고관리");
           case 3 -> {
-
+            System.out.println("운송장 조회");
           }
           case 4 -> {
-            System.out.println("종료");
-            isOn = false;
+            System.out.println("고객 센터");
           }
+          case 5 ->{
+            loginService.findID();
+          }
+          case 6 ->{
+            loginService.findPassWord();
+          }
+          case 7 ->{
+            System.out.println(" 프로그램 종료");
+            isOn = false;}
           default -> throw new NumberFormatException();
         }
-
       } catch (IOException e) {
         throw new RuntimeException(e);
       } catch (NumberFormatException e) {
@@ -48,12 +57,12 @@ public class LoginController {
   }
 
 
-  /** 로그인 선택시 뜨는 메뉴 */
-  public void loginMenu() {
+  ///** 로그인 선택시 뜨는 메뉴 */
+ /* public void loginMenu() {
     boolean isOn = true;
     while (isOn) {
       try {
-        loginScript.printLoginAllMenu();
+        //loginScript.printLoginAllMenu();
         int select = 0;
         select = Integer.parseInt(br.readLine());
 
@@ -72,7 +81,7 @@ public class LoginController {
         loginScript.printFaultInput();
       }
     }
-  }
+  }*/
 
 
 }

@@ -1,8 +1,8 @@
 package ssg.service.memberMgr;
 
-import java.sql.PreparedStatement;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import ssg.Main;
 import ssg.dao.memberManagement.memberManagementDao;
 import ssg.dto.Member;
@@ -22,9 +22,9 @@ public class MemberManagementService implements MemberManagementInterface {
   /** 전체 회원 조회 */
   @Override
   public void listMember() {
-    ArrayList<Member> memberArrayList = memberManagementDao.readAll();
+    List<Member> memberList = memberManagementDao.read();
 
-    for(Member m: memberArrayList) {
+    for(Member m: memberList) {
       sb.append(m.getId()).append("\t").append(m.getUserid()).append("\t").append(m.getPassWord())
           .append("\t").append(m.getUserName()).append("\t").append(m.getBRN() == null ? "없음" : m.getBRN()).append("\t").append(m.getUserType())
           .append("\t").append(m.getMemberConfirm()).append("\t").append(formatter.format(m.getCreateAt())).append("\t").append(m.getPhoneNumber())
@@ -39,9 +39,9 @@ public class MemberManagementService implements MemberManagementInterface {
   /** 관리자 조회 */
   @Override
   public void listAdmin(UserType type) {
-    ArrayList<Member> memberArrayList = memberManagementDao.readType(type);
+    List<Member> memberList = memberManagementDao.readType(type);
 
-    for(Member m: memberArrayList) {
+    for(Member m: memberList) {
       sb.append(m.getId()).append("\t").append(m.getUserid()).append("\t").append(m.getPassWord())
           .append("\t").append(m.getUserName()).append("\t").append(m.getBRN() == null ? "없음" : m.getBRN()).append("\t").append(m.getUserType())
           .append("\t").append(m.getMemberConfirm()).append("\t").append(formatter.format(m.getCreateAt())).append("\t").append(m.getPhoneNumber())

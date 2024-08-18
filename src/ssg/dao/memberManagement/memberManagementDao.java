@@ -3,8 +3,8 @@ package ssg.dao.memberManagement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import ssg.dto.Member;
 import ssg.enums.UserState;
 import ssg.enums.UserType;
@@ -14,13 +14,11 @@ public class memberManagementDao  extends AbstractDBIO {
 
   private StringBuilder sb = new StringBuilder();
 
-  @Override
-  protected Object read() {
-    return super.read();
-  }
 
+
+  @Override
   /** 전체 회원 조회 */
-  public ArrayList<Member> readAll() {
+  public List<Member> read() {
     try {
         sb.append("SELECT * FROM member");
       String query = sb.toString();
@@ -40,21 +38,21 @@ public class memberManagementDao  extends AbstractDBIO {
     }
   }
 
-  public ArrayList<Member> readType(UserType type) {
+  public List<Member> readType(UserType type) {
     try {
       sb.append("SELECT * FROM member WHERE userType = '").append(type.toString()).append("'");
       String query = sb.toString();
       sb.delete(0, sb.length());
-      ArrayList<Member> arrayListMember = new ArrayList<>();
+      List<Member> ListMember = new ArrayList<>();
       PreparedStatement ps = getConnection().prepareStatement(query);
       ResultSet rs = null;
       rs = ps.executeQuery();
 
       while (rs.next()) {
-        arrayListMember.add(resultSetReturn(rs));
+        ListMember.add(resultSetReturn(rs));
       }
       close(getConnection(), ps, rs);
-      return arrayListMember;
+      return ListMember;
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -63,18 +61,10 @@ public class memberManagementDao  extends AbstractDBIO {
   /** resultSet 값 받기 */
   private Member resultSetReturn(ResultSet rs) {
     try {
-      int id = rs.getInt("id");
-      String userid = rs.getString("userid");
-      String password = rs.getString("password");
-      String name = rs.getString("userName");
-      String BRN = rs.getString("BRN");
-      UserType usertype = UserType.valueOf(rs.getString("userType"));
-      UserState userState = UserState.valueOf(rs.getString("memberConfirm"));
-      Timestamp timestamp = rs.getTimestamp("create_at");
-      String phone = rs.getString("phone_number");
-      String address = rs.getString("address");
-      String email = rs.getString("email");
-      return new Member(id, userid, password, name, BRN, usertype, userState, timestamp, phone, address, email);
+      return Member.builder().id(rs.getInt("id")).userid(rs.getString("userid")).passWord(rs.getString("password"))
+          .userName(rs.getString("userName")).BRN(rs.getString("BRN")).userType(UserType.valueOf(rs.getString("userType")))
+          .memberConfirm(UserState.valueOf(rs.getString("memberConfirm"))).createAt(rs.getTimestamp("create_at"))
+          .phoneNumber(rs.getString("phone_number")).address(rs.getString("address")).email(rs.getString("email")).build();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

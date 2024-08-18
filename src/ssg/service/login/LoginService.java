@@ -101,9 +101,6 @@ public class LoginService implements LoginServiceInterface {
     @Override
   public void createMember() {
       try {
-        System.out.print("id를 입력하세요 : ");
-        int id = Integer.parseInt(br.readLine());
-
         loginScript.printInputID();
         String userid = br.readLine();
 
@@ -122,7 +119,9 @@ public class LoginService implements LoginServiceInterface {
         loginScript.printInputEmail();
         String email = br.readLine();
 
-        Member createMember = new Member(id, userid, passWord, name, phone, address, email);
+        //Member createMember = new Member(id, userid, passWord, name, phone, address, email);
+        Member createMember =Member.builder().userid(userid).passWord(passWord).userName(name).
+            phoneNumber(phone).address(address).email(email).build();
         loginDao.create(createMember);
 
         br.close();
