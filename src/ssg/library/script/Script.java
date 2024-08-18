@@ -24,7 +24,15 @@ public class Script {
     printString(sb);
   }
 
+  public void printInputBRN() {
+    sb.append("사업자 번호를 입력해 주세요. : ");
+    printString(sb);
+  }
 
+  public void printInputID() {
+    sb.append("아이디를 입력해 주세요. : ");
+    printString(sb);
+  }
 
   /** 재고 관리 메뉴(관리자) */
   public void printAdminStockMenu() {
@@ -43,6 +51,8 @@ public class Script {
     printString(sb);
     printInputNumber();
   }
+
+
 
   /** 입고 관리 메뉴(관리자) */
   public void printAdminInboundMenu() {
@@ -64,25 +74,6 @@ public class Script {
     printString(sb);
     printInputNumber();
   }
-
-
-
-  /** 임시 */
-  public void temp() {
-
-    System.out.println("<로그인 성공 시>");
-    System.out.println("000 관리자님 반갑습니다!");
-    System.out.println();
-    System.out.println("============================================================================");
-
-  }
-
-
-
-
-
-
-
 
 
 

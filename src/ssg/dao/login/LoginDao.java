@@ -74,7 +74,7 @@ public class LoginDao extends AbstractDBIO2 {
         address = rs.getString("address");
         email = rs.getString("email");
         tempMember = new Member(userID, userName, BRN, userType,userState, createAt, phoneNumber, address, email);*/
-        tempMember = Member.builder().userName(rs.getString("userName")).BRN(rs.getString("BRN"))
+        tempMember = Member.builder().id(rs.getInt("id")).userid(rs.getString("userid")).passWord(rs.getString("password")).userName(rs.getString("userName")).BRN(rs.getString("BRN"))
             .userType(UserType.valueOf(rs.getString("userType"))).memberConfirm(UserState.valueOf(rs.getString("memberConfirm")))
             .createAt( rs.getTimestamp("create_at")).phoneNumber(rs.getString("phone_number")).address(rs.getString("address"))
             .email(rs.getString("email")).build();

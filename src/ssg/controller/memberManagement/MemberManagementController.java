@@ -28,60 +28,67 @@ public class MemberManagementController {
 
   /** 회원관리 메뉴(관리자) */
   private void memberManegementMenuAdmin() {
-    try {
-      memberManagementScript.printAdminMemberMenu();
-      int select = Integer.parseInt(br.readLine());
-      switch (select) {
-        case 1 -> memberManagementService.confirmMemberCreate();
-        case 2 -> memberListMenu();
-        case 3 -> memberManagementService.showInformation();
-        case 4 -> memberManagementService.updateMember();
-        case 5 -> memberManagementService.deleteMember();
-        case 6 -> memberManagementService.updateAuthority();
-        case 7 -> System.out.println("이전화면");
-        default -> throw new NumberFormatException();
+    boolean isOn = true;
+    while (isOn) {
+      try {
+        memberManagementScript.printAdminMemberMenu();
+        int select = Integer.parseInt(br.readLine());
+        switch (select) {
+          case 1 -> confirmMember();
+          case 2 -> memberListMenu();
+          case 3 -> memberManagementService.showInformation();
+          case 4 -> memberManagementService.updateMember();
+          case 5 -> memberManagementService.deleteMember();
+          case 6 -> memberManagementService.updateAuthority();
+          case 7 -> {System.out.println("이전화면"); isOn = false;}
+          default -> throw new NumberFormatException();
+        }
+        //br.close();
+      } catch (IOException | NumberFormatException e) {
+        System.out.println("잘못된 입력입니다.");
       }
-      //br.close();
-    } catch (IOException | NumberFormatException e) {
-      System.out.println("잘못된 입력입니다.");
     }
   }
 
   /** 회원관리 메뉴(일반직원) */
   private void memberManagementMenuNormal() {
-
-    try {
-      memberManagementScript.printEmplMemberMenu();
-      int select = Integer.parseInt(br.readLine());
-      switch (select) {
-        case 1 -> memberManagementService.updateMember();
-        case 2 -> memberManagementService.showInformation();
-        case 3 -> System.out.println("이전화면");
-        default -> throw new NumberFormatException();
+    boolean isOn = true;
+    while (isOn) {
+      try {
+        memberManagementScript.printEmplMemberMenu();
+        int select = Integer.parseInt(br.readLine());
+        switch (select) {
+          case 1 -> memberManagementService.updateMember();
+          case 2 -> memberManagementService.showInformation();
+          case 3 -> {System.out.println("이전화면"); isOn = false;}
+          default -> throw new NumberFormatException();
+        }
+        // br.close();
+      } catch (IOException | NumberFormatException e) {
+        throw new RuntimeException(e);
       }
-     // br.close();
-    } catch (IOException | NumberFormatException e) {
-      throw new RuntimeException(e);
     }
   }
 
   /** 회원관리 메뉴(사장) */
   private void memberManagementMenuPresident() {
-
-    try {
-      memberManagementScript.printPresMemberMenu();
-      int select = Integer.parseInt(br.readLine());
-      switch (select) {
-        case 1 -> memberManagementService.listBRN();
-        case 2 -> memberManagementService.updateMember();
-        case 3 -> memberManagementService.showInformation();
-        case 4 -> memberManagementService.deleteMember();
-        case 5 -> System.out.println("이전화면");
-        default -> throw new NumberFormatException();
+    boolean isOn = true;
+    while (isOn) {
+      try {
+        memberManagementScript.printPresMemberMenu();
+        int select = Integer.parseInt(br.readLine());
+        switch (select) {
+          case 1 -> memberManagementService.listBRN(Main.loginOnMember.getBRN());
+          case 2 -> memberManagementService.updateMember();
+          case 3 -> memberManagementService.showInformation();
+          case 4 -> memberManagementService.deleteMember();
+          case 5 -> {System.out.println("이전화면"); isOn = false;}
+          default -> throw new NumberFormatException();
+        }
+        //br.close();
+      } catch (IOException | NumberFormatException e) {
+        throw new RuntimeException(e);
       }
-      //br.close();
-    } catch (IOException | NumberFormatException e) {
-      throw new RuntimeException(e);
     }
   }
 
@@ -98,7 +105,7 @@ public class MemberManagementController {
       switch (select) {
         case 1 -> memberManagementService.listMember();
         case 2 -> memberTypeListMenu();
-        case 3 -> memberManagementService.listBRN();
+        case 3 -> memberBRNListMenu();
         case 4 -> memberManagementMenu(Main.loginOnMember.getUserType());
       }
     } catch (IOException | NumberFormatException e) {
@@ -125,5 +132,42 @@ public class MemberManagementController {
       throw new RuntimeException(e);
     }
   }
+
+  /** 직원 조회(사장) */
+  private void memberBRNListMenu() {
+    try {
+      System.out.println("--사업자번호 조회--");
+      memberManagementScript.printInputBRN();
+      String brn = br.readLine();
+      memberManagementService.listBRN(brn);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private void confirmMember() {
+    boolean isOn = true;
+    while (isOn) {
+      try {
+        System.out.println("1.승인 대기 회원 조회\t" + "2.회원 승인\t" + "3.전체 승인\t" + "4.이전화면");
+        int select = Integer.parseInt(br.readLine());
+        switch (select) {
+          case 1 -> memberManagementService.confirmMemberList();
+          case 2 -> {
+            memberManagementScript.printInputID();
+            int id = Integer.parseInt(br.readLine());
+            memberManagementService.confirmMemberCreate(id);}
+          case 3 -> memberManagementService.confirmMemberAll();
+          case 4 -> { isOn = false;
+          }
+          default -> throw new NumberFormatException();
+        }
+
+      } catch (IOException | NumberFormatException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
 }
 
