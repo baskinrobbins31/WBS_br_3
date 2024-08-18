@@ -23,10 +23,10 @@ public abstract class AbstractDBIO {
               properties.load(fis);
             }
 
-            String driver = properties.getProperty("com.mysql.cj.jdbc.Driver");
-            String url = properties.getProperty("jdbc:mysql://localhost:3306/category");
-            String name = properties.getProperty("root");
-            String password = properties.getProperty("Mysql1234!?");
+            String driver = properties.getProperty("driver");
+            String url = properties.getProperty("url");
+            String name = properties.getProperty("username");
+            String password = properties.getProperty("password");
 
             Class.forName(driver);
             connection = DriverManager.getConnection(url, name, password);

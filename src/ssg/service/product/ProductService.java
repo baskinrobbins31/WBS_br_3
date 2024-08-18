@@ -1,11 +1,11 @@
-package ssg.service;
+package ssg.service.product;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import ssg.dao.category.CategoryDAO;
-import ssg.dao.inbound.ProductDAO;
+import ssg.dao.product.ProductDAO;
 import ssg.dto.Product;
 import ssg.dto.category.MajorCategory;
 import ssg.dto.category.MiddleCategory;
@@ -28,6 +28,8 @@ public class ProductService {
     if (!isProductExist(product.getProductName())) {
       productDAO.create(product);
       System.out.println("상품이 등록되었습니다.");
+    } else {
+      System.out.println("이미 존재하는 상품입니다.");
     }
   }
 
@@ -50,7 +52,7 @@ public class ProductService {
   }
 
   public List<Product> getAllProduct() throws SQLException {
-    return productDAO.read();
+    return productDAO.readAll();
   }
 
   public Optional<Product> getProductsByName(String productName) throws SQLException {
@@ -69,7 +71,6 @@ public class ProductService {
     return categoryDAO.getSubclassCategory(middleId);
   }
 
-  // 카테고리 출력 메서드들
   public void displayMajorCategories() throws SQLException {
     List<MajorCategory> majorCategories = getMajorCategories();
     String display = majorCategories.stream()

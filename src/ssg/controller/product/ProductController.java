@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 import ssg.dto.Product;
-import ssg.service.ProductService;
+import ssg.service.product.ProductService;
 import java.util.Optional;
 
 public class ProductController {
@@ -19,9 +19,12 @@ public class ProductController {
   public void processProducts() {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       while (true) {
-        System.out.println("1. 상품 등록");
-        System.out.println("2. 상품 조회 및 관리");
-        System.out.println("3. 종료");
+        StringBuilder menu = new StringBuilder();
+        menu.append("1.상품 등록\t\t")
+            .append("2.상품 조회 및 관리\t\t")
+            .append("3.종료");
+
+        System.out.println(menu.toString());
         System.out.print("선택: ");
 
         int choice = Integer.parseInt(br.readLine());
@@ -67,17 +70,17 @@ public class ProductController {
 
   // 상품 조회 및 관리 메서드
   private void readAndManageProduct(BufferedReader br) throws IOException, SQLException {
-    System.out.print("조회할 상품 이름: ");
+    System.out.print("조회할 상품 키워드: ");
     String name = br.readLine();
 
     List<Product> similarProducts = productService.findProductsByName(name);
     if (similarProducts.isEmpty()) {
       System.out.println("유사한 상품이 없습니다.");
     } else {
-      System.out.println("유사한 상품 목록:");
+      System.out.println("조회된 상품 목록:");
       for (Product product : similarProducts) {
-        System.out.println("ID: " + product.getProductId() + ", 이름: " + product.getProductName() +
-            ", 가격: " + product.getProductPrice() + ", 정보: " + product.getProductInfo());
+        System.out.println("소분류: " + product.getSubclassId() + "\tID: " + product.getProductId() + "\t이름: " + product.getProductName() +
+            "\t\t가격: " + product.getProductPrice() + "\t정보: " + product.getProductInfo());
       }
 
       System.out.println("관리할 상품의 이름을 입력하세요: ");
