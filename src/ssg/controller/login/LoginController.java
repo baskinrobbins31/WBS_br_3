@@ -29,7 +29,9 @@ public class LoginController {
             isOn = false;
           }
           case 2 -> System.out.println("출고관리");
-          case 3 -> System.out.println("고객센터");
+          case 3 -> {
+
+          }
           case 4 -> {
             System.out.println("종료");
             isOn = false;

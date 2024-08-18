@@ -1,6 +1,7 @@
 package ssg.dao.inbound.stock;
 
-public class StockDAO {
+import ssg.library.dbio.AbstractDBIO;
 
+public class StockDAO extends AbstractDBIO {
 
 }

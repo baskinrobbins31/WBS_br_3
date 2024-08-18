@@ -1,4 +1,4 @@
-package ssg.dao;
+package ssg.dao.category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import ssg.dto.category.MiddleCategory;
 import ssg.dto.category.SubclassCategory;
 import ssg.library.dbio.AbstractDBIO;
 
-public class CategoryDAO extends AbstractDBIO  {
+public class CategoryDAO extends AbstractDBIO {
 
   public List<MajorCategory> getMajorCategory() throws SQLException {
     List<MajorCategory> majorCategory = new ArrayList<>();
@@ -37,17 +37,18 @@ public class CategoryDAO extends AbstractDBIO  {
     String query = "SELECT * FROM middle_category WHERE major_id = ?";
 
     try (Connection connection = getConnection();
-        PreparedStatement pStmt = connection.prepareStatement(query);
-        ResultSet rs = pStmt.executeQuery()) {
+        PreparedStatement pStmt = connection.prepareStatement(query)) {
 
       pStmt.setInt(1, majorId);
-      while (rs.next()) {
-        MiddleCategory category = new MiddleCategory(
-            rs.getInt("middle_id"),
-            rs.getString("middle_name"),
-            rs.getInt("major_id")
-        );
-        middleCategory.add(category);
+      try (ResultSet rs = pStmt.executeQuery()) {
+        while (rs.next()) {
+          MiddleCategory category = new MiddleCategory(
+              rs.getInt("middle_id"),
+              rs.getString("middle_name"),
+              rs.getInt("major_id")
+          );
+          middleCategory.add(category);
+        }
       }
     }
     return middleCategory;
@@ -58,20 +59,20 @@ public class CategoryDAO extends AbstractDBIO  {
     String query = "SELECT * FROM subclass_category WHERE middle_id = ?";
 
     try (Connection connection = getConnection();
-        PreparedStatement pStmt = connection.prepareStatement(query);
-        ResultSet rs = pStmt.executeQuery()) {
+        PreparedStatement pStmt = connection.prepareStatement(query)) {
 
       pStmt.setInt(1, middleId);
-      while (rs.next()) {
-        SubclassCategory category = new SubclassCategory(
-            rs.getInt("subclass_id"),
-            rs.getString("subclass_name"),
-            rs.getInt("middle_id")
-        );
-        subclassCategory.add(category);
+      try (ResultSet rs = pStmt.executeQuery()) {
+        while (rs.next()) {
+          SubclassCategory category = new SubclassCategory(
+              rs.getInt("subclass_id"),
+              rs.getString("subclass_name"),
+              rs.getInt("middle_id")
+          );
+          subclassCategory.add(category);
+        }
       }
     }
     return subclassCategory;
   }
-
 }

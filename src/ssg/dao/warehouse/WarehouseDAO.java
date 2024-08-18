@@ -1,4 +1,4 @@
-package ssg.dao.inbound;
+package ssg.dao.warehouse;
 
 public class WarehouseDAO {
 

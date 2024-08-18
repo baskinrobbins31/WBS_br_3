@@ -11,4 +11,12 @@ public class Product {
   private int productPrice;
   private String productInfo;
   private int subclassId;
+
+  public Product(String productName, int productPrice, String productInfo, int subclassId){
+    this.productName = productName;
+    this.productPrice = productPrice;
+    this.productInfo = productInfo;
+    this.subclassId = subclassId;
+  }
 }
+

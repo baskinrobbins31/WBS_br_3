@@ -26,20 +26,15 @@ public class LoginService implements LoginServiceInterface {
       String password = br.readLine();
 
       if(loginDao.read(userid, password) instanceof Member m) {
-        switch (m.getMemberConfirm()) {
-          case ACCESS_WAIT -> System.out.println("가입 승인 대기중입니다.");
-          case ACCESS_OK -> { System.out.println("로그인 성공");
-            Main.loginOnMember = m;
-            MainController mainController = new MainController();
-            mainController.allControllerMenu();}
-          case ACCESS_DENIED -> System.out.println("가입이 거부 되었습니다.");
-          case ACCESS_LOCK -> System.out.println("계정이 비활성 상태입니다.");
-        }
+          System.out.println("로그인 성공");
+          Main.loginOnMember = m;
+        MainController allController = new MainController();
+        allController.mainControllerMenu();
       }
       else {
         loginScript.printUnknownMember();
       }
-      //br.close();
+      br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -73,7 +68,7 @@ public class LoginService implements LoginServiceInterface {
         System.out.println("찾으시는 아이디는 " + word);
       }
 
-      //br.close();
+      br.close();
     } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
@@ -96,7 +91,7 @@ public class LoginService implements LoginServiceInterface {
       }
 
 
-      //br.close();
+      br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -130,7 +125,7 @@ public class LoginService implements LoginServiceInterface {
         Member createMember = new Member(id, userid, passWord, name, phone, address, email);
         loginDao.create(createMember);
 
-        //br.close();
+        br.close();
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
