@@ -33,9 +33,9 @@ public class Main {
 
     //productController.processProducts();
 
-    InboundController inboundController = new InboundController(new InboundService(), new Script());
+/*    InboundController inboundController = new InboundController(new InboundService(), new Script());
 
-    inboundController.processMemberInbound();
+    inboundController.processMemberInbound();*/
 
   }
 }

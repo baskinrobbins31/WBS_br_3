@@ -25,10 +25,10 @@ public class LoginController {
 
         switch (select) {
           case 1 -> {
-            loginService.createMember();
+            loginService.createMember(br);
           }
           case 2 -> {
-            loginService.loginStart();
+            loginService.loginStart(br);
           }
           case 3 -> {
             System.out.println("운송장 조회");
@@ -37,16 +37,16 @@ public class LoginController {
             System.out.println("고객센터");
           }
           case 5 -> {
-            loginService.findID();
+            loginService.findID(br);
           }
           case 6 -> {
-            loginService.findPassWord();
+            loginService.findPassWord(br);
           }
           case 7 -> {
             System.out.println("종료");
             isOn = false;
           }
-          case 999 -> loginService.createAdmin();
+          case 999 -> loginService.createAdmin(br);
           default -> throw new NumberFormatException();
         }
       } catch (IOException e) {

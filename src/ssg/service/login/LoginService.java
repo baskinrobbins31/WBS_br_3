@@ -10,14 +10,12 @@ import ssg.dto.Member;
 import ssg.library.script.LoginScript;
 
 public class LoginService implements LoginServiceInterface {
-
-  private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   LoginScript loginScript  = LoginScript.getLoginScriptInstance();
   private LoginDao loginDao = new LoginDao();
 
   /** 사용자 login */
   @Override
-  public void loginStart() {
+  public void loginStart(BufferedReader br) {
     try {
       System.out.println("--로그인--");
       loginScript.printInputUserID();
@@ -42,7 +40,7 @@ public class LoginService implements LoginServiceInterface {
 
   /** 로그인id 찾기 */
   @Override
-  public void findID() {
+  public void findID(BufferedReader br) {
 
     try {
       System.out.println("--아이디 찾기--");
@@ -75,7 +73,7 @@ public class LoginService implements LoginServiceInterface {
 
   /** 비밀번호 찾기 */
   @Override
-  public void findPassWord() {
+  public void findPassWord(BufferedReader br) {
     try {
       System.out.println("--비밀번호 찾기--");
       loginScript.printInputUserID();
@@ -96,7 +94,7 @@ public class LoginService implements LoginServiceInterface {
 
   /** 회원 등록 */
     @Override
-  public void createMember() {
+  public void createMember(BufferedReader br) {
       try {
         System.out.println("--회원 등록--");
 
@@ -127,7 +125,7 @@ public class LoginService implements LoginServiceInterface {
       }
     }
 
-    public void createAdmin() {
+    public void createAdmin(BufferedReader br) {
       loginDao.CreateAdmins();
     }
 }
