@@ -35,6 +35,15 @@ public class ExceptionList {
     }
   }
 
+  public static boolean isNumberRange1To6(String number) {
+    try {
+      int num = Integer.parseInt(number);
+      return num < 1 || num > 6;
+    } catch (NumberFormatException e) {
+      return true;
+    }
+  }
+
   public static boolean isNumberRange1To7(String number) {
     try {
       int num = Integer.parseInt(number);

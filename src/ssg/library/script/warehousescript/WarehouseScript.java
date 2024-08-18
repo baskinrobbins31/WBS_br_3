@@ -1,11 +1,13 @@
 package ssg.library.script.warehousescript;
 
+import static java.lang.System.out;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import ssg.dto.warehouse.Warehouse;
 import ssg.enums.errorcode.ErrorCode;
 import ssg.exception.Exception;
 import ssg.exception.ExceptionList;
@@ -36,7 +38,7 @@ public class WarehouseScript {
   //창고관리 1-1-1 : 창고 시설 등록 메뉴
   //창고 이름
   public String registerWarehouseName() throws IOException {
-    System.out.println("<창고 시설 등록>\n창고명을 입력해주세요 : ");
+    System.out.print("창고명을 입력해주세요 : ");
     String wName = reader.readLine();
     if (ExceptionList.isValidString(wName) || ExceptionList.isLength50(wName) || wName == null) { //유효성 검사
       throw new Exception(ErrorCode.INVALID_INPUT_LENGTH);
@@ -48,7 +50,7 @@ public class WarehouseScript {
   public int registerWarehouseLocationId() throws IOException{
     System.out.print("창고 주소 코드를 입력해주세요 :\n1. 서울 2. 부산 3. 경기 4. 강원 5. 충북 \n6. 충남 7. 전북 8. 전남 9. 경북 10. 경남\n");
     String locationId = reader.readLine(); //창고 주소 코드번호
-    if (ExceptionList.isValidNumber(locationId) && ExceptionList.isNumberRange1To10(locationId)) {
+    if (ExceptionList.isNumberRange1To10(locationId)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
     }
     return Integer.parseInt(locationId);
@@ -265,7 +267,6 @@ public class WarehouseScript {
     return null;
   }
 
-
   //등록하기
   public int registerOk() throws IOException {
     System.out.print("등록하시겠습니까? (Y / N) : ");
@@ -280,6 +281,39 @@ public class WarehouseScript {
     }
   }
 
+  //등록 성공
+  public String registerSuccess() throws IOException {
+    System.out.println("창고가 등록되었습니다.\n1. 창고 전체 조회\t\t\t2. 계속 등록하기\t\t\t3. 나가기\n메뉴 입력 : ");
+    String menu = reader.readLine();
+    if (ExceptionList.isNumberRange1To3(menu)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
+    }
+    return menu;
+  }
+
+  //등록 실패
+  public void registerFail() throws IOException {
+    System.out.println("창고 등록이 실패했습니다.");
+  }
+
+  //창고관리 1-2 : 창고 조회 메뉴
+  public String printWarehouseMenu2() throws IOException {
+    out.println(
+        "<창고 조회>\n1. 전체 조회\t\t\t2. 소재지 별 조회\t\t\t3. 창고명 별 조회\n4. 종류 별 조회\t\t\t5. 임대여부 별 조회\t\t\t6. 나가기\n메뉴 입력 : ");
+    String menu = reader.readLine();
+    if (ExceptionList.isNumberRange1To6(menu)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
+    }
+    return menu;
+  }
+
+  //List 출력
+  public void printWarehouseList(List<Warehouse> warehouseList) {
+    Optional<List<Warehouse>> optional = Optional.ofNullable(warehouseList);
+    optional.ifPresentOrElse(
+        warehouseArray -> warehouseArray.forEach(warehouse -> {out.println(warehouse.toString());}),
+        () -> out.println("창고 리스트가 존재하지 않습니다."));
+  }
 
 
 
