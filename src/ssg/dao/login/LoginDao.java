@@ -3,12 +3,13 @@ package ssg.dao.login;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import ssg.dto.Member;
+import ssg.enums.UserState;
 import ssg.enums.UserType;
-import ssg.library.dbio.AbstractDBIO;
 
-public class LoginDao extends AbstractDBIO {
+import ssg.library.dbio.AbstractDBIO2;
+
+public class LoginDao extends AbstractDBIO2 {
 
   private StringBuilder sb = new StringBuilder();
 
@@ -41,10 +42,6 @@ public class LoginDao extends AbstractDBIO {
 
   }
 
-  @Override
-  public Object read() {
-    return null;
-  }
 
   /** 아이디, 비밀번호로 조회 로그인 할때 사용*/
   public Object read(String userid, String password) {
@@ -57,24 +54,30 @@ public class LoginDao extends AbstractDBIO {
       rs = ps.executeQuery();
       sb.delete(0, sb.length());
 
-      String userID = userid;
+     /* String userID = userid;
       String userName = null;
       String BRN;
       UserType userType;
+      UserState userState;
       Timestamp createAt;
       String phoneNumber;
       String address;
-      String email;
+      String email;*/
       Member tempMember = null;
       while (rs.next()) {
-        userName = rs.getString("userName");
+/*        userName = rs.getString("userName");
         BRN = rs.getString("BRN");
         userType = UserType.valueOf(rs.getString("userType"));
+        userState = UserState.valueOf(rs.getString("memberConfirm"));
         createAt = rs.getTimestamp("create_at");
         phoneNumber = rs.getString("phone_number");
         address = rs.getString("address");
         email = rs.getString("email");
-        tempMember = new Member(userID, userName, BRN, userType, createAt, phoneNumber, address, email);
+        tempMember = new Member(userID, userName, BRN, userType,userState, createAt, phoneNumber, address, email);*/
+        tempMember = Member.builder().userName(rs.getString("userName")).BRN(rs.getString("BRN"))
+            .userType(UserType.valueOf(rs.getString("userType"))).memberConfirm(UserState.valueOf(rs.getString("memberConfirm")))
+            .createAt( rs.getTimestamp("create_at")).phoneNumber(rs.getString("phone_number")).address(rs.getString("address"))
+            .email(rs.getString("email")).build();
       }
       close(getConnection(), ps, rs);
         return tempMember;
@@ -118,16 +121,6 @@ public class LoginDao extends AbstractDBIO {
 
 
 
-  @Override
-  public void update(Object o) {
-
-  }
-
-  @Override
-  public void delete(Object o) {
-
-  }
-
   public void commit() {
 
     try {
@@ -146,8 +139,8 @@ public class LoginDao extends AbstractDBIO {
   /** 관리자ID 생성 (추후 삭제 필요) */
 public void CreateAdmins() {
 
-    sb.append("INSERT INTO  member(userid, password, userName, phone_number, address, email, userType)").
-        append("VALUES ( 'admin', 'admin123', '총관리자', '010-1234-9987', '서울시 강남구 SAC아트홀 6층', 'egurmaza@gmail.com', 'ADMINISTRATOR')");
+    sb.append("INSERT INTO  member(userid, password, userName, phone_number, address, email, userType, memberConfirm)").
+        append("VALUES ( 'admin', 'admin123', '총관리자', '010-1234-9987', '서울시 강남구 SAC아트홀 6층', 'egurmaza@gmail.com', 'ADMINISTRATOR', 'ACCESS_OK')");
     String qurey = sb.toString();
 
     try {

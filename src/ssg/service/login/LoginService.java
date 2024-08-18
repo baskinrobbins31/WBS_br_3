@@ -19,6 +19,7 @@ public class LoginService implements LoginServiceInterface {
   @Override
   public void loginStart() {
     try {
+      System.out.println("--로그인--");
       loginScript.printInputID();
       String userid = br.readLine();
 
@@ -34,7 +35,7 @@ public class LoginService implements LoginServiceInterface {
       else {
         loginScript.printUnknownMember();
       }
-      br.close();
+      //br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -45,6 +46,7 @@ public class LoginService implements LoginServiceInterface {
   public void findID() {
 
     try {
+      System.out.println("--아이디 찾기--");
       loginScript.printFindIDMenu();
       int select = Integer.parseInt(br.readLine());
       String find;
@@ -78,6 +80,7 @@ public class LoginService implements LoginServiceInterface {
   @Override
   public void findPassWord() {
     try {
+      System.out.println("--비밀번호 찾기--");
       loginScript.printInputID();
       String userid = br.readLine();
 
@@ -101,8 +104,7 @@ public class LoginService implements LoginServiceInterface {
     @Override
   public void createMember() {
       try {
-        System.out.print("id를 입력하세요 : ");
-        int id = Integer.parseInt(br.readLine());
+        System.out.println("--회원 등록--");
 
         loginScript.printInputID();
         String userid = br.readLine();
@@ -122,7 +124,9 @@ public class LoginService implements LoginServiceInterface {
         loginScript.printInputEmail();
         String email = br.readLine();
 
-        Member createMember = new Member(id, userid, passWord, name, phone, address, email);
+        //Member createMember = new Member(id, userid, passWord, name, phone, address, email);
+        Member createMember =Member.builder().userid(userid).passWord(passWord).userName(name).
+            phoneNumber(phone).address(address).email(email).build();
         loginDao.create(createMember);
 
         br.close();

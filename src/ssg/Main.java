@@ -1,5 +1,9 @@
 package ssg;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import ssg.controller.login.LoginController;
 import ssg.controller.product.ProductController;
 import ssg.dao.category.CategoryDAO;
 import ssg.dao.product.ProductDAO;
@@ -9,11 +13,16 @@ import ssg.service.product.ProductService;
 public class Main {
 
   public static Member loginOnMember; //로그인 후 유저 정보를 담고 있음
+  //public  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
-    ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
+//    LoginController loginController = new LoginController();
+//    loginController.startMenu();
+//
+//    ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
+//    productController.processProducts();
 
-    productController.processProducts();
+    //br.close();
   }
 }
