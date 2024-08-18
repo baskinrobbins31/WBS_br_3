@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import ssg.dao.CategoryDAO;
+import ssg.dao.category.CategoryDAO;
 import ssg.dao.inbound.ProductDAO;
 import ssg.dto.Product;
 import ssg.dto.category.MajorCategory;
