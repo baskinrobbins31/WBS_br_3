@@ -6,6 +6,7 @@ import ssg.service.customerservice.CustomerServiceService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerServiceController {
@@ -43,11 +44,24 @@ public class CustomerServiceController {
         CustomerServiceService customerServiceService = new CustomerServiceService();
         boolean isQuit = false;
         while (!isQuit) {
+            customerServiceScript.printInquiryMenu();
             System.out.print("원하는 메뉴를 입력하세요.: ");
             int menu = scanner.nextInt();
             switch (menu) {
                 case 1 -> {
-                    customerServiceService.getInquiries();
+                    List<Inquiry> inquiryList = customerServiceService.getInquiries();
+                    System.out.println("-------- 나의 문의글 -----------");
+                    StringBuilder sb = new StringBuilder();
+                    for (Inquiry inquiry : inquiryList) {
+                        sb
+                                .append(inquiry.getId()).append("\t")
+                                .append(inquiry.getTitle()).append("\t")
+                                .append(inquiry.getContent()).append("\t")
+                                .append(inquiry.getCreatedAt()).append("\t")
+                                .append(inquiry.getUpdatedAt()).append("\t");
+                        System.out.println(sb);
+                        sb.setLength(0);
+                    }
                 }
                 case 2 -> {
                     System.out.println("문의글 등록: ");
@@ -66,10 +80,26 @@ public class CustomerServiceController {
                     customerServiceService.createInquiry(inquiry);
                 }
                 case 3 -> {
-                    customerServiceService.updateInquiry(1);
+                    System.out.print("수정할 문의글 id를 입력하세요.: ");
+                    int inquiry_id = scanner.nextInt();
+                    System.out.print("수정할 문의글 제목을 입력하세요.: ");
+                    String inquiry_title = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("수정할 문의글 내용을 입력하세요.: ");
+                    String inquiry_content = scanner.nextLine();
+
+                    Inquiry inquiry = Inquiry.builder()
+                            .title(inquiry_title)
+                            .content(inquiry_content)
+                            .updatedAt(new Timestamp(System.currentTimeMillis()))
+                            .build();
+
+                    customerServiceService.updateInquiry(inquiry_id, inquiry);
                 }
                 case 4 -> {
-                    customerServiceService.deleteInquiry(1);
+                    System.out.print("삭제할 문의글 id를 입력하세요.: ");
+                    int inquiry_id = scanner.nextInt();
+                    customerServiceService.deleteInquiry(inquiry_id);
                 }
                 case 5 -> {
                     isQuit = true;

@@ -12,11 +12,9 @@ public class Main {
   public static Member loginOnMember; //로그인 후 유저 정보를 담고 있음
 
   public static void main(String[] args) {
-    MainController mainController = new MainController();
 
-    // LoginController loginController = new LoginController();
+    LoginController loginController = new LoginController();
 
-
-    mainController.mainControllerMenu();
+    loginController.startMenu();
   }
 }
