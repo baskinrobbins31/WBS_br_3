@@ -2,7 +2,10 @@ package ssg;
 
 import ssg.controller.MainController;
 import ssg.controller.login.LoginController;
+import ssg.controller.product.ProductController;
+import ssg.dao.inbound.ProductDAO;
 import ssg.dto.Member;
+import ssg.service.ProductService;
 
 public class Main {
 
@@ -13,8 +16,7 @@ public class Main {
 
     // LoginController loginController = new LoginController();
 
+
     mainController.mainControllerMenu();
-
-
   }
 }

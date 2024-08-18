@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
+
 public abstract class AbstractDBIO {
 
   //프로퍼티
@@ -22,10 +23,10 @@ public abstract class AbstractDBIO {
               properties.load(fis);
             }
 
-            String driver = properties.getProperty("driver");
-            String url = properties.getProperty("url");
-            String name = properties.getProperty("username");
-            String password = properties.getProperty("password");
+            String driver = properties.getProperty("com.mysql.cj.jdbc.Driver");
+            String url = properties.getProperty("jdbc:mysql://localhost:3306/category");
+            String name = properties.getProperty("root");
+            String password = properties.getProperty("Mysql1234!?");
 
             Class.forName(driver);
             connection = DriverManager.getConnection(url, name, password);
@@ -86,6 +87,4 @@ public abstract class AbstractDBIO {
   protected void delete(Object o){
 
   }
-
-
 }
