@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import ssg.dao.category.CategoryDAO;
 import ssg.dao.product.ProductDAO;
-import ssg.dto.Product;
+import ssg.dto.product.Product;
 import ssg.dto.category.MajorCategory;
 import ssg.dto.category.MiddleCategory;
 import ssg.dto.category.SubclassCategory;

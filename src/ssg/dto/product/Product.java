@@ -1,4 +1,4 @@
-package ssg.dto;
+package ssg.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

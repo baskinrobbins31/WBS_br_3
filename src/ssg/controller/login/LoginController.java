@@ -9,8 +9,6 @@ import ssg.library.script.LoginScript;
 import ssg.service.login.LoginService;
 
 public class LoginController {
-
-  private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   private final LoginScript loginScript = LoginScript.getLoginScriptInstance();
   private LoginService loginService = new LoginService();
 
@@ -21,7 +19,7 @@ public class LoginController {
   public void startMenu() {
     boolean isOn = true;
     while(isOn) {
-      try {
+      try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
         loginScript.printStartMenu();
         int select = Integer.parseInt(br.readLine());
 

@@ -35,7 +35,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         loginScript.printUnknownMember();
       }
-      //br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -69,8 +68,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         System.out.println("찾으시는 아이디는 " + word);
       }
-
-      br.close();
     } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
@@ -92,9 +89,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         System.out.println(userid + " 계정의 비밀번호는 : " + findPass);
       }
-
-
-      br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -128,8 +122,6 @@ public class LoginService implements LoginServiceInterface {
         Member createMember =Member.builder().userid(userid).passWord(passWord).userName(name).
             phoneNumber(phone).address(address).email(email).build();
         loginDao.create(createMember);
-
-        br.close();
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
