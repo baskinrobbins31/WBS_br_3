@@ -3,10 +3,10 @@ package ssg.service.memberMgr;
 import ssg.enums.UserType;
 
 public interface MemberManagementInterface {
-  void confirmMemberCreate();
+  void confirmMemberCreate(int id);
   void listMember();
   void listAdmin(UserType type);
-  void listBRN();
+  void listBRN(String brn);
   void updateAuthority();
   void deleteMember();
   void findMember();

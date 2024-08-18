@@ -17,8 +17,8 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-//    LoginController loginController = new LoginController();
-//    loginController.startMenu();
+    LoginController loginController = new LoginController();
+    loginController.startMenu();
 //
 //    ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
 //    productController.processProducts();

@@ -76,8 +76,8 @@ public class LoginScript extends Script{
     printInputNumber();
   }
 
-  public void printInputID() {
-    sb.append("아이디를 입력해 주세요. : ");
+  public void printInputUserID() {
+    sb.append("사용자 아이디를 입력해 주세요. : ");
     printString(sb);
   }
 
@@ -105,10 +105,7 @@ public class LoginScript extends Script{
     printString(sb);
   }
 
-  public void printInputBRN() {
-    sb.append("사업자 번호를 입력해 주세요. : ");
-    printString(sb);
-  }
+
 
 
   /** ID 찾기 매뉴 */

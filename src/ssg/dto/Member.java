@@ -23,35 +23,35 @@ public class Member {
 
 
 
-  public Member() {}
+  private Member() {}
 
-//  /** 회원 등록 할때 사용 */
-//  public Member(int id, String userid, String passWord, String userName, String phoneNumber,
-//      String address, String email) {
-//    this.id = id;
-//    this.userid = userid;
-//    this.passWord = passWord;
-//    this.userName = userName;
-//    this.phoneNumber = phoneNumber;
-//    this.address = address;
-//    this.email = email;
-//  }
-//
-//
-//  public Member(String userid, String userName, String BRN, UserType userType, UserState userState,
-//       Timestamp createAt, String phoneNumber, String address,
-//      String email) {
-//    this.userid = userid;
-//    this.userName = userName;
-//    this.BRN = BRN;
-//    this.userType = userType;
-//    this.memberConfirm = userState;
-//    this.createAt = createAt;
-//    this.phoneNumber = phoneNumber;
-//    this.address = address;
-//    this.email = email;
-//  }
-//
+/*  *//** 회원 등록 할때 사용 *//*
+  public Member(int id, String userid, String passWord, String userName, String phoneNumber,
+      String address, String email) {
+    this.id = id;
+    this.userid = userid;
+    this.passWord = passWord;
+    this.userName = userName;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.email = email;
+  }
+
+
+  public Member(String userid, String userName, String BRN, UserType userType, UserState userState,
+       Timestamp createAt, String phoneNumber, String address,
+      String email) {
+    this.userid = userid;
+    this.userName = userName;
+    this.BRN = BRN;
+    this.userType = userType;
+    this.memberConfirm = userState;
+    this.createAt = createAt;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.email = email;
+  }*/
+
   @Builder
   public Member(int id, String userid, String passWord, String userName, String BRN,
       UserType userType, UserState memberConfirm, Timestamp createAt, String phoneNumber,
@@ -68,4 +68,6 @@ public class Member {
     this.address = address;
     this.email = email;
   }
+
+
 }

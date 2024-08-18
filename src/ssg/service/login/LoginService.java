@@ -20,7 +20,7 @@ public class LoginService implements LoginServiceInterface {
   public void loginStart() {
     try {
       System.out.println("--로그인--");
-      loginScript.printInputID();
+      loginScript.printInputUserID();
       String userid = br.readLine();
 
       loginScript.printInputPassWord();
@@ -29,8 +29,8 @@ public class LoginService implements LoginServiceInterface {
       if(loginDao.read(userid, password) instanceof Member m) {
           System.out.println("로그인 성공");
           Main.loginOnMember = m;
-        MainController allController = new MainController();
-        allController.mainControllerMenu();
+        MainController mainController = new MainController();
+        mainController.mainControllerMenu();
       }
       else {
         loginScript.printUnknownMember();
@@ -81,7 +81,7 @@ public class LoginService implements LoginServiceInterface {
   public void findPassWord() {
     try {
       System.out.println("--비밀번호 찾기--");
-      loginScript.printInputID();
+      loginScript.printInputUserID();
       String userid = br.readLine();
 
       String findPass = loginDao.read(userid, 3);
@@ -106,7 +106,7 @@ public class LoginService implements LoginServiceInterface {
       try {
         System.out.println("--회원 등록--");
 
-        loginScript.printInputID();
+        loginScript.printInputUserID();
         String userid = br.readLine();
 
         loginScript.printInputPassWord();
