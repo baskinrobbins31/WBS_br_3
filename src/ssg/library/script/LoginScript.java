@@ -68,9 +68,10 @@ public class LoginScript extends Script{
             .append("2.상품관리\t")
             .append("3.입고관리\t")
             .append("4.재고관리\t")
-            .append("5.창고관리\t")
-            .append("6.고객센터\t")
-            .append("7.로그아웃\n");
+            .append("5.출고관리\t")
+            .append("6.창고관리\t")
+            .append("7.고객센터\t")
+            .append("8.로그아웃\n");
     printString(sb);
     printInputNumber();
   }

@@ -41,7 +41,7 @@ public class MemberManagementController {
         case 7 -> System.out.println("이전화면");
         default -> throw new NumberFormatException();
       }
-      br.close();
+      //br.close();
     } catch (IOException | NumberFormatException e) {
       System.out.println("잘못된 입력입니다.");
     }
@@ -59,7 +59,7 @@ public class MemberManagementController {
         case 3 -> System.out.println("이전화면");
         default -> throw new NumberFormatException();
       }
-      br.close();
+     // br.close();
     } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
@@ -79,7 +79,7 @@ public class MemberManagementController {
         case 5 -> System.out.println("이전화면");
         default -> throw new NumberFormatException();
       }
-      br.close();
+      //br.close();
     } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
