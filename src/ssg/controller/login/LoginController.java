@@ -3,6 +3,8 @@ package ssg.controller.login;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import ssg.controller.customerservice.CustomerServiceController;
 import ssg.library.script.LoginScript;
 import ssg.service.login.LoginService;
 
@@ -11,6 +13,8 @@ public class LoginController {
   private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   private final LoginScript loginScript = LoginScript.getLoginScriptInstance();
   private LoginService loginService = new LoginService();
+
+  CustomerServiceController customerServiceController = new CustomerServiceController();
 
 
   /** 프로그램 실행시 처음 시작하는 메뉴 */
@@ -29,7 +33,7 @@ public class LoginController {
           }
           case 2 -> System.out.println("출고관리");
           case 3 -> {
-
+            customerServiceController.startMenu();
           }
           case 4 -> {
             System.out.println("종료");

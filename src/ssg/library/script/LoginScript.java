@@ -63,9 +63,15 @@ public class LoginScript extends Script{
 
   /** 메인 메뉴 */
   public void printMainMenu() {
-    index =1;
-    sb.append("---메인 메뉴---\n").append("\t").append(index++).append(". 회원관리\t").append(index++).append(". 입고관리").
-        append(index++).append(". 재고관리").append(index++).append(". 창고관리").append(index++).append(". 고객센터").append(index++).append(". 로그아웃\n");
+    StringBuilder append = sb.append("---메인 메뉴---\n")
+            .append("\t")
+            .append("1. 회원관리\t")
+            .append("2. 상품관리\t")
+            .append("3. 입고관리\t")
+            .append("4. 재고관리\t")
+            .append("5. 창고관리\t")
+            .append("6. 고객센터\t")
+            .append("7. 로그아웃\n");
     printString(sb);
     printInputNumber();
   }
