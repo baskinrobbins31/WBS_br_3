@@ -6,10 +6,11 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 import ssg.dto.Product;
-import ssg.service.ProductService;
+import ssg.service.product.ProductService;
 import java.util.Optional;
 
 public class ProductController {
+
   private final ProductService productService;
 
   public ProductController(ProductService productService) {
@@ -19,9 +20,12 @@ public class ProductController {
   public void processProducts() {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       while (true) {
-        System.out.println("1. 상품 등록");
-        System.out.println("2. 상품 조회 및 관리");
-        System.out.println("3. 종료");
+        StringBuilder menu = new StringBuilder();
+        menu.append("1.상품 등록\t\t")
+            .append("2.상품 조회 및 관리\t\t")
+            .append("3.종료");
+
+        System.out.println(menu.toString());
         System.out.print("선택: ");
 
         int choice = Integer.parseInt(br.readLine());
@@ -67,17 +71,22 @@ public class ProductController {
 
   // 상품 조회 및 관리 메서드
   private void readAndManageProduct(BufferedReader br) throws IOException, SQLException {
-    System.out.print("조회할 상품 이름: ");
+    System.out.print("조회할 상품 키워드: ");
     String name = br.readLine();
 
     List<Product> similarProducts = productService.findProductsByName(name);
     if (similarProducts.isEmpty()) {
       System.out.println("유사한 상품이 없습니다.");
     } else {
-      System.out.println("유사한 상품 목록:");
+      System.out.println("조회된 상품 목록:");
       for (Product product : similarProducts) {
-        System.out.println("ID: " + product.getProductId() + ", 이름: " + product.getProductName() +
-            ", 가격: " + product.getProductPrice() + ", 정보: " + product.getProductInfo());
+        System.out.println(
+                  product.getMajorName() + "> "
+                + product.getMiddleName() + "> "
+                + product.getSubclassName() + ">\t"
+                + "\t상품명: " + product.getProductName()
+                + "\t\t상품가격: " + product.getProductPrice()
+                + "\t상품정보: " + product.getProductInfo());
       }
 
       System.out.println("관리할 상품의 이름을 입력하세요: ");
@@ -94,7 +103,7 @@ public class ProductController {
         int manageChoice = Integer.parseInt(br.readLine());
         switch (manageChoice) {
           case 1 -> updateProduct(br, product);
-          case 2 -> deleteProduct(product.getProductName());
+          case 2 -> deleteProduct(br ,product.getProductName());
           case 3 -> System.out.println("취소되었습니다.");
           default -> System.out.println("잘못된 선택입니다.");
         }
@@ -117,8 +126,17 @@ public class ProductController {
   }
 
   // 상품 삭제 메서드
-  private void deleteProduct(String productName) throws SQLException {
-    productService.deleteProduct(productName);
-    System.out.println("상품이 삭제되었습니다.");
+  private void deleteProduct(BufferedReader br, String productName) throws IOException, SQLException {
+    System.out.println("정말로 상품정보를 삭제하시겠습니까?");
+    System.out.println("1.예\t\t2.아니오");
+    System.out.print("선택: ");
+    int choice = Integer.parseInt(br.readLine());
+    if(choice == 1) {
+      productService.deleteProduct(productName);
+    } else if(choice ==2){
+      System.out.println("상품정보 삭제를 취소하셨습니다.");
+    } else {
+      System.out.println("옳지않은 입력입니다.");
+    }
   }
 }
