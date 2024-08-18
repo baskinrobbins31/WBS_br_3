@@ -1,9 +1,11 @@
 package ssg.service.warehouse;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.util.List;
+import ssg.dao.warehouse.WarehouseDAO;
+import ssg.dto.warehouse.Warehouse;
 
 public class WarehouseService implements WarehouseServiceInterface{
+  WarehouseDAO dao = new WarehouseDAO();
 
   @Override
   public String getWarehouseLaw(int law) {
@@ -17,6 +19,31 @@ public class WarehouseService implements WarehouseServiceInterface{
       case 7 -> "화학물질관리법";
       default -> "물류시설법";
     };
+  }
+
+  @Override
+  public boolean executeQuery(String query) {
+    return dao.executeQuery(query);
+  }
+
+  @Override
+  public List<Warehouse> getWarehouseListAll() {
+    return dao.readAll();
+  }
+
+  @Override
+  public List<Warehouse> getWarehouseListLocationId(int locationId) {
+    return dao.readAllLocationId(locationId);
+  }
+
+  @Override
+  public List<Warehouse> getWarehouseListLaw(String law) {
+    return dao.readAllLaw(law);
+  }
+
+  @Override
+  public List<Warehouse> getWarehouseListName(String name) {
+    return dao.readAllName(name);
   }
 
 
