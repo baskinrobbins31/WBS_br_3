@@ -44,6 +44,7 @@ public class CustomerServiceController {
         CustomerServiceService customerServiceService = new CustomerServiceService();
         boolean isQuit = false;
         while (!isQuit) {
+            customerServiceScript.printInquiryMenu();
             System.out.print("원하는 메뉴를 입력하세요.: ");
             int menu = scanner.nextInt();
             switch (menu) {
@@ -79,10 +80,26 @@ public class CustomerServiceController {
                     customerServiceService.createInquiry(inquiry);
                 }
                 case 3 -> {
-                    customerServiceService.updateInquiry(1);
+                    System.out.print("수정할 문의글 id를 입력하세요.: ");
+                    int inquiry_id = scanner.nextInt();
+                    System.out.print("수정할 문의글 제목을 입력하세요.: ");
+                    String inquiry_title = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("수정할 문의글 내용을 입력하세요.: ");
+                    String inquiry_content = scanner.nextLine();
+
+                    Inquiry inquiry = Inquiry.builder()
+                            .title(inquiry_title)
+                            .content(inquiry_content)
+                            .updatedAt(new Timestamp(System.currentTimeMillis()))
+                            .build();
+
+                    customerServiceService.updateInquiry(inquiry_id, inquiry);
                 }
                 case 4 -> {
-                    customerServiceService.deleteInquiry(1);
+                    System.out.print("삭제할 문의글 id를 입력하세요.: ");
+                    int inquiry_id = scanner.nextInt();
+                    customerServiceService.deleteInquiry(inquiry_id);
                 }
                 case 5 -> {
                     isQuit = true;
