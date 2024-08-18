@@ -1,16 +1,15 @@
 package ssg.controller.warehouse;
 
-import static java.lang.System.out;
 
 import java.io.IOException;
-import java.util.List;
-import ssg.dao.warehouse.WarehouseDAO;
-import ssg.dto.warehouse.Warehouse;
+import ssg.dto.warehouse.SubWarehouse;
+import ssg.library.script.warehousescript.SubWarehouseScript;
 import ssg.library.script.warehousescript.WarehouseScript;
 import ssg.service.warehouse.WarehouseService;
 
 public class WarehouseController {
   WarehouseScript s = new WarehouseScript();
+  SubWarehouseScript sw = new SubWarehouseScript();
   WarehouseService service = new WarehouseService();
 
   public void callWarehouseMenu(){
@@ -27,7 +26,7 @@ public class WarehouseController {
               //창고관리 1-1-1 : 창고 시설 등록 메뉴
               boolean repeat = true;
               while (repeat) {
-                out.println("<창고 시설 등록>");
+                System.out.println("<창고 시설 등록>");
                 String wName = s.registerWarehouseName();
                 int locationId = s.registerWarehouseLocationId();
                 String location = s.registerWarehouseLocation();
@@ -96,7 +95,17 @@ public class WarehouseController {
               //창고관리 1-1-2 :서브 창고 등록
               boolean repeatSub = true;
               while (repeatSub) {
-                //창고 등록 메서드
+                System.out.println("<층별 창고 등록>");
+                String wID = sw.registerSubWarehouseParentID();
+                int law = s.registerWarehouseLaw();
+                String relatedLaw = service.getWarehouseLaw(law);
+                System.out.print("창고 토지 면적을 입력해주세요 : ");
+                String wsAreaSqm = sw.registerSubWarehouseArea();
+                System.out.print("창고 전용 면적을 입력해주세요 : ");
+                String wsWSqm = sw.registerSubWarehouseArea();
+                System.out.print("층고를 입력해주세요 : ");
+                String wsHeight = sw.registerSubWarehouseArea();
+                SubWarehouse subWarehouse = SubWarehouse.builder().wId(Integer.parseInt(wID)).build();
               }
             } else {
               //창고관리 1-1-3 :섹션 창고 등록
@@ -114,24 +123,24 @@ public class WarehouseController {
               switch(menu2) {
                 case "1" -> {
                   //창고관리 1-2-1 : 창고 전체 조회
-                  out.println("<창고 전체 조회>");
+                  System.out.println("<창고 전체 조회>");
                   s.printWarehouseList(service.getWarehouseListAll());
                 }
                 case "2" -> {
                   //창고관리 1-2-2 : 창고 소재지 별 조회
-                  out.println("<창고 소재지 별 조회>");
+                  System.out.println("<창고 소재지 별 조회>");
                   int id = s.registerWarehouseLocationId();
                   s.printWarehouseList(service.getWarehouseListLocationId(id));
                 }
                 case "3" -> {
                   //창고관리 1-2-3 : 창고명 조회
-                  out.println("<창고명 조회>");
+                  System.out.println("<창고명 조회>");
                   String name = s.registerWarehouseName();
                   s.printWarehouseList(service.getWarehouseListName(name));
                 }
                 case "4" -> {
                   //창고관리 1-2-4 : 창고 종류(법률) 별 조회
-                  out.println("<창고 법률 별 조회>");
+                  System.out.println("<창고 법률 별 조회>");
                   String related_law = service.getWarehouseLaw(s.registerWarehouseLaw());
                   s.printWarehouseList(service.getWarehouseListLaw(related_law));
                 }

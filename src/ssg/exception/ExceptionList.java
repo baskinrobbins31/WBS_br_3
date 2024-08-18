@@ -63,7 +63,7 @@ public class ExceptionList {
   }
 
   public static boolean isValidAddress(String address) {
-    String regex = "^[a-zA-Z0-9 _-]*$";
+    String regex = "^[a-zA-Z가-힣()0-9 _-]*$";
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(address);
     return !m.matches();
