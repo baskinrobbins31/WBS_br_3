@@ -86,6 +86,4 @@ public abstract class AbstractDBIO2<E> {
     protected void delete(int id){
 
     }
-
-
 }

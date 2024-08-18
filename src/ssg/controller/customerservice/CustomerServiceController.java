@@ -6,6 +6,7 @@ import ssg.service.customerservice.CustomerServiceService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerServiceController {
@@ -47,7 +48,19 @@ public class CustomerServiceController {
             int menu = scanner.nextInt();
             switch (menu) {
                 case 1 -> {
-                    customerServiceService.getInquiries();
+                    List<Inquiry> inquiryList = customerServiceService.getInquiries();
+                    System.out.println("-------- 나의 문의글 -----------");
+                    StringBuilder sb = new StringBuilder();
+                    for (Inquiry inquiry : inquiryList) {
+                        sb
+                                .append(inquiry.getId()).append("\t")
+                                .append(inquiry.getTitle()).append("\t")
+                                .append(inquiry.getContent()).append("\t")
+                                .append(inquiry.getCreatedAt()).append("\t")
+                                .append(inquiry.getUpdatedAt()).append("\t");
+                        System.out.println(sb);
+                        sb.setLength(0);
+                    }
                 }
                 case 2 -> {
                     System.out.println("문의글 등록: ");
