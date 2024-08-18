@@ -18,11 +18,11 @@ public class Inquiry {
     private Timestamp updatedAt;
 
     @Builder
-    Inquiry(int id, String title, String content, Timestamp updatedAt) {
+    Inquiry(int id, String title, String content, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.createdAt = (createdAt == null ? new Timestamp(System.currentTimeMillis()) : createdAt);
         this.updatedAt = updatedAt;
     }
 }

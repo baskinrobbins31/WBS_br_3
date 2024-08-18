@@ -17,8 +17,8 @@ public class CustomerServiceService {
         customerServiceDAO.create(inquiry);
     }
 
-    public void updateInquiry(int id) {
-        customerServiceDAO.update(id);
+    public void updateInquiry(int id, Inquiry inquiry) {
+        customerServiceDAO.update(id, inquiry);
     }
 
     public void deleteInquiry(int id) {
