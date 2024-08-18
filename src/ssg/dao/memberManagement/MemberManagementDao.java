@@ -125,7 +125,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
         String query = sb.toString();
         sb.delete(0, sb.length());
         PreparedStatement ps = getConnection().prepareStatement(query);
-        ps.executeUpdate();
+        int updaterow = ps.executeUpdate();
         close(getConnection(), ps);
       } catch (SQLException e) {
         throw new RuntimeException(e);

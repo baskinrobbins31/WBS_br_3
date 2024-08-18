@@ -173,6 +173,7 @@ public class MemberManagementService implements MemberManagementInterface {
     try {
       System.out.println("--회원 정보 수정--");
       System.out.println("*미수정시 no 입력");
+      String noUpdate = "no";
       System.out.print("수정할 비밀번호를 입력하세요. : ");
       String updatePass = br.readLine();
       System.out.print("수정할 이름을 입력하세요. : ");
@@ -186,12 +187,13 @@ public class MemberManagementService implements MemberManagementInterface {
       System.out.print("수정할 이메일을 입력하세요. : ");
       String updateEmail = br.readLine();
 
-      Member temp = Member.builder().passWord(updatePass.equals("no")? Main.loginOnMember.getPassWord() : updatePass)
-          .userName(updateName.equals("no")? Main.loginOnMember.getUserName() : updateName)
-          .BRN(updateBRN.equals("no")? Main.loginOnMember.getBRN() : updateBRN)
-          .phoneNumber(updatePhone.equals("no")? Main.loginOnMember.getPhoneNumber() : updatePhone)
-          .address(updateAddress.equals("no") ? Main.loginOnMember.getAddress() : updateAddress)
-          .email(updateEmail.equals("no") ? Main.loginOnMember.getEmail() : updateEmail).build();
+      Member temp = Member.builder().id(Main.loginOnMember.getId())
+          .passWord(updatePass.equals(noUpdate)? Main.loginOnMember.getPassWord() : updatePass)
+          .userName(updateName.equals(noUpdate)? Main.loginOnMember.getUserName() : updateName)
+          .BRN(updateBRN.equals(noUpdate)? Main.loginOnMember.getBRN() : updateBRN)
+          .phoneNumber(updatePhone.equals(noUpdate)? Main.loginOnMember.getPhoneNumber() : updatePhone)
+          .address(updateAddress.equals(noUpdate) ? Main.loginOnMember.getAddress() : updateAddress)
+          .email(updateEmail.equals(noUpdate) ? Main.loginOnMember.getEmail() : updateEmail).build();
 
       memberManagementDao.update(temp);
     } catch (IOException e) {

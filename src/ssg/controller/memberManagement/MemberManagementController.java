@@ -58,8 +58,8 @@ public class MemberManagementController {
         memberManagementScript.printEmplMemberMenu();
         int select = Integer.parseInt(br.readLine());
         switch (select) {
-          case 1 -> memberManagementService.updateMember();
-          case 2 -> memberManagementService.showInformation();
+          case 1 -> memberManagementService.showInformation();
+          case 2 -> memberManagementService.updateMember();
           case 3 -> {System.out.println("이전화면"); isOn = false;}
           default -> throw new NumberFormatException();
         }
