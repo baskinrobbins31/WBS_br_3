@@ -3,6 +3,7 @@ package ssg.dao.customerservice;
 import ssg.dto.customerservice.Inquiry;
 import ssg.library.dbio.AbstractDBIO2;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,12 +67,55 @@ public class CustomerServiceDAO extends AbstractDBIO2<Inquiry> {
 
         return inquiries;
     }
-    public void update(int id) {
+    public void update(int id, Inquiry inquiry) {
+        String query = "UPDATE inquiry SET title=?, content=?, updated_at=? WHERE id=?";
 
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, inquiry.getTitle());
+            pstmt.setString(2, inquiry.getContent());
+            pstmt.setTimestamp(3, inquiry.getUpdatedAt());
+            pstmt.setInt(4, id);
+
+            int rows = pstmt.executeUpdate();
+
+            if (rows == 1) {
+                System.out.println("문의글이 수정되었습니다.");
+            } else {
+                System.out.println("문의글이 수정되지 않았습니다.");
+            }
+
+            pstmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override
     public void delete(int id) {
+        String query = "DELETE FROM inquiry WHERE id=?";
 
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, id);
+
+            int rows = pstmt.executeUpdate();
+
+            if (rows == 1) {
+                System.out.println("문의글이 삭제되었습니다.");
+            } else {
+                System.out.println("문의글이 삭제되지 않았습니다.");
+            }
+
+            pstmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

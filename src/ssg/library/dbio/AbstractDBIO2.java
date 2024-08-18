@@ -79,7 +79,7 @@ public abstract class AbstractDBIO2<E> {
         return null;
     }
 
-    protected void update(int id){
+    protected void update(int id, E e){
 
     }
 
