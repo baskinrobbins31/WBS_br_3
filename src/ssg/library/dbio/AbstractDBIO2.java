@@ -10,17 +10,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
+public abstract class AbstractDBIO2<E> {
 
-public abstract class AbstractDBIO {
-
-  //프로퍼티
+    //프로퍼티
     protected Connection getConnection () {
-      Connection connection = null;
-      try {
+        Connection connection = null;
+        try {
             Properties properties = new Properties();
 
             try(FileInputStream fis = new FileInputStream("resource/database.properties")) {
-              properties.load(fis);
+                properties.load(fis);
             }
 
             String driver = properties.getProperty("driver");
@@ -40,10 +39,10 @@ public abstract class AbstractDBIO {
     protected void close (Connection connection, PreparedStatement pStmt){
         try {
             if(pStmt != null) {
-              pStmt.close();
+                pStmt.close();
             }
             if(connection != null) {
-              connection.close();
+                connection.close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,13 +53,13 @@ public abstract class AbstractDBIO {
     protected void close (Connection connection, PreparedStatement pStmt, ResultSet rs){
         try {
             if(rs != null) {
-              rs.close();
+                rs.close();
             }
             if(pStmt != null) {
-              pStmt.close();
+                pStmt.close();
             }
             if(connection != null) {
-              connection.close();
+                connection.close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -68,23 +67,23 @@ public abstract class AbstractDBIO {
     }
 
 
-  protected void create(Object o) {
+    protected void create(E e) {
 
-  }
+    }
 
-  protected Object read(){
-      return null;
-  }
-
-  protected List<Object> readAll(){
+    protected E read(){
         return null;
     }
 
-  protected void update(Object o){
+    protected List<E> readAll(){
+        return null;
+    }
 
-  }
+    protected void update(int id, E e){
 
-  protected void delete(Object o){
+    }
 
-  }
+    protected void delete(int id){
+
+    }
 }
