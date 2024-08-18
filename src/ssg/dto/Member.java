@@ -19,6 +19,8 @@ public class Member {
   private String address;       //회원 주소
   private String email;         //회원 e메일
 
+
+
   Member() {}
 
   /** 회원 등록 할때 사용 */
@@ -33,7 +35,7 @@ public class Member {
     this.email = email;
   }
 
-
+//롬복 빌더패턴
   public Member(String userid, String userName, String BRN, UserType userType, UserState userState,
        Timestamp createAt, String phoneNumber, String address,
       String email) {

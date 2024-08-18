@@ -3,6 +3,7 @@ package ssg.controller.login;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import ssg.Main;
 import ssg.library.script.LoginScript;
 import ssg.service.login.LoginService;
 
