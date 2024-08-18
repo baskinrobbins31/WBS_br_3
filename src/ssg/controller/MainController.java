@@ -1,4 +1,4 @@
-package ssg.controller.allController;
+package ssg.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import ssg.controller.login.LoginController;
 import ssg.controller.memberManagement.MemberManagementController;
 import ssg.library.script.LoginScript;
 
-public class AllController {
+public class MainController {
 
   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   LoginScript loginScript = LoginScript.getLoginScriptInstance();
@@ -22,7 +22,7 @@ public class AllController {
       switch (select){
         case 1-> {
           MemberManagementController memberManagementController = new MemberManagementController();
-                  memberManagementController.memberMgrMenu(Main.loginOnMember.getUserType());}
+                  memberManagementController.memberManagementMenu(Main.loginOnMember.getUserType());}
         case 2 -> {
           System.out.println("입고관리");
         }

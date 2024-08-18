@@ -47,24 +47,27 @@ public class LoginController {
 
   /** 로그인 선택시 뜨는 메뉴 */
   public void loginMenu() {
+    boolean isOn = true;
+    while (isOn) {
+      try {
+        loginScript.printLoginAllMenu();
+        int select = 0;
+        select = Integer.parseInt(br.readLine());
 
-    try {
-      loginScript.printLoginAllMenu();
-      int select = Integer.parseInt(br.readLine());
-
-      switch (select) {
-        case 1 -> loginService.loginStart();
-        case 2 -> loginService.findID();
-        case 3 -> loginService.findPassWord();
-        case 4 -> loginService.createMember();
-        case 5 -> startMenu();
-        case 99 -> loginService.createAdmin();
-        default -> throw new NumberFormatException();
+        switch (select) {
+          case 1 -> loginService.loginStart();
+          case 2 -> loginService.findID();
+          case 3 -> loginService.findPassWord();
+          case 4 -> loginService.createMember();
+          case 5 -> {startMenu(); isOn =false;}
+          case 99 -> loginService.createAdmin();
+          default -> throw new NumberFormatException();
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      } catch (NumberFormatException e) {
+        loginScript.printFaultInput();
       }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } catch (NumberFormatException e) {
-      loginScript.printFaultInput();
     }
   }
 

@@ -20,7 +20,7 @@ public class Script {
   }
 
   public void printFaultInput() {
-    sb.append("잘못 입력하셨습니다.");
+    sb.append("잘못 입력하셨습니다.\n");
     printString(sb);
   }
 

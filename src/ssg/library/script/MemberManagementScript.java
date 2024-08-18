@@ -50,4 +50,14 @@ public class MemberManagementScript extends Script{
     printString(sb);
     printInputNumber();
   }
+
+  public void printFindAdminMenu() {
+    index =1;
+    sb.append("---관리자 조회---\n").append("\t")
+        .append(index++).append(".총관리자\t").append(index++).append(". 창고관리자\t").append(index++).append(". 사장\t").
+        append(index++).append(". 일반직원\n").append("\t").append(index++).append(". 이전화면\n");
+    printString(sb);
+    printInputNumber();
+  }
+
 }
