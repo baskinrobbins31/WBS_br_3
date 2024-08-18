@@ -10,6 +10,7 @@ import ssg.service.product.ProductService;
 import java.util.Optional;
 
 public class ProductController {
+
   private final ProductService productService;
 
   public ProductController(ProductService productService) {
@@ -79,8 +80,13 @@ public class ProductController {
     } else {
       System.out.println("조회된 상품 목록:");
       for (Product product : similarProducts) {
-        System.out.println("소분류: " + product.getSubclassId() + "\tID: " + product.getProductId() + "\t이름: " + product.getProductName() +
-            "\t\t가격: " + product.getProductPrice() + "\t정보: " + product.getProductInfo());
+        System.out.println(
+                  product.getMajorName() + "> "
+                + product.getMiddleName() + "> "
+                + product.getSubclassName() + ">\t"
+                + "\t상품명: " + product.getProductName()
+                + "\t\t상품가격: " + product.getProductPrice()
+                + "\t상품정보: " + product.getProductInfo());
       }
 
       System.out.println("관리할 상품의 이름을 입력하세요: ");
@@ -97,7 +103,7 @@ public class ProductController {
         int manageChoice = Integer.parseInt(br.readLine());
         switch (manageChoice) {
           case 1 -> updateProduct(br, product);
-          case 2 -> deleteProduct(product.getProductName());
+          case 2 -> deleteProduct(br ,product.getProductName());
           case 3 -> System.out.println("취소되었습니다.");
           default -> System.out.println("잘못된 선택입니다.");
         }
@@ -120,8 +126,17 @@ public class ProductController {
   }
 
   // 상품 삭제 메서드
-  private void deleteProduct(String productName) throws SQLException {
-    productService.deleteProduct(productName);
-    System.out.println("상품이 삭제되었습니다.");
+  private void deleteProduct(BufferedReader br, String productName) throws IOException, SQLException {
+    System.out.println("정말로 상품정보를 삭제하시겠습니까?");
+    System.out.println("1.예\t\t2.아니오");
+    System.out.print("선택: ");
+    int choice = Integer.parseInt(br.readLine());
+    if(choice == 1) {
+      productService.deleteProduct(productName);
+    } else if(choice ==2){
+      System.out.println("상품정보 삭제를 취소하셨습니다.");
+    } else {
+      System.out.println("옳지않은 입력입니다.");
+    }
   }
 }

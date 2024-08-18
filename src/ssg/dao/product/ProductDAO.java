@@ -22,7 +22,6 @@ public class ProductDAO extends AbstractDBIO2<Product> {
       try (ResultSet rs = pStmt.executeQuery()) {
         if (rs.next()) {
           return Optional.of(new Product(
-              rs.getInt("product_id"),
               rs.getString("product_name"),
               rs.getInt("product_price"),
               rs.getString("product_info"),
@@ -39,7 +38,7 @@ public class ProductDAO extends AbstractDBIO2<Product> {
   // 제품 이름으로 유사한 제품들을 찾는 메서드
   public List<Product> findProductsByName(String productName) {
     List<Product> products = new ArrayList<>();
-    String query = "SELECT * FROM product WHERE product_name LIKE ?";
+    String query = "SELECT * FROM product_category_view WHERE product_name LIKE ?";
     try (Connection connection = getConnection();
         PreparedStatement pStmt = connection.prepareStatement(query)) {
 
@@ -47,11 +46,12 @@ public class ProductDAO extends AbstractDBIO2<Product> {
       try (ResultSet rs = pStmt.executeQuery()) {
         while (rs.next()) {
           products.add(new Product(
-              rs.getInt("product_id"),
               rs.getString("product_name"),
               rs.getInt("product_price"),
               rs.getString("product_info"),
-              rs.getInt("subclass_id")
+              rs.getString("subclass_name"),
+              rs.getString("middle_name"),
+              rs.getString("major_name")
           ));
         }
       }
@@ -88,7 +88,6 @@ public class ProductDAO extends AbstractDBIO2<Product> {
 
       while (rs.next()) {
         products.add(new Product(
-            rs.getInt("product_id"),
             rs.getString("product_name"),
             rs.getInt("product_price"),
             rs.getString("product_info"),

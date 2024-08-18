@@ -1,11 +1,10 @@
 package ssg;
 
-import ssg.controller.MainController;
-import ssg.controller.login.LoginController;
 import ssg.controller.product.ProductController;
-import ssg.dao.inbound.ProductDAO;
+import ssg.dao.category.CategoryDAO;
+import ssg.dao.product.ProductDAO;
 import ssg.dto.Member;
-import ssg.service.ProductService;
+import ssg.service.product.ProductService;
 
 public class Main {
 
@@ -13,8 +12,8 @@ public class Main {
 
   public static void main(String[] args) {
 
-    LoginController loginController = new LoginController();
+    ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
 
-    loginController.startMenu();
+    productController.processProducts();
   }
 }
