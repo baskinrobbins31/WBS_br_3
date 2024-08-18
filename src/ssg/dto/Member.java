@@ -6,7 +6,7 @@ import lombok.Getter;
 import ssg.enums.UserState;
 import ssg.enums.UserType;
 
-@Builder
+
 @Getter
 public class Member {
   private int id;   //id
@@ -23,7 +23,7 @@ public class Member {
 
 
 
-  Member() {}
+  public Member() {}
 
 //  /** 회원 등록 할때 사용 */
 //  public Member(int id, String userid, String passWord, String userName, String phoneNumber,
@@ -52,19 +52,20 @@ public class Member {
 //    this.email = email;
 //  }
 //
-//  public Member(int id, String userid, String passWord, String userName, String BRN,
-//      UserType userType, UserState memberConfirm, Timestamp createAt, String phoneNumber,
-//      String address, String email) {
-//    this.id = id;
-//    this.userid = userid;
-//    this.passWord = passWord;
-//    this.userName = userName;
-//    this.BRN = BRN;
-//    this.userType = userType;
-//    this.memberConfirm = memberConfirm;
-//    this.createAt = createAt;
-//    this.phoneNumber = phoneNumber;
-//    this.address = address;
-//    this.email = email;
-//  }
+  @Builder
+  public Member(int id, String userid, String passWord, String userName, String BRN,
+      UserType userType, UserState memberConfirm, Timestamp createAt, String phoneNumber,
+      String address, String email) {
+    this.id = id;
+    this.userid = userid;
+    this.passWord = passWord;
+    this.userName = userName;
+    this.BRN = BRN;
+    this.userType = userType;
+    this.memberConfirm = memberConfirm;
+    this.createAt = createAt;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.email = email;
+  }
 }

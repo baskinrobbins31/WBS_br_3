@@ -14,11 +14,10 @@ public class LoginScript extends Script{
 
   /** 처음 실행시 뜨는 화면 */
   public void printStartMenu() {
-    index =1;
-    sb.append("\t창고천국에 오신 것을 환영합니다!\n\n").
-        append("============================================================================\n").
-        append("\t").append(index++).append(". 로그인\t").append(index++).append(". 출고관리\t").append(index++).append(". 고객센터\t").
-        append(index++).append(". 종료\n").
+    sb.append("\t창고천국에 오신 것을 환영합니다!\n").
+        append("============================================================================\n")
+        .append("\t").append("1.회원등록\t").append("2.로그인\t").append("3.운송장 조회\t").append("4.고객 센터\n")
+        .append("\t").append("5.아이디 찾기\t").append("6.비밀번호 찾기\t").append("7.종료\n").
         append("============================================================================\n");
     printString(sb);
     printInputNumber();
@@ -33,15 +32,15 @@ public class LoginScript extends Script{
     System.out.print("번호를 입력해 주세요 :  ");*/
   }
 
-  /** 로그인 전체 메뉴 */
-  public void printLoginAllMenu() {
+ // /** 로그인 전체 메뉴 */
+/*  public void printLoginAllMenu() {
     index =1;
     sb.append("---로그인 전체 메뉴---\n").append("\t").
         append(index++).append(". 로그인\t").append(index++).append(". 아이디 찾기\t").append(index++).append(". 비밀번호 찾기\t").
         append(index++).append(". 회원등록\n").append("\t").append(index++).append(". 이전화면\n");
     printString(sb);
     printInputNumber();
-  }
+  }*/
 
   /** 아이디가 중복시 출력문 */
   public void printDuplicateID() {
@@ -65,13 +64,13 @@ public class LoginScript extends Script{
   public void printMainMenu() {
     StringBuilder append = sb.append("---메인 메뉴---\n")
             .append("\t")
-            .append("1. 회원관리\t")
-            .append("2. 상품관리\t")
-            .append("3. 입고관리\t")
-            .append("4. 재고관리\t")
-            .append("5. 창고관리\t")
-            .append("6. 고객센터\t")
-            .append("7. 로그아웃\n");
+            .append("1.회원관리\t")
+            .append("2.상품관리\t")
+            .append("3.입고관리\t")
+            .append("4.재고관리\t")
+            .append("5.창고관리\t")
+            .append("6.고객센터\t")
+            .append("7.로그아웃\n");
     printString(sb);
     printInputNumber();
   }
