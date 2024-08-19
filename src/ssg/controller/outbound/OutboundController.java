@@ -80,12 +80,8 @@ public class OutboundController {
 
   /** 출고 요청 */
   private void outboundRequest() {
-    try {
-      System.out.println("--출고 요청--");
-      outboundService.outboundRequest(brInstance);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    System.out.println("--출고 요청--");
+    outboundService.outboundRequest(brInstance);
   }
 
   /** 출고 요청 승인 */
