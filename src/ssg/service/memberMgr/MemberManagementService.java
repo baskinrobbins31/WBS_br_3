@@ -132,8 +132,8 @@ public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원 삭제 */
   @Override
-  public void deleteMember(int id) {
-    memberManagementDao.delete(id);
+  public void deleteMember(int id, String brn) {
+    memberManagementDao.delete(id, brn);
   }
 
   /** 화원 찾기 */
