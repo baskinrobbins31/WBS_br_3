@@ -5,6 +5,7 @@ import static ssg.Main.brInstance;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import ssg.enums.OutboundState;
 import ssg.enums.UserType;
 import ssg.library.script.OutboundScript;
 import ssg.service.outbound.OutboundService;
@@ -31,9 +32,9 @@ public class OutboundController {
         int select = Integer.parseInt(brInstance.readLine());
         switch (select) {
           case 1 -> okOutboundRquest();
-          case 2 -> System.out.println("출고지시서 조회");
+          case 2 -> outboundList(OutboundState.OUTBOUND_WAIT);
           case 3 -> System.out.println("출고상품 검색");
-          case 4 -> System.out.println("출고리스트 조회");
+          case 4 -> outboundList(OutboundState.OUTBOUND_OK);
           case 5 -> System.out.println("출고리스트 검색");
           case 6 -> vehicleAssignmentMenuAdmin();
           case 7 -> waybillMenuAdmin();
@@ -55,9 +56,9 @@ public class OutboundController {
         int select = Integer.parseInt(brInstance.readLine());
         switch (select) {
           case 1 -> outboundRequest();
-          case 2 -> System.out.println("출고지시서 조회");
+          case 2 -> outboundList(OutboundState.OUTBOUND_WAIT);
           case 3 -> System.out.println("출고상품 검색");
-          case 4 -> System.out.println("출고리스트 조회");
+          case 4 -> outboundList(OutboundState.OUTBOUND_OK);
           case 5 -> System.out.println("출고리스트 검색");
           case 6 -> System.out.println("운송장 조회");
           case 7 -> {System.out.println("이전화면");
@@ -81,9 +82,7 @@ public class OutboundController {
   private void outboundRequest() {
     try {
       System.out.println("--출고 요청--");
-      outboundScript.printInputID();
-      int id = Integer.parseInt(brInstance.readLine());
-      outboundService.outboundRequest();
+      outboundService.outboundRequest(brInstance);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -96,14 +95,14 @@ public class OutboundController {
       outboundScript.printInputID();
       int id = Integer.parseInt(brInstance.readLine());
       outboundService.okOutboundRequest(id);
-
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
 
   /** 출고지시서, 리스트 조회 */
-  private void outboundList(int select) {
-    
+  private void outboundList(OutboundState state) {
+    outboundService.outboundList(state);
   }
+
 }
