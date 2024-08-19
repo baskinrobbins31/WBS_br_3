@@ -9,6 +9,7 @@ import ssg.controller.login.LoginController;
 import ssg.controller.memberManagement.MemberManagementController;
 import ssg.controller.outbound.OutboundController;
 import ssg.library.script.LoginScript;
+import ssg.library.script.Script;
 
 public class MainController {
 
@@ -57,7 +58,7 @@ public class MainController {
             default -> throw new NumberFormatException();
           }
         } catch (NumberFormatException e) {
-          throw new RuntimeException(e);
+          loginScript.printFaultInput();
         }
       }
     } catch (IOException e) {
