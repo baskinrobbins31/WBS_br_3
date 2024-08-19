@@ -17,9 +17,9 @@ public class WarehouseScript {
 
   //창고관리 1 : 창고 메인 메뉴
   public String printWarehouseMenuMain() throws IOException {
-    System.out.println("<창고 관리>\n1. 창고 등록\t\t\t2. 창고 조회\t\t\t3. 나가기\n메뉴 입력 : ");
+    System.out.print("\n<창고 관리>\n1. 창고 등록\t\t\t2. 창고 조회\t\t\t3. 나가기\n\n메뉴 입력 : ");
       String menu = reader.readLine();
-      if (ExceptionList.isNumberRange1To3(menu)) {
+      if (ExceptionList.isNumberInRange(menu,3)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
       return menu;
@@ -27,9 +27,9 @@ public class WarehouseScript {
 
   //창고관리 1-1 : 창고 등록 메뉴
   public String printWarehouseMenu1() throws IOException {
-    System.out.println("<창고 등록>\n1. 창고 시설 등록\t\t\t2. 층별 창고 등록\t\t\t3. 세부 창고 등록\n메뉴 입력 : ");
+    System.out.print("\n<창고 등록>\n1. 창고 시설 등록\t\t\t2. 층별 창고 등록\t\t\t3. 세부 창고 등록\n\n메뉴 입력 : ");
     String menu = reader.readLine();
-    if (ExceptionList.isNumberRange1To3(menu)) {
+    if (ExceptionList.isNumberInRange(menu, 2)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
     }
     return menu;
@@ -80,7 +80,7 @@ public class WarehouseScript {
   public String registerWarehouseGeneralArea() throws IOException{
     System.out.print("일반 창고 면적을 입력해주세요 : ");
     String generalAreaSqm = reader.readLine();
-    if (generalAreaSqm != null) {
+    if (!generalAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(generalAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -93,7 +93,7 @@ public class WarehouseScript {
   public String registerWarehouseColdArea() throws IOException{
     System.out.print("냉동/냉장 창고 면적을 입력해주세요 : ");
     String coldAreaSqm = reader.readLine();
-    if (coldAreaSqm != null) {
+    if (!coldAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(coldAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -106,7 +106,7 @@ public class WarehouseScript {
   public String registerWarehouseStorageArea() throws IOException{
     System.out.print("보관 창고 면적을 입력해주세요 : ");
     String storageAreaSqm = reader.readLine();
-    if (storageAreaSqm != null) {
+    if (!storageAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(storageAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -119,7 +119,7 @@ public class WarehouseScript {
   public String registerWarehousePortArea() throws IOException{
     System.out.print("항만 창고 면적을 입력해주세요 : ");
     String portAreaSqm = reader.readLine();
-    if (portAreaSqm != null) {
+    if (!portAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(portAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -132,7 +132,7 @@ public class WarehouseScript {
   public String registerWarehouseBondedArea() throws IOException{
     System.out.print("보세 창고 면적을 입력해주세요 : ");
     String bondedAreaSqm = reader.readLine();
-    if (bondedAreaSqm != null) {
+    if (!bondedAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(bondedAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -145,7 +145,7 @@ public class WarehouseScript {
   public String registerWarehouseChemicalArea() throws IOException{
     System.out.print("화학 창고 면적을 입력해주세요 : ");
     String chemicalAreaSqm = reader.readLine();
-    if (chemicalAreaSqm != null) {
+    if (!chemicalAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(chemicalAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -158,7 +158,7 @@ public class WarehouseScript {
   public String registerWarehouseFoodArea() throws IOException{
     System.out.print("식품 창고 면적을 입력해주세요 : ");
     String foodAreaSqm = reader.readLine();
-    if (foodAreaSqm != null) {
+    if (!foodAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(foodAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -171,7 +171,7 @@ public class WarehouseScript {
   public String registerWarehouseLivestockArea() throws IOException{
     System.out.print("축산물 창고 면적을 입력해주세요 : ");
     String livestockAreaSqm = reader.readLine();
-    if (livestockAreaSqm != null) {
+    if (!livestockAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(livestockAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -184,7 +184,7 @@ public class WarehouseScript {
   public String registerWarehouseMarineArea() throws IOException{
     System.out.print("수산 창고 면적을 입력해주세요 : ");
     String marineAreaSqm = reader.readLine();
-    if (marineAreaSqm != null) {
+    if (!marineAreaSqm.trim().isEmpty()) {
       if (ExceptionList.isValidFloat(marineAreaSqm)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -207,7 +207,7 @@ public class WarehouseScript {
   public String registerWarehouseItems() throws IOException{
     System.out.print("취급 품목을 입력해주세요 : ");
     String items = reader.readLine();
-    if (items != null) {
+    if (!items.trim().isEmpty()) {
       if (ExceptionList.isValidText(items) || ExceptionList.isLength50(items)) {
         throw new Exception(ErrorCode.INVALID_INPUT_LENGTH);
       }
@@ -232,7 +232,7 @@ public class WarehouseScript {
   public String registerWarehouseEmployees() throws IOException{
     System.out.print("종업원 수를 입력해주세요 : ");
     String employees = reader.readLine();
-    if (employees != null) {
+    if (!employees.trim().isEmpty()) {
       if (ExceptionList.isValidNumber(employees) || ExceptionList.isValidSmallInt(employees)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
@@ -245,7 +245,7 @@ public class WarehouseScript {
   public String registerWarehouseEquipment() throws IOException{
     System.out.print("시설 장비를 입력해주세요 : ");
     String equipment = reader.readLine();
-    if (equipment != null) {
+    if (!equipment.trim().isEmpty()) {
       if (ExceptionList.isValidText(equipment) || ExceptionList.isLength50(equipment)) {
         throw new Exception(ErrorCode.INVALID_INPUT_LENGTH);
       }
@@ -256,9 +256,9 @@ public class WarehouseScript {
 
   //창고 전화번호
   public String registerWarehouseContact() throws IOException{
-    System.out.print("시설 장비를 입력해주세요 : ");
+    System.out.print("연락처를 입력해주세요 : ");
     String contact = reader.readLine();
-    if (contact != null) {
+    if (!contact.trim().isEmpty()) {
       if (ExceptionList.isValidPhoneNumber(contact)) {
         throw new Exception(ErrorCode.INVALID_INPUT_PHONENUMBER);
       }
@@ -269,7 +269,7 @@ public class WarehouseScript {
 
   //등록하기
   public int registerOk() throws IOException {
-    System.out.print("등록하시겠습니까? (Y / N) : ");
+    System.out.print("\n등록하시겠습니까? (Y / N) : ");
     String ok = reader.readLine();
     if (ExceptionList.isValidOk(ok)) {
       throw new Exception(ErrorCode.INVALID_INPUT_OKAY);
@@ -283,7 +283,7 @@ public class WarehouseScript {
 
   //등록 성공
   public String registerSuccess() throws IOException {
-    System.out.println("창고가 등록되었습니다.\n1. 창고 전체 조회\t\t\t2. 계속 등록하기\t\t\t3. 나가기\n메뉴 입력 : ");
+    System.out.print("창고가 등록되었습니다.\n\n1. 창고 전체 조회\t\t\t2. 계속 등록하기\t\t\t3. 나가기\n\n메뉴 입력 : ");
     String menu = reader.readLine();
     if (ExceptionList.isNumberRange1To3(menu)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
@@ -298,8 +298,8 @@ public class WarehouseScript {
 
   //창고관리 1-2 : 창고 조회 메뉴
   public String printWarehouseMenu2() throws IOException {
-    out.println(
-        "<창고 조회>\n1. 전체 조회\t\t\t2. 소재지 별 조회\t\t\t3. 창고명 별 조회\n4. 종류 별 조회\t\t\t5. 임대여부 별 조회\t\t\t6. 나가기\n메뉴 입력 : ");
+    out.print(
+        "\n<창고 조회>\n1. 전체 조회\t\t\t2. 소재지 별 조회\t\t\t3. 창고명 별 조회\n4. 종류 별 조회\t\t\t5. 임대여부 별 조회\t\t\t6. 나가기\n\n메뉴 입력 : ");
     String menu = reader.readLine();
     if (ExceptionList.isNumberRange1To6(menu)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);

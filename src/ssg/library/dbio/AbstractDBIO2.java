@@ -12,7 +12,6 @@ import java.util.Properties;
 
 public abstract class AbstractDBIO2<E> {
 
-    //프로퍼티
     protected Connection getConnection () {
         Connection connection = null;
         try {
@@ -35,7 +34,6 @@ public abstract class AbstractDBIO2<E> {
         return connection;
     }
 
-
     protected void close (Connection connection, PreparedStatement pStmt){
         try {
             if(pStmt != null) {
@@ -48,7 +46,6 @@ public abstract class AbstractDBIO2<E> {
             throw new RuntimeException(e);
         }
     }
-
 
     protected void close (Connection connection, PreparedStatement pStmt, ResultSet rs){
         try {
@@ -65,7 +62,6 @@ public abstract class AbstractDBIO2<E> {
             throw new RuntimeException(e);
         }
     }
-
 
     protected void create(E e) {
 
