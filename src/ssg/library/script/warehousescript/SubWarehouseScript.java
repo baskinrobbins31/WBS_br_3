@@ -1,8 +1,15 @@
 package ssg.library.script.warehousescript;
 
+import static java.lang.System.out;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import ssg.dto.warehouse.SubWarehouse;
+import ssg.dto.warehouse.Warehouse;
 import ssg.enums.errorcode.ErrorCode;
 import ssg.exception.Exception;
 import ssg.exception.ExceptionList;
@@ -10,12 +17,18 @@ import ssg.exception.ExceptionList;
 public class SubWarehouseScript {
   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-  public String registerSubWarehouseParentID () throws IOException {
+  public String registerSubWarehouseParentID (String id, ArrayList<Integer> array) throws IOException {
+    if (ExceptionList.isExistWId(id, array)) {
+      throw new Exception(ErrorCode.NOT_EXISTS_ID);
+    }
+    return id;
+  }
+
+  public String printSubWarehouseParentID () throws IOException {
     System.out.print("창고 아이디를 입력해주세요 : ");
     String wid = reader.readLine();
-    //창고 아이디가 없으면 throw exception
-    if (true) {
-
+    if (ExceptionList.isValidNumber(wid)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
     }
     return wid;
   }
@@ -71,6 +84,14 @@ public class SubWarehouseScript {
       return height;
     }
     return null;
+  }
+
+  //List 출력
+  public void printSubWarehouseList(List<SubWarehouse> subWarehouseList) {
+    Optional<List<SubWarehouse>> optional = Optional.ofNullable(subWarehouseList);
+    optional.ifPresentOrElse(
+        subWarehouseArray -> subWarehouseArray.forEach(warehouse -> {out.println(warehouse.toString());}),
+        () -> out.println("창고 리스트가 존재하지 않습니다."));
   }
 
 }
