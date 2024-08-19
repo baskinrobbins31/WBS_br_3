@@ -1,8 +1,5 @@
 package ssg.controller.login;
 
-
-import static ssg.Main.brInstance;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,41 +22,44 @@ public class LoginController {
    */
   public void startMenu() {
     boolean isOn = true;
-    while (isOn) {
-      try {
+    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+      while (isOn) {
+        try {
         loginScript.printStartMenu();
-        int select = Integer.parseInt(brInstance.readLine());
-        switch (select) {
-          case 1 -> {
-            loginService.createMember(brInstance);
+        int select = Integer.parseInt(br.readLine());
+          switch (select) {
+            case 1 -> {
+              loginService.createMember(br);
+            }
+            case 2 -> {
+              loginService.loginStart(br);
+            }
+            case 3 -> {
+              System.out.println("운송장 조회");
+            }
+            case 4 -> {
+              customerServiceController.startMenu();
+            }
+            case 5 -> {
+              loginService.findID(br);
+            }
+            case 6 -> {
+              loginService.findPassWord(br);
+            }
+            case 7 -> {
+              System.out.println("종료");
+              isOn = false;
+            }
+            case 999 -> loginService.createAdmin(br);
+            default -> throw new NumberFormatException();
           }
-          case 2 -> {
-            loginService.loginStart(brInstance);
-          }
-          case 3 -> {
-            System.out.println("운송장 조회");
-          }
-          case 4 -> {
-            System.out.println("고객센터");
-          }
-          case 5 -> {
-            loginService.findID(brInstance);
-          }
-          case 6 -> {
-            loginService.findPassWord(brInstance);
-          }
-          case 7 -> {
-            System.out.println("종료");
-            isOn = false;
-          }
-          case 999 -> loginService.createAdmin(brInstance);
-          default -> throw new NumberFormatException();
+        }catch (NumberFormatException e) {
+          loginScript.printFaultInput();
         }
-
-      } catch (IOException | NumberFormatException e) {
-        throw new RuntimeException(e);
       }
-    }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+      }
   }
 }
 

@@ -1,13 +1,13 @@
 package ssg.service.customerservice;
 
-import ssg.dao.customerservice.CustomerServiceDAO;
+import ssg.dao.customerservice.InquiryDAO;
 import ssg.dto.customerservice.Inquiry;
 
 import java.util.List;
 
-public class CustomerServiceService {
+public class InquiryService {
 
-    CustomerServiceDAO customerServiceDAO = new CustomerServiceDAO();
+    InquiryDAO customerServiceDAO = new InquiryDAO();
 
     public List<Inquiry> getInquiries() {
         return customerServiceDAO.readAll();
