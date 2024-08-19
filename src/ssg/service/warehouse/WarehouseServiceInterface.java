@@ -5,6 +5,7 @@ import ssg.dto.warehouse.Warehouse;
 
 public interface WarehouseServiceInterface {
   String getWarehouseLaw(int law);
+  String getSubWarehouseLaw(int law);
   boolean executeQuery(String query);
   List<Warehouse> getWarehouseListAll();
   List<Warehouse> getWarehouseListLocationId(int locationId);
