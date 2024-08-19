@@ -321,11 +321,8 @@ public class WarehouseScript {
   public void printWarehouseList(List<Warehouse> warehouseList) {
     Optional<List<Warehouse>> optional = Optional.ofNullable(warehouseList);
     optional.ifPresentOrElse(
-        warehouseArray -> warehouseArray.forEach(warehouse -> {out.println(warehouse.toString());}),
+        warehouseArray -> warehouseArray.forEach(warehouse -> out.println(warehouse.toString())),
         () -> out.println("창고 리스트가 존재하지 않습니다."));
   }
-
-
-
 
 }
