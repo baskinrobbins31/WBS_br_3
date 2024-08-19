@@ -94,32 +94,35 @@ public class LoginService implements LoginServiceInterface {
 
   /** 회원 등록 */
     @Override
-  public void createMember(BufferedReader br) {
-      try {
+  public void createMember(BufferedReader loginService) {
+      try{
+        //BufferedReader loginService = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("--회원 등록--");
 
         loginScript.printInputUserID();
-        String userid = br.readLine();
+        String userid = loginService.readLine();
 
         loginScript.printInputPassWord();
-        String passWord = br.readLine();
+        String passWord = loginService.readLine();
 
         loginScript.printInputName();
-        String name = br.readLine();
+        String name = loginService.readLine();
 
         loginScript.printInputPhoneNumber();
-        String phone = br.readLine();
+        String phone = loginService.readLine();
 
         loginScript.printInputAddress();
-        String address = br.readLine();
+        String address = loginService.readLine();
 
         loginScript.printInputEmail();
-        String email = br.readLine();
+        String email = loginService.readLine();
 
         //Member createMember = new Member(id, userid, passWord, name, phone, address, email);
         Member createMember =Member.builder().userid(userid).passWord(passWord).userName(name).
             phoneNumber(phone).address(address).email(email).build();
+        //loginService.close();
         loginDao.create(createMember);
+
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
