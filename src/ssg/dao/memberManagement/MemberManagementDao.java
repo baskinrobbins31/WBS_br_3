@@ -1,5 +1,6 @@
 package ssg.dao.memberManagement;
 
+import java.lang.reflect.Type;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -173,10 +174,13 @@ public class MemberManagementDao extends AbstractDBIO2 {
     }
   }
 
-  @Override
-  public void delete(int id) {
+
+  public void delete(int id, String BRN) {
     try {
-      sb.append("DELETE FROM member WHERE id = ").append(id);
+      if(BRN.equals("null"))
+        sb.append("DELETE FROM member WHERE id = ").append(id);
+      else
+        sb.append("DELETE FROM member WHERE id = ").append(id).append(" AND BRN = '").append(BRN).append("'");
       String query = sb.toString();
       sb.delete(0, sb.length());
       PreparedStatement ps = getConnection().prepareStatement(query);
