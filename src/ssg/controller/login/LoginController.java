@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 import ssg.controller.customerservice.CustomerServiceController;
 import ssg.controller.outbound.OutboundController;
+import ssg.controller.stockhistory.StockHistoryController;
 import ssg.library.script.LoginScript;
 import ssg.service.login.LoginService;
 
@@ -18,6 +19,8 @@ public class LoginController {
 
   CustomerServiceController customerServiceController = new CustomerServiceController();
   OutboundController outboundController = new OutboundController();
+
+  StockHistoryController stockHistoryController = new StockHistoryController();
 
   /**
    * 프로그램 실행시 처음 시작하는 메뉴
@@ -37,6 +40,7 @@ public class LoginController {
             }
             case 3 -> {
               System.out.println("운송장 조회");
+              stockHistoryController.startMenu();
             }
             case 4 -> {
               customerServiceController.startMenu();

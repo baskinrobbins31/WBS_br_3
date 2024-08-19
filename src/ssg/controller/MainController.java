@@ -9,6 +9,7 @@ import ssg.Main;
 import ssg.controller.customerservice.CustomerServiceController;
 import ssg.controller.memberManagement.MemberManagementController;
 import ssg.controller.outbound.OutboundController;
+import ssg.controller.stockhistory.StockHistoryController;
 import ssg.controller.warehouse.WarehouseController;
 import ssg.library.script.LoginScript;
 
@@ -19,6 +20,8 @@ public class MainController {
   MemberManagementController memberManagementController = new MemberManagementController();
   OutboundController outboundController = new OutboundController();
   WarehouseController warehouseController = new WarehouseController();
+
+  StockHistoryController stockHistoryController = new StockHistoryController();
 
   /** 사용자 로그인 후 뜨는 전체 메뉴 */
   public void mainControllerMenu(){
@@ -41,7 +44,7 @@ public class MainController {
               System.out.println("입고관리");
             }
             case 4 -> {
-              System.out.println("재고관리");
+              stockHistoryController.startMenu();
             }
             case 5 -> {
               outboundController.outboundMenuSelect(Main.loginOnMember.getUserType());
