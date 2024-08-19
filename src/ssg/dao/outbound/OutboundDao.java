@@ -5,11 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import ssg.dto.Member;
 import ssg.dto.Outbound;
 import ssg.enums.OutboundState;
-import ssg.enums.UserState;
-import ssg.enums.UserType;
 import ssg.library.dbio.AbstractDBIO2;
 
 public class OutboundDao extends AbstractDBIO2 {
@@ -76,6 +73,20 @@ public class OutboundDao extends AbstractDBIO2 {
     super.update(id, o);
   }
 
+  public int update(int id){
+    try {
+      sb.append("UPDATE outbound_request SET out_request_state = 'OUTBOUND_OK' WHERE out_id = ").append(id);
+      String query = sb.toString();
+      sb.delete(0, sb.length());
+      PreparedStatement ps = getConnection().prepareStatement(query);
+      int updaterow = ps.executeUpdate();
+      close(getConnection(), ps);
+      return updaterow;
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   @Override
   protected void delete(int id) {
     super.delete(id);
@@ -83,11 +94,15 @@ public class OutboundDao extends AbstractDBIO2 {
 
   /** resultSet 값 받기 */
   private Outbound resultSetReturn(ResultSet rs) {
-//  try {
-    return Outbound.builder().build();
-//  } catch (SQLException e) {
-//    throw new RuntimeException(e);
-//  }
+  try {
+    return Outbound.builder().outboundID(rs.getInt("out_id")).userid(rs.getInt("user_id")).stockID(rs.getInt("stock_id"))
+        .wssID(rs.getInt("wss_id")).outboundAmount(rs.getInt("out_amount")).deliveryAddress(rs.getString("delivery_address"))
+        .locationID(rs.getInt("location_id")).recipient(rs.getString("recipient")).recipientPhoneNumber(rs.getString("recipient_number"))
+        .createAt(rs.getTimestamp("created_at")).outboundState(OutboundState.valueOf(rs.getString("out_request_state")))
+        .outboundExplain(rs.getString("out_explain")).build();
+  } catch (SQLException e) {
+    throw new RuntimeException(e);
+  }
   }
 }
 

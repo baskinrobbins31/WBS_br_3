@@ -1,5 +1,6 @@
 package ssg.service.outbound;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import ssg.dao.outbound.OutboundDao;
@@ -18,7 +19,9 @@ public class OutboundService {
   }
 
   /** 출고 요청 */
-  public void outboundRequest() {}
+  public void outboundRequest(BufferedReader br) {
+
+  }
 
 
   /** 출고 지시서, 리스트 조회 */

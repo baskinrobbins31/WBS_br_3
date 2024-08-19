@@ -82,9 +82,7 @@ public class OutboundController {
   private void outboundRequest() {
     try {
       System.out.println("--출고 요청--");
-      outboundScript.printInputID();
-      int id = Integer.parseInt(brInstance.readLine());
-      outboundService.outboundRequest();
+      outboundService.outboundRequest(brInstance);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -97,7 +95,6 @@ public class OutboundController {
       outboundScript.printInputID();
       int id = Integer.parseInt(brInstance.readLine());
       outboundService.okOutboundRequest(id);
-
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -106,7 +103,6 @@ public class OutboundController {
   /** 출고지시서, 리스트 조회 */
   private void outboundList(OutboundState state) {
     outboundService.outboundList(state);
-
   }
 
 }
