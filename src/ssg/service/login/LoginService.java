@@ -78,7 +78,7 @@ public class LoginService implements LoginServiceInterface {
       loginScript.printInputUserID();
       String userid = br.readLine();
 
-      String findPass = loginDao.read(userid, 3);
+      String findPass = loginDao.read(userid, 4);
 
       if (findPass == null) {
         loginScript.printNotFoundID();
@@ -125,7 +125,7 @@ public class LoginService implements LoginServiceInterface {
       }
     }
 
-    public void createAdmin(BufferedReader br) {
+    public void createAdmin() {
       loginDao.CreateAdmins();
     }
 }
