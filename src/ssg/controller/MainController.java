@@ -48,6 +48,7 @@ public class MainController {
             }
             case 6 -> {
               System.out.println("창고관리");
+
             }
             case 7 -> {
               customerServiceController.startMenu();
