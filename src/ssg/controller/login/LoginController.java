@@ -38,7 +38,7 @@ public class LoginController {
               System.out.println("운송장 조회");
             }
             case 4 -> {
-              System.out.println("고객센터");
+              customerServiceController.startMenu();
             }
             case 5 -> {
               loginService.findID(br);
