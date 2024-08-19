@@ -32,59 +32,9 @@ public class UserTypeControllerProcessor {
   ProductController productController
       = new ProductController(new ProductService(new ProductDAO(),new CategoryDAO()), new BufferedReader(new InputStreamReader(System.in)));
 
-  /** 사용자 로그인 후 뜨는 전체 메뉴 */
-  /*public void mainControllerMenu(){
-    boolean isOn = true;
-
-    //try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
-      while (isOn) {
-        try  {
-          loginScript.printMainMenu();
-          int select = Integer.parseInt(brInstance.readLine());
-          switch (select) {
-            case 1 -> {
-              System.out.println("회원관리");
-              memberManagementController.memberManagementMenu(Main.loginOnMember.getUserType());
-            }
-            case 2 -> {
-              System.out.println("상품관리");
-            }
-            case 3 -> {
-              System.out.println("입고관리");
-            }
-            case 4 -> {
-              System.out.println("재고관리");
-            }
-            case 5 -> {
-              outboundController.outboundMenuSelect(Main.loginOnMember.getUserType());
-            }
-            case 6 -> {
-              System.out.println("창고관리");
-
-            }
-            case 7 -> {
-              customerServiceController.startMenu();
-            }
-            case 8 -> {
-              System.out.println("로그아웃");
-              Main.loginOnMember = null;
-              isOn = false;
-            }
-            default -> throw new NumberFormatException();
-          }
-        } catch (IOException | NumberFormatException e) {
-          loginScript.printFaultInput();
-        }
-      }*/
-//    } catch (IOException e) {
-//      throw new RuntimeException(e);
-//    }
-//  }
-
   public void viewAdminMenu(){
 
     boolean isOn = true;
-
     while (isOn) {
       try {
         loginScript.printMainMenu();
