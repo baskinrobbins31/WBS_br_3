@@ -10,8 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class SectionWarehouse {
-  private int sswId;
+  private int wssd;
   private Float rentFee6m; // FLOAT -> Float 타입 (null 허용)
   private Float rentFee12m; // FLOAT -> Float 타입 (null 허용)
-  private int swId;
+  private int wsId;
 }
