@@ -17,7 +17,7 @@ import ssg.service.product.ProductService;
 public class Main {
 
   public static Member loginOnMember; //로그인 후 유저 정보를 담고 있음
-  //public  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+  public  static BufferedReader brInstance = new BufferedReader(new InputStreamReader(System.in));
 
   public static void main(String[] args) throws IOException {
 
@@ -27,7 +27,7 @@ public class Main {
 //    ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
 //    productController.processProducts();
 
-    //br.close();
+
 
     //ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
 
@@ -36,6 +36,8 @@ public class Main {
 /*    InboundController inboundController = new InboundController(new InboundService(), new Script());
 
     inboundController.processMemberInbound();*/
+
+    brInstance.close();
 
   }
 }

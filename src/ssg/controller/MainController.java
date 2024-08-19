@@ -1,15 +1,16 @@
 package ssg.controller;
 
+import static ssg.Main.brInstance;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import ssg.Main;
 import ssg.controller.customerservice.CustomerServiceController;
-import ssg.controller.login.LoginController;
 import ssg.controller.memberManagement.MemberManagementController;
 import ssg.controller.outbound.OutboundController;
+import ssg.controller.warehouse.WarehouseController;
 import ssg.library.script.LoginScript;
-import ssg.library.script.Script;
 
 public class MainController {
 
@@ -17,16 +18,17 @@ public class MainController {
   CustomerServiceController customerServiceController = new CustomerServiceController();
   MemberManagementController memberManagementController = new MemberManagementController();
   OutboundController outboundController = new OutboundController();
+  WarehouseController warehouseController = new WarehouseController();
 
   /** 사용자 로그인 후 뜨는 전체 메뉴 */
-  public void mainControllerMenu() {
+  public void mainControllerMenu(){
     boolean isOn = true;
 
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+    //try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
       while (isOn) {
         try  {
           loginScript.printMainMenu();
-          int select = Integer.parseInt(br.readLine());
+          int select = Integer.parseInt(brInstance.readLine());
           switch (select) {
             case 1 -> {
               System.out.println("회원관리");
@@ -57,12 +59,12 @@ public class MainController {
             }
             default -> throw new NumberFormatException();
           }
-        } catch (NumberFormatException e) {
+        } catch (IOException | NumberFormatException e) {
           loginScript.printFaultInput();
         }
       }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
   }
 }
