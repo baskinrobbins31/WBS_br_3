@@ -7,6 +7,9 @@ import ssg.enums.OutboundState;
 @Getter
 public class Outbound {
   private int outboundID;   //출고번호
+  private int userid;
+  private int inventoryID;
+
   private int outboundAmount =0;
   private String deliveryAddress;
   private int locationID;

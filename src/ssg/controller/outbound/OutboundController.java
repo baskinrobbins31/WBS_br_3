@@ -5,6 +5,7 @@ import static ssg.Main.brInstance;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import ssg.enums.OutboundState;
 import ssg.enums.UserType;
 import ssg.library.script.OutboundScript;
 import ssg.service.outbound.OutboundService;
@@ -103,7 +104,9 @@ public class OutboundController {
   }
 
   /** 출고지시서, 리스트 조회 */
-  private void outboundList(int select) {
-    
+  private void outboundList(OutboundState state) {
+    outboundService.outboundList(state);
+
   }
+
 }
