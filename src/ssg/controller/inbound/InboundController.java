@@ -81,7 +81,7 @@ public class InboundController {
   private void requestInbound(BufferedReader br) throws IOException, SQLException {
     System.out.println("새로운 입고 요청을 생성합니다.");
 
-    System.out.print("조회할 키워드를 입력하세요: ");
+    System.out.print("등록할 상품 키워드를 입력하세요: ");
     String keyword = br.readLine();
     List<Product> products = inboundService.findProductsByName(keyword);
 
@@ -103,7 +103,7 @@ public class InboundController {
     System.out.println("대여한 창고 목록을 조회합니다.");
     List<Warehouse> warehouses = inboundService.getWarehousesByMember(Main.loginOnMember.getId());
     warehouses.forEach(warehouse -> System.out.println(
-        "창고 ID: " + warehouse.getWId() + ", 창고명: " + warehouse.getWName()));
+        "창고 ID: " + warehouse.getWId() + "\t\t창고명: " + warehouse.getWName()));
 
     System.out.print("입고할 창고 ID를 입력하세요: ");
     int wssId = Integer.parseInt(br.readLine());
@@ -134,12 +134,12 @@ public class InboundController {
     } else {
       inboundList.forEach(inbound -> System.out.println(
           "입고 ID: " + inbound.getInboundId() +
-              "\t상품 ID: " + inbound.getProductName() +
-              "\t상태: " + inbound.getInboundStatus() +
-              "\t요청 시간: " + inbound.getInboundRequestDatetime() +
-              "\t승인 시간: " + (inbound.getInboundApprovalDatetime() != null
+              "\t\t상품 ID: " + inbound.getProductName() +
+              "\t\t상태: " + inbound.getInboundStatus() +
+              "\t\t요청 시간: " + inbound.getInboundRequestDatetime() +
+              "\t\t승인 시간: " + (inbound.getInboundApprovalDatetime() != null
               ? inbound.getInboundApprovalDatetime() : "승인되지 않음") +
-              "\t예상 입고 시간: " + inbound.getInboundExpectedDatetime()
+              "\t\t예상 입고 시간: " + inbound.getInboundExpectedDatetime()
       ));
     }
   }
@@ -152,16 +152,16 @@ public class InboundController {
     } else {
       inboundList.forEach(inbound -> System.out.println(
           "입고 ID: " + inbound.getInboundId() +
-              ", 상태: " + inbound.getInboundStatus().getValue() +
-              ", 요청 시간: " + inbound.getInboundRequestDatetime() +
-              ", 예상 입고 시간: " + inbound.getInboundExpectedDatetime()));
+              "\t\t상태: " + inbound.getInboundStatus().getValue() +
+              "\t\t요청 시간: " + inbound.getInboundRequestDatetime() +
+              "\t\t예상 입고 시간: " + inbound.getInboundExpectedDatetime()));
     }
   }
 
   private void viewAdminApprovedInboundList(BufferedReader br) throws IOException {
     System.out.println("관리자의 조회");
     System.out.println("조회 방식을 선택하세요");
-    String view = "1.전체 조회\t2.기간별 조회\t3.월별 조회\t4.돌아가기";
+    String view = "1.전체 조회\t\t2.기간별 조회\t\t3.월별 조회\t\t4.돌아가기";
     System.out.println(view);
     script.printInputNumber();
 
@@ -180,7 +180,7 @@ public class InboundController {
 
   // 입고 현황 조회
   private void viewMemberApprovedInboundList(BufferedReader br) throws IOException {
-    System.out.println("조회 방식을 선택하세요: 1. 전체 조회 2. 기간별 조회 3. 월별 조회 4. 돌아가기");
+    System.out.println("조회 방식을 선택하세요: 1. 전체 조회\t\t2. 기간별 조회\t\t3. 월별 조회\t\t4. 돌아가기");
     int choice = Integer.parseInt(br.readLine());
 
     switch (choice) {
@@ -198,7 +198,7 @@ public class InboundController {
   private void viewAdminAllApprovedInboundList() {
     List<Inbound> approvedList = inboundService.getAllApprovedInboundList();
     approvedList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + "\t상태: " + inbound.getInboundStatus()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus()));
   }
 
   private void viewAdminApprovedInboundListByPeriod(BufferedReader br) throws IOException {
@@ -208,7 +208,7 @@ public class InboundController {
     LocalDateTime end = LocalDateTime.parse(br.readLine() + "T23:59:59");
     List<Inbound> periodList = inboundService.getApprovedInboundListByPeriod(start, end);
     periodList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + "\t상태: " + inbound.getInboundStatus()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus()));
   }
 
   private void viewAdminApprovedInboundListByMonth(BufferedReader br) throws IOException {
@@ -218,14 +218,14 @@ public class InboundController {
     int month = Integer.parseInt(br.readLine());
     List<Inbound> monthList = inboundService.getApprovedInboundListByMonth(month, year);
     monthList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + "\t상태: " + inbound.getInboundStatus()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus()));
   }
 
 
   private void viewMemberAllApprovedInboundList() {
     List<Inbound> approvedList = inboundService.getAllApprovedInboundList();
     approvedList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + ", 상태: " + inbound.getInboundStatus().getValue()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus().getValue()));
   }
 
   private void viewMemberApprovedInboundListByPeriod(BufferedReader br) throws IOException {
@@ -235,7 +235,7 @@ public class InboundController {
     LocalDateTime end = LocalDateTime.parse(br.readLine() + "T23:59:59");
     List<Inbound> periodList = inboundService.getApprovedInboundListByPeriod(start, end);
     periodList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + ", 상태: " + inbound.getInboundStatus().getValue()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus().getValue()));
   }
 
   private void viewMemberApprovedInboundListByMonth(BufferedReader br) throws IOException {
@@ -245,7 +245,7 @@ public class InboundController {
     int month = Integer.parseInt(br.readLine());
     List<Inbound> monthList = inboundService.getApprovedInboundListByMonth(month, year);
     monthList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + ", 상태: " + inbound.getInboundStatus().getValue()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus().getValue()));
   }
 
   // 입고 요청 수정
@@ -262,7 +262,7 @@ public class InboundController {
   private void approvedInboundList() {
     List<Inbound> approvedList = inboundService.getAllApprovedInboundList();
     approvedList.forEach(inbound -> System.out.println(
-        "입고 ID: " + inbound.getInboundId() + ", 상태: " + inbound.getInboundStatus()));
+        "입고 ID: " + inbound.getInboundId() + "\t\t상태: " + inbound.getInboundStatus()));
   }
 
   // 입고 요청 거절
