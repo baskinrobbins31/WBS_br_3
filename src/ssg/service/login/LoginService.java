@@ -125,7 +125,7 @@ public class LoginService implements LoginServiceInterface {
       }
     }
 
-    public void createAdmin(BufferedReader br) {
+    public void createAdmin() {
       loginDao.CreateAdmins();
     }
 }

@@ -1,5 +1,7 @@
 package ssg.controller.login;
 
+import static ssg.Main.brInstance;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,17 +24,16 @@ public class LoginController {
    */
   public void startMenu() {
     boolean isOn = true;
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       while (isOn) {
         try {
         loginScript.printStartMenu();
-        int select = Integer.parseInt(br.readLine());
+        int select = Integer.parseInt(brInstance.readLine());
           switch (select) {
             case 1 -> {
-              loginService.createMember(br);
+              loginService.createMember(brInstance);
             }
             case 2 -> {
-              loginService.loginStart(br);
+              loginService.loginStart(brInstance);
             }
             case 3 -> {
               System.out.println("운송장 조회");
@@ -41,24 +42,21 @@ public class LoginController {
               customerServiceController.startMenu();
             }
             case 5 -> {
-              loginService.findID(br);
+              loginService.findID(brInstance);
             }
             case 6 -> {
-              loginService.findPassWord(br);
+              loginService.findPassWord(brInstance);
             }
             case 7 -> {
               System.out.println("종료");
               isOn = false;
             }
-            case 999 -> loginService.createAdmin(br);
+            case 999 -> loginService.createAdmin();
             default -> throw new NumberFormatException();
           }
-        }catch (NumberFormatException e) {
+        }catch (IOException | NumberFormatException e) {
           loginScript.printFaultInput();
         }
-      }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
       }
   }
 }
