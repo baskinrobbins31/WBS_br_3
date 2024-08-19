@@ -17,7 +17,6 @@ public class MemberManagementService implements MemberManagementInterface {
   private MemberManagementDao memberManagementDao = new MemberManagementDao();
   private StringBuilder sb = new StringBuilder();
   private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-  private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
   /** 회원 등록 승인 */
   @Override
@@ -107,7 +106,7 @@ public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원 권한 수정 */
   @Override
-  public void updateAuthority() {
+  public void updateAuthority(BufferedReader br) {
 
     try {
       MemberManagementScript.getMEMBER_MANAGEMENT_SCRIPT_INSTANCE().printInputID();
@@ -133,14 +132,8 @@ public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원 삭제 */
   @Override
-  public void deleteMember() {
-    try {
-      System.out.print("삭제할 아이디를 입력하세요. : ");
-      int id = Integer.parseInt(br.readLine());
-      memberManagementDao.delete(id);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+  public void deleteMember(int id) {
+    memberManagementDao.delete(id);
   }
 
   /** 화원 찾기 */
@@ -169,7 +162,7 @@ public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원본인 정보 수정 */
   @Override
-  public void updateMember() {
+  public void updateMember(BufferedReader br) {
     try {
       System.out.println("--회원 정보 수정--");
       System.out.println("*미수정시 no 입력");

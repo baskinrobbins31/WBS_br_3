@@ -56,21 +56,29 @@ public class Script {
 
   /** 입고 관리 메뉴(관리자) */
   public void printAdminInboundMenu() {
-    index =1;
-    sb.append("---입고 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 입고요청승인\t").append(index++).append(". 입고요청 수정\t").append(index++).append(". 입고요청 취소\t").
-        append(index++).append(". 입고지시서 조회\n").append("\t").append(index++).append(". 입고리스트 조회\n").append(index++).append(". 입고현황 조회\t").
-        append(index++).append(". 이전화면\n");
+    sb.append("---입고 관리 메뉴---\n")
+        .append("1.입고요청승인\t")
+        .append("2.입고요청 수정\t")
+        .append("3.입고요청 취소\t")
+        .append("4.입고지시서 조회\n")
+        .append("5.입고요청리스트 조회\t")
+        .append("6.입고현황 조회\t")
+        .append("7.이전화면\n");
     printString(sb);
     printInputNumber();
   }
 
   /** 입고 관리 메뉴(회원) */
   public void printMemberInboundMenu() {
-    index =1;
-    sb.append("---입고 관리 메뉴---\n").append("\t")
-        .append(index++).append(". 입고요청\t").append(index++).append(". 입고요청 수정\t").append(index++).append(". 입고요청 취소\t").
-        append(index++).append(". 입고요청 조회\n").append("\t").append(index++).append(". 입고현황 조회\t").append(". 이전화면\n");
+
+    sb.append("---입고 관리 메뉴---\n")
+        .append("1. 입고요청\t")
+        .append("2. 입고요청 수정\t")
+        .append("3. 입고요청 취소\t")
+        .append("4. 입고요청 조회\n")
+        .append("5. 입고현황 조회\t")
+        .append("6. 이전화면\n");
+
     printString(sb);
     printInputNumber();
   }
