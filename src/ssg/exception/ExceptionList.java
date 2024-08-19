@@ -62,6 +62,15 @@ public class ExceptionList {
     }
   }
 
+  public static boolean isNumberInRange(String number, int max) {
+    try {
+      int num = Integer.parseInt(number);
+      return num < 1 || num > max;
+    } catch (NumberFormatException e) {
+      return true;
+    }
+  }
+
   public static boolean isValidAddress(String address) {
     String regex = "^[a-zA-Z가-힣()0-9 _-]*$";
     Pattern p = Pattern.compile(regex);
@@ -72,7 +81,7 @@ public class ExceptionList {
   public static boolean isValidFloat(String number) {
     try {
       float f = Float.parseFloat(number);
-      return (f < Float.MIN_VALUE) || (f > Float.MAX_VALUE);
+      return (f < 0.0) || (f > Float.MAX_VALUE);
     } catch (NumberFormatException e) {
       return true;
     }
