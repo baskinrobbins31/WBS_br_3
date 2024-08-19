@@ -23,22 +23,25 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-/*    LoginController loginController = new LoginController();
+    /*LoginController loginController = new LoginController();
     loginController.startMenu();*/
 //
     /*ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
     productController.processProducts();*/
 
-
-
     /*ProductController productController = new ProductController(new ProductService(new ProductDAO(), new CategoryDAO()));
 
     productController.processProducts();*/
 
-    InboundController inboundController = new InboundController(new InboundService(new InboundDAO()),new Script());
-    inboundController.processMemberInbound();
+    /*InboundController inboundController = new InboundController(new InboundService(new InboundDAO()),new Script());
+    inboundController.processMemberInbound();*/
+
+
+
+    //logincontroller.startMenu _> loginstart 분기 시점 -> maincontroller(Admin, WH, President, Normal)
+    LoginController loginController = new LoginController();
+    loginController.startMenu();
 
     brInstance.close();
-
   }
 }

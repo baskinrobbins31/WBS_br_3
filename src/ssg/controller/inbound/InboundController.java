@@ -20,14 +20,16 @@ public class InboundController {
 
   private final InboundService inboundService;
   private final Script script;
+  private final BufferedReader br;
 
-  public InboundController(InboundService inboundService, Script script) {
+  public InboundController(InboundService inboundService, Script script, BufferedReader br) {
     this.inboundService = inboundService;
     this.script = script;
+    this.br = br;
   }
 
   public void processAdminInbound() {
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+    try {
       while (true) {
         script.printAdminInboundMenu();
 
