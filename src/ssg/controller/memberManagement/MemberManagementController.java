@@ -40,7 +40,7 @@ public class MemberManagementController {
             case 2 -> memberListMenu();
             case 3 -> memberManagementService.showInformation();
             case 4 -> memberManagementService.updateMember(brInstance);
-            case 5 -> deleteMemberInput();
+            case 5 -> deleteMemberInput(UserType.ADMINISTRATOR);
             case 6 -> memberManagementService.updateAuthority(brInstance);
             case 7 -> {System.out.println("이전화면"); isOn = false;}
             default -> throw new NumberFormatException();
@@ -81,7 +81,7 @@ public class MemberManagementController {
             case 1 -> memberManagementService.listBRN(Main.loginOnMember.getBRN());
             case 2 -> memberManagementService.updateMember(brInstance);
             case 3 -> memberManagementService.showInformation();
-            case 4 -> deleteMemberInput();
+            case 4 -> deleteMemberInput(UserType.PRESIDENT_MEMBER);
             case 5 -> {System.out.println("이전화면"); isOn = false;}
             default -> throw new NumberFormatException();
           }
@@ -168,12 +168,18 @@ public class MemberManagementController {
     }
   }
 
-  private void deleteMemberInput() {
+  private void deleteMemberInput(UserType type) {
     try {
       System.out.print("삭제할 아이디를 입력하세요. : ");
       int id = 0;
       id = Integer.parseInt(brInstance.readLine());
-      memberManagementService.deleteMember(id);
+      String brn = null;
+      if(type == UserType.PRESIDENT_MEMBER)
+        brn = Main.loginOnMember.getBRN();
+      else if(type == UserType.ADMINISTRATOR)
+        brn = "null";
+
+      memberManagementService.deleteMember(id, brn);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
