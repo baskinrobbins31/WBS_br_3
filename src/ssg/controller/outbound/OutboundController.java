@@ -32,9 +32,9 @@ public class OutboundController {
         int select = Integer.parseInt(brInstance.readLine());
         switch (select) {
           case 1 -> okOutboundRquest();
-          case 2 -> System.out.println("출고지시서 조회");
+          case 2 -> outboundList(OutboundState.OUTBOUND_WAIT);
           case 3 -> System.out.println("출고상품 검색");
-          case 4 -> System.out.println("출고리스트 조회");
+          case 4 -> outboundList(OutboundState.OUTBOUND_OK);
           case 5 -> System.out.println("출고리스트 검색");
           case 6 -> vehicleAssignmentMenuAdmin();
           case 7 -> waybillMenuAdmin();
@@ -56,9 +56,9 @@ public class OutboundController {
         int select = Integer.parseInt(brInstance.readLine());
         switch (select) {
           case 1 -> outboundRequest();
-          case 2 -> System.out.println("출고지시서 조회");
+          case 2 -> outboundList(OutboundState.OUTBOUND_WAIT);
           case 3 -> System.out.println("출고상품 검색");
-          case 4 -> System.out.println("출고리스트 조회");
+          case 4 -> outboundList(OutboundState.OUTBOUND_OK);
           case 5 -> System.out.println("출고리스트 검색");
           case 6 -> System.out.println("운송장 조회");
           case 7 -> {System.out.println("이전화면");
