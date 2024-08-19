@@ -194,7 +194,7 @@ public class WarehouseController {
       boolean cont = true;
       while (cont) {
         //창고관리 1 : 창고 메인 메뉴
-        String menu = s.printWarehouseMenuMain();
+        String menu = s.printWarehouseMenuMainNotAdmin();
         switch (menu) {
           case "1" -> {
             //창고관리 1-2 : 창고 조회 메뉴
@@ -237,4 +237,5 @@ public class WarehouseController {
       System.out.println("입력 중 문제가 발생했습니다." + e.getMessage());
     }
   }
+
 }
