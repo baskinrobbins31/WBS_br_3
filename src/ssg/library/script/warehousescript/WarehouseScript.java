@@ -17,9 +17,9 @@ public class WarehouseScript {
 
   //창고관리 1 : 창고 메인 메뉴
   public String printWarehouseMenuMain() throws IOException {
-    System.out.print("<창고 관리>\n1. 창고 등록\t\t\t2. 창고 조회\t\t\t3. 나가기\n메뉴 입력 : ");
+    System.out.print("\n<창고 관리>\n1. 창고 등록\t\t\t2. 창고 조회\t\t\t3. 나가기\n\n메뉴 입력 : ");
       String menu = reader.readLine();
-      if (ExceptionList.isNumberRange1To3(menu)) {
+      if (ExceptionList.isNumberInRange(menu,3)) {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
       return menu;
@@ -27,9 +27,9 @@ public class WarehouseScript {
 
   //창고관리 1-1 : 창고 등록 메뉴
   public String printWarehouseMenu1() throws IOException {
-    System.out.print("<창고 등록>\n1. 창고 시설 등록\t\t\t2. 층별 창고 등록\t\t\t3. 세부 창고 등록\n메뉴 입력 : ");
+    System.out.print("\n<창고 등록>\n1. 창고 시설 등록\t\t\t2. 층별 창고 등록\t\t\t3. 세부 창고 등록\n\n메뉴 입력 : ");
     String menu = reader.readLine();
-    if (ExceptionList.isNumberRange1To3(menu)) {
+    if (ExceptionList.isNumberInRange(menu, 2)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
     }
     return menu;
@@ -256,7 +256,7 @@ public class WarehouseScript {
 
   //창고 전화번호
   public String registerWarehouseContact() throws IOException{
-    System.out.print("시설 장비를 입력해주세요 : ");
+    System.out.print("연락처를 입력해주세요 : ");
     String contact = reader.readLine();
     if (!contact.trim().isEmpty()) {
       if (ExceptionList.isValidPhoneNumber(contact)) {
@@ -269,7 +269,7 @@ public class WarehouseScript {
 
   //등록하기
   public int registerOk() throws IOException {
-    System.out.print("등록하시겠습니까? (Y / N) : ");
+    System.out.print("\n등록하시겠습니까? (Y / N) : ");
     String ok = reader.readLine();
     if (ExceptionList.isValidOk(ok)) {
       throw new Exception(ErrorCode.INVALID_INPUT_OKAY);
@@ -283,7 +283,7 @@ public class WarehouseScript {
 
   //등록 성공
   public String registerSuccess() throws IOException {
-    System.out.print("창고가 등록되었습니다.\n1. 창고 전체 조회\t\t\t2. 계속 등록하기\t\t\t3. 나가기\n메뉴 입력 : ");
+    System.out.print("창고가 등록되었습니다.\n\n1. 창고 전체 조회\t\t\t2. 계속 등록하기\t\t\t3. 나가기\n\n메뉴 입력 : ");
     String menu = reader.readLine();
     if (ExceptionList.isNumberRange1To3(menu)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
@@ -299,7 +299,7 @@ public class WarehouseScript {
   //창고관리 1-2 : 창고 조회 메뉴
   public String printWarehouseMenu2() throws IOException {
     out.print(
-        "<창고 조회>\n1. 전체 조회\t\t\t2. 소재지 별 조회\t\t\t3. 창고명 별 조회\n4. 종류 별 조회\t\t\t5. 임대여부 별 조회\t\t\t6. 나가기\n메뉴 입력 : ");
+        "\n<창고 조회>\n1. 전체 조회\t\t\t2. 소재지 별 조회\t\t\t3. 창고명 별 조회\n4. 종류 별 조회\t\t\t5. 임대여부 별 조회\t\t\t6. 나가기\n\n메뉴 입력 : ");
     String menu = reader.readLine();
     if (ExceptionList.isNumberRange1To6(menu)) {
       throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);

@@ -1,7 +1,9 @@
 package ssg.service.warehouse;
 
+import java.util.ArrayList;
 import java.util.List;
 import ssg.dao.warehouse.WarehouseDAO;
+import ssg.dto.warehouse.SubWarehouse;
 import ssg.dto.warehouse.Warehouse;
 
 public class WarehouseService implements WarehouseServiceInterface{
@@ -43,6 +45,11 @@ public class WarehouseService implements WarehouseServiceInterface{
   }
 
   @Override
+  public boolean executeQuery(SubWarehouse sw) {
+    return dao.executeQuery(sw);
+  }
+
+  @Override
   public List<Warehouse> getWarehouseListAll() {
     return dao.readAll();
   }
@@ -62,6 +69,20 @@ public class WarehouseService implements WarehouseServiceInterface{
     return dao.readAllName(name);
   }
 
+  @Override
+  public List<Warehouse> getWarehouseListLimit(int limit) {
+    return dao.readAllLimit(limit);
+  }
+
+  @Override
+  public List<SubWarehouse> getSubWarehouseListLimit(int limit) {
+    return dao.readAllSubWarehouse(limit);
+  }
+
+  @Override
+  public ArrayList<Integer> getWarehouseListColumn(String column) {
+    return dao.readColumn(column);
+  }
 
 }
 
