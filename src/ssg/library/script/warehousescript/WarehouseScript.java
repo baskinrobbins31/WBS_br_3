@@ -15,7 +15,7 @@ import ssg.exception.ExceptionList;
 public class WarehouseScript {
   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-  //창고관리 1 : 창고 메인 메뉴
+  //창고관리 1 : 창고 메인 메뉴 , 총관리자 권한 일때
   public String printWarehouseMenuMain() throws IOException {
     System.out.print("\n<창고 관리>\n1. 창고 등록\t\t\t2. 창고 조회\t\t\t3. 나가기\n\n메뉴 입력 : ");
       String menu = reader.readLine();
@@ -23,6 +23,16 @@ public class WarehouseScript {
         throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
       }
       return menu;
+  }
+
+  //창고관리 : 총관리자 권한이 아닐 때
+  public String printWarehouseMenuMainNotAdmin() throws IOException {
+    System.out.print("\n<창고 관리>\n1. 창고 조회\t\t\t2. 나가기\n\n메뉴 입력 : ");
+    String menu = reader.readLine();
+    if (ExceptionList.isNumberInRange(menu,2)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
+    }
+    return menu;
   }
 
   //창고관리 1-1 : 창고 등록 메뉴
