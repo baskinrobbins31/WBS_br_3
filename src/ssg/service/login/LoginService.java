@@ -43,7 +43,6 @@ public class LoginService implements LoginServiceInterface {
   public void findID(BufferedReader br) {
 
     try {
-      System.out.println("--아이디 찾기--");
       loginScript.printFindIDMenu();
       int select = Integer.parseInt(br.readLine());
       String find;
@@ -95,7 +94,7 @@ public class LoginService implements LoginServiceInterface {
   /** 회원 등록 */
     @Override
   public void createMember(BufferedReader br) {
-      try {
+      try{
         System.out.println("--회원 등록--");
 
         loginScript.printInputUserID();
@@ -120,6 +119,7 @@ public class LoginService implements LoginServiceInterface {
         Member createMember =Member.builder().userid(userid).passWord(passWord).userName(name).
             phoneNumber(phone).address(address).email(email).build();
         loginDao.create(createMember);
+
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

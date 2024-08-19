@@ -111,7 +111,7 @@ public class LoginScript extends Script{
   /** ID 찾기 매뉴 */
   public void printFindIDMenu() {
     index =1;
-    sb.append("---아이디 찾기---\n").append("\t").append(index++).append(". 전화번호\t").append(index++).append(". 이메일").
+    sb.append("---아이디 찾기---\n").append("\t").append(index++).append(". 전화번호\t").append(index++).append(". 이메일\t").
         append(index++).append(". 사업자번호\n");
     printString(sb);
     printInputNumber();
