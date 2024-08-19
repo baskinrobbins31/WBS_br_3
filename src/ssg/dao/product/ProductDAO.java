@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import ssg.dto.Product;
+import ssg.dto.product.Product;
 import ssg.library.dbio.AbstractDBIO2;
 
 public class ProductDAO extends AbstractDBIO2<Product> {

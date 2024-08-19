@@ -1,7 +1,32 @@
 package ssg.dao.inbound;
 
-public class InboundDAO {
-   public int multiply(int x, int y){
-   return x * y;
+import java.util.List;
+import ssg.library.dbio.AbstractDBIO2;
+
+public class InboundDAO extends AbstractDBIO2 {
+
+  @Override
+  protected void create(Object o) {
+
+  }
+
+  @Override
+  protected Object read() {
+    return null;
+  }
+
+  @Override
+  protected List readAll() {
+    return null;
+  }
+
+  @Override
+  protected void update(int id, Object o) {
+
+  }
+
+  @Override
+  protected void delete(int id) {
+
   }
 }

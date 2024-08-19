@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
-import ssg.dto.Product;
+import ssg.dto.product.Product;
 import ssg.service.product.ProductService;
 import java.util.Optional;
 

@@ -10,14 +10,12 @@ import ssg.dto.Member;
 import ssg.library.script.LoginScript;
 
 public class LoginService implements LoginServiceInterface {
-
-  private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   LoginScript loginScript  = LoginScript.getLoginScriptInstance();
   private LoginDao loginDao = new LoginDao();
 
   /** 사용자 login */
   @Override
-  public void loginStart() {
+  public void loginStart(BufferedReader br) {
     try {
       System.out.println("--로그인--");
       loginScript.printInputUserID();
@@ -35,7 +33,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         loginScript.printUnknownMember();
       }
-      //br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -43,10 +40,9 @@ public class LoginService implements LoginServiceInterface {
 
   /** 로그인id 찾기 */
   @Override
-  public void findID() {
+  public void findID(BufferedReader br) {
 
     try {
-      System.out.println("--아이디 찾기--");
       loginScript.printFindIDMenu();
       int select = Integer.parseInt(br.readLine());
       String find;
@@ -69,8 +65,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         System.out.println("찾으시는 아이디는 " + word);
       }
-
-      br.close();
     } catch (IOException | NumberFormatException e) {
       throw new RuntimeException(e);
     }
@@ -78,13 +72,13 @@ public class LoginService implements LoginServiceInterface {
 
   /** 비밀번호 찾기 */
   @Override
-  public void findPassWord() {
+  public void findPassWord(BufferedReader br) {
     try {
       System.out.println("--비밀번호 찾기--");
       loginScript.printInputUserID();
       String userid = br.readLine();
 
-      String findPass = loginDao.read(userid, 3);
+      String findPass = loginDao.read(userid, 4);
 
       if (findPass == null) {
         loginScript.printNotFoundID();
@@ -92,9 +86,6 @@ public class LoginService implements LoginServiceInterface {
       else {
         System.out.println(userid + " 계정의 비밀번호는 : " + findPass);
       }
-
-
-      br.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -102,8 +93,8 @@ public class LoginService implements LoginServiceInterface {
 
   /** 회원 등록 */
     @Override
-  public void createMember() {
-      try {
+  public void createMember(BufferedReader br) {
+      try{
         System.out.println("--회원 등록--");
 
         loginScript.printInputUserID();
@@ -129,7 +120,6 @@ public class LoginService implements LoginServiceInterface {
             phoneNumber(phone).address(address).email(email).build();
         loginDao.create(createMember);
 
-        br.close();
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
