@@ -1,4 +1,4 @@
-package ssg.dto;
+package ssg.dto.outbound;
 
 import java.sql.Timestamp;
 import lombok.Builder;
@@ -11,13 +11,13 @@ public class Outbound {
   private int userid;
   private int stockID;
   private int wssID;
-  private int outboundAmount =0;
+  private int outboundAmount;
   private String deliveryAddress;
   private int locationID;
   private String recipient;
   private String recipientPhoneNumber;
   private Timestamp createAt;
-  private OutboundState outboundState = OutboundState.OUTBOUND_WAIT;  //출고 상태
+  private OutboundState outboundState;  //출고 상태
   private String outboundExplain;
 
   @Builder

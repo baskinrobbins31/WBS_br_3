@@ -2,9 +2,7 @@ package ssg.controller;
 
 import static ssg.Main.brInstance;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import ssg.Main;
 import ssg.controller.customerservice.CustomerServiceController;
 import ssg.controller.memberManagement.MemberManagementController;
@@ -48,7 +46,7 @@ public class MainController {
             }
             case 6 -> {
               System.out.println("창고관리");
-
+              warehouseController.callWarehouseMenu(Main.loginOnMember.getUserType());
             }
             case 7 -> {
               customerServiceController.startMenu();
