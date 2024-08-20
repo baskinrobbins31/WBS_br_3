@@ -112,7 +112,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
 
 
 
-  public void update(Object o) {
+  public int update(Object o) {
     if(o instanceof Member m) {
       try {
         sb.append("UPDATE member SET ").append("password = '").append(m.getPassWord()).append("', ")
@@ -128,6 +128,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
         PreparedStatement ps = getConnection().prepareStatement(query);
         int updaterow = ps.executeUpdate();
         close(getConnection(), ps);
+        commit();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
@@ -143,6 +144,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -156,6 +158,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -169,6 +172,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -186,6 +190,20 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void commit() {
+
+    try {
+      String query = "commit";
+      PreparedStatement ps = null;
+      ps = getConnection().prepareStatement(query);
+      ps.executeUpdate();
+      close(getConnection(), ps);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
