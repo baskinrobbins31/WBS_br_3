@@ -1,10 +1,7 @@
 package ssg.library.script;
 
 public class Script {
-  // 출력 메세지 및 스크립트를 포함하고 있는 클래스 입니다.
-  // 모두 완성하면 각 파트를 메서드로 재구성해서 Main 클래스에서 사용하도록 합니다.
-
-  StringBuilder sb =new StringBuilder();
+  StringBuilder sb = new StringBuilder();
   int index = 1;
 
   public void printString(StringBuilder stringBuilder) {
@@ -12,7 +9,6 @@ public class Script {
     System.out.print(str);
     stringBuilder.delete(0, stringBuilder.length());
   }
-
 
   public void printInputNumber() {
     sb.append("번호를 입력해 주세요 :  ");
@@ -51,7 +47,6 @@ public class Script {
     printString(sb);
     printInputNumber();
   }
-
 
 
   /** 입고 관리 메뉴(관리자) */
