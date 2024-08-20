@@ -18,7 +18,7 @@ public class InboundDAO extends AbstractDBIO2<Inbound> {
     String sql = "INSERT INTO inbound (product_name, user_id, wss_id, subclass_id, product_amount, qr_id, inbound_status, inbound_request_datetime, inbound_expected_datetime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (Connection connection = getConnection();
         PreparedStatement pStmt = connection.prepareStatement(sql)) {
-      pStmt.setInt(1, inbound.getProductName());
+      pStmt.setString(1, inbound.getProductName());
       pStmt.setInt(2, inbound.getUserId());
       pStmt.setInt(3, inbound.getWssId());
       pStmt.setInt(4, inbound.getSubclassId());
@@ -53,7 +53,7 @@ public class InboundDAO extends AbstractDBIO2<Inbound> {
   @Override
   public List<Inbound> readAll() {
     List<Inbound> inboundList = new ArrayList<>();
-    String sql = "SELECT * FROM inbound";
+    String sql = "SELECT * FROM inbound i JOIN product p ON i.product_id = p.product_id";;
     try (Connection connection = getConnection();
         PreparedStatement pStmt = connection.prepareStatement(sql);
         ResultSet rs = pStmt.executeQuery()) {
@@ -71,7 +71,7 @@ public class InboundDAO extends AbstractDBIO2<Inbound> {
     String sql = "UPDATE inbound SET product_name = ?, user_id = ?, wss_id = ?, subclass_id = ?, product_amount = ?, qr_id = ?, inbound_status = ?, inbound_approval_datetime = ?, inbound_expected_datetime = ? WHERE inbound_id = ?";
     try (Connection connection = getConnection();
         PreparedStatement pStmt = connection.prepareStatement(sql)) {
-      pStmt.setInt(1, inbound.getProductName());
+      pStmt.setString(1, inbound.getProductName());
       pStmt.setInt(2, inbound.getUserId());
       pStmt.setInt(3, inbound.getWssId());
       pStmt.setInt(4, inbound.getSubclassId());
@@ -145,7 +145,8 @@ public class InboundDAO extends AbstractDBIO2<Inbound> {
   private Inbound mapRowToInbound(ResultSet rs) throws SQLException {
     return new Inbound(
         rs.getInt("inbound_id"),
-        rs.getInt("product_name"),
+        rs.getInt("product_id"),
+        rs.getString("product_name"),
         rs.getInt("user_id"),
         rs.getInt("wss_id"),
         rs.getInt("subclass_id"),
