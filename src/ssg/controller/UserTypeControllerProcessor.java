@@ -33,6 +33,7 @@ public class UserTypeControllerProcessor {
   ProductController productController
       = new ProductController(new ProductService(new ProductDAO(),new CategoryDAO()), new BufferedReader(new InputStreamReader(System.in)));
 
+  /** 전체 메뉴(관리자) */
   public void viewAdminMenu(){
 
     boolean isOn = true;
@@ -47,7 +48,7 @@ public class UserTypeControllerProcessor {
           case 3 -> inboundController.processAdminInbound();
           case 4 -> System.out.println("재고관리");
           case 5 -> outboundController.outboundMenuSelect(Main.loginOnMember.getUserType());
-          case 6 -> System.out.println("창고관리");
+          case 6 -> warehouseController.callWarehouseMenu(Main.loginOnMember.getUserType());
           case 7 -> customerServiceController.startMenu();
           case 8 -> {
             System.out.println("로그아웃");
@@ -63,7 +64,7 @@ public class UserTypeControllerProcessor {
 
   }
 
-
+/** 전체 메뉴 (창고 관리자) */
   public void viewWarehouseAdminMenu(){
     boolean isOn = true;
     while (isOn) {
@@ -73,11 +74,11 @@ public class UserTypeControllerProcessor {
         //테스트를 위해 임의로 번호할당했습니다.
         switch (select) {
           case 1 -> memberManagementController.memberManagementMenu(Main.loginOnMember.getUserType());
-          case 2 -> System.out.println("2.");
-          case 3 -> System.out.println("3.");
+          case 2 -> productController.processProducts();
+          case 3 -> inboundController.processAdminInbound();
           case 4 -> System.out.println("4.");
           case 5 -> outboundController.outboundMenuSelect(Main.loginOnMember.getUserType());
-          case 6 -> System.out.println("창고관리");
+          case 6 -> warehouseController.callWarehouseMenu(Main.loginOnMember.getUserType());
           case 7 -> customerServiceController.startMenu();
           case 8 -> {
             System.out.println("로그아웃");
@@ -92,6 +93,7 @@ public class UserTypeControllerProcessor {
     }
   }
 
+  /** 전체 메뉴 (사장) */
   public void viewPresidentMenu(){
     boolean isOn = true;
     while (isOn) {
@@ -101,11 +103,11 @@ public class UserTypeControllerProcessor {
         //테스트를 위해 임의로 번호할당했습니다.
         switch (select) {
           case 1 -> memberManagementController.memberManagementMenu(Main.loginOnMember.getUserType());
-          case 2 -> System.out.println("2.");
+          case 2 -> productController.processProducts();
           case 3 -> inboundController.processMemberInbound();
           case 4 -> System.out.println("4.");
           case 5 -> outboundController.outboundMenuSelect(Main.loginOnMember.getUserType());
-          case 6 -> System.out.println("창고관리");
+          case 6 -> warehouseController.callWarehouseMenu(Main.loginOnMember.getUserType());
           case 7 -> customerServiceController.startMenu();
           case 8 -> {
             System.out.println("로그아웃");

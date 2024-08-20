@@ -34,7 +34,7 @@ public class LoginController {
           case 1 -> loginService.createMember(br);
           case 2 -> loginService.loginStart(br);
           case 3 -> System.out.println("운송장 조회");
-          case 4 -> System.out.println("고객센터");
+          case 4 -> customerServiceController.startMenu();
           case 5 -> loginService.findID(br);
           case 6 -> loginService.findPassWord(br);
           case 7 -> {
@@ -42,7 +42,7 @@ public class LoginController {
             isOn = false;
           }
           case 999 -> loginService.createAdmin();
-          default -> System.out.println("잘못된 입력입니다.");
+          default -> loginScript.printFaultInput();
         }
       } catch (IOException e) {
         throw new RuntimeException(e);

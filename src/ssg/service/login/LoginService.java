@@ -53,7 +53,7 @@ public class LoginService implements LoginServiceInterface {
           }
           case NORMAL_MEMBER -> {
             System.out.println("일반 회원으로 로그인되었습니다.");
-            userTypeCP.viewMemberMenu();
+            userTypeCP.viewPresidentMenu();
           }
           default -> throw new IllegalStateException("잘못된 값입니다.");
         }
