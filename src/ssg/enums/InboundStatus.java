@@ -1,7 +1,11 @@
 package ssg.enums;
 //import lombok.Getter;
 
+import lombok.Data;
+import lombok.Getter;
+
 //@Getter
+@Getter
 public enum InboundStatus {
 
   PENDING_REQUEST("입고요청 대기"),
