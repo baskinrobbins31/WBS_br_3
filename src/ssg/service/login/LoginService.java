@@ -1,17 +1,24 @@
 package ssg.service.login;
 
+import static ssg.enums.UserType.ADMINISTRATOR;
+import static ssg.enums.UserType.NORMAL_MEMBER;
+import static ssg.enums.UserType.PRESIDENT_MEMBER;
+import static ssg.enums.UserType.WH_ADMIN;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import ssg.Main;
-import ssg.controller.MainController;
+import ssg.controller.UserTypeControllerProcessor;
 import ssg.dao.login.LoginDao;
 import ssg.dto.Member;
+import ssg.enums.UserType;
 import ssg.library.script.LoginScript;
 
 public class LoginService implements LoginServiceInterface {
   LoginScript loginScript  = LoginScript.getLoginScriptInstance();
   private LoginDao loginDao = new LoginDao();
+  private int UserType;
 
   /** 사용자 login */
   @Override
@@ -27,11 +34,31 @@ public class LoginService implements LoginServiceInterface {
       if(loginDao.read(userid, password) instanceof Member m) {
           System.out.println("로그인 성공");
           Main.loginOnMember = m;
-        MainController mainController = new MainController();
-        mainController.mainControllerMenu();
-      }
-      else {
-        loginScript.printUnknownMember();
+        UserTypeControllerProcessor userTypeCP = new UserTypeControllerProcessor();
+
+        UserType userType = m.getUserType();
+
+        switch (userType) {
+          case ADMINISTRATOR -> {
+            System.out.println("총관리자 권한으로 로그인되었습니다.");
+            userTypeCP.viewAdminMenu();
+          }
+          case WH_ADMIN -> {
+            System.out.println("창고관리자 권한으로 로그인되었습니다.");
+            userTypeCP.viewWarehouseAdminMenu();
+          }
+          case PRESIDENT_MEMBER -> {
+            System.out.println("사장 회원으로 로그인되었습니다.");
+            userTypeCP.viewPresidentMenu();
+          }
+          case NORMAL_MEMBER -> {
+            System.out.println("일반 회원으로 로그인되었습니다.");
+            userTypeCP.viewPresidentMenu();
+          }
+          default -> throw new IllegalStateException("잘못된 값입니다.");
+        }
+      } else {
+        System.out.println("로그2인 실패");
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
