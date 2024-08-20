@@ -55,7 +55,7 @@ public class InboundController {
 
   // 회원 입고 요청 처리
   public void processMemberInbound() {
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+    try {
       while (true) {
         script.printMemberInboundMenu();
         int choice = Integer.parseInt(br.readLine());
@@ -114,7 +114,7 @@ public class InboundController {
     LocalDateTime inboundExpectedDate = LocalDateTime.parse(br.readLine() + "T00:00:00");
 
     Inbound inbound = new Inbound();
-    inbound.setProductName(productId);
+    inbound.setProductName(inbound.getProductName());
     inbound.setUserId(Main.loginOnMember.getId());
     inbound.setWssId(wssId);
     inbound.setProductAmount(productAmount);

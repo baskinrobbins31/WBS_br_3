@@ -57,6 +57,8 @@ public class LoginService implements LoginServiceInterface {
           }
           default -> throw new IllegalStateException("잘못된 값입니다.");
         }
+      } else {
+        System.out.println("로그2인 실패");
       }
     } catch (IOException e) {
       throw new RuntimeException(e);

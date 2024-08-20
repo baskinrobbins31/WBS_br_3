@@ -12,7 +12,8 @@ import ssg.enums.InboundStatus;
 @NoArgsConstructor
 public class Inbound {
   private int inboundId;
-  private int productName;
+  private int productId;
+  private String productName;
   private int userId;
   private Integer wssId;
   private int subclassId;

@@ -91,7 +91,7 @@ public class ProductController {
                 + "\t상품정보: " + product.getProductInfo());
       }
 
-      System.out.println("관리할 상품의 이름을 입력하세요: ");
+      System.out.print("관리할 상품의 이름을 입력하세요: ");
       String manageProductName = br.readLine();
       Optional<Product> productOpt = productService.getProductsByName(manageProductName);
 
