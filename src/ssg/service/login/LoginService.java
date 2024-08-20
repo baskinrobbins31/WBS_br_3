@@ -12,6 +12,7 @@ import ssg.Main;
 import ssg.controller.UserTypeControllerProcessor;
 import ssg.dao.login.LoginDao;
 import ssg.dto.Member;
+import ssg.enums.UserState;
 import ssg.enums.UserType;
 import ssg.library.script.LoginScript;
 
@@ -32,33 +33,37 @@ public class LoginService implements LoginServiceInterface {
       String password = br.readLine();
 
       if(loginDao.read(userid, password) instanceof Member m) {
+        if(m.getMemberConfirm() == UserState.ACCESS_OK) {
           System.out.println("로그인 성공");
           Main.loginOnMember = m;
-        UserTypeControllerProcessor userTypeCP = new UserTypeControllerProcessor();
+          UserTypeControllerProcessor userTypeCP = new UserTypeControllerProcessor();
 
-        UserType userType = m.getUserType();
+          UserType userType = m.getUserType();
 
-        switch (userType) {
-          case ADMINISTRATOR -> {
-            System.out.println("총관리자 권한으로 로그인되었습니다.");
-            userTypeCP.viewAdminMenu();
+          switch (userType) {
+            case ADMINISTRATOR -> {
+              System.out.println("총관리자 권한으로 로그인되었습니다.");
+              userTypeCP.viewAdminMenu();
+            }
+            case WH_ADMIN -> {
+              System.out.println("창고관리자 권한으로 로그인되었습니다.");
+              userTypeCP.viewWarehouseAdminMenu();
+            }
+            case PRESIDENT_MEMBER -> {
+              System.out.println("사장 회원으로 로그인되었습니다.");
+              userTypeCP.viewPresidentMenu();
+            }
+            case NORMAL_MEMBER -> {
+              System.out.println("일반 회원으로 로그인되었습니다.");
+              userTypeCP.viewPresidentMenu();
+            }
+            default -> throw new IllegalStateException("잘못된 값입니다.");
           }
-          case WH_ADMIN -> {
-            System.out.println("창고관리자 권한으로 로그인되었습니다.");
-            userTypeCP.viewWarehouseAdminMenu();
-          }
-          case PRESIDENT_MEMBER -> {
-            System.out.println("사장 회원으로 로그인되었습니다.");
-            userTypeCP.viewPresidentMenu();
-          }
-          case NORMAL_MEMBER -> {
-            System.out.println("일반 회원으로 로그인되었습니다.");
-            userTypeCP.viewPresidentMenu();
-          }
-          default -> throw new IllegalStateException("잘못된 값입니다.");
+        } else if (m.getMemberConfirm() == UserState.ACCESS_WAIT) {
+          System.out.println("승인 대기중입니다.");
         }
       } else {
-        System.out.println("로그2인 실패");
+        loginScript.printUnknownMember();
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
