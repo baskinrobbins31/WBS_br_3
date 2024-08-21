@@ -1,5 +1,6 @@
 package ssg.dao.memberManagement;
 
+import java.lang.reflect.Type;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -111,7 +112,8 @@ public class MemberManagementDao extends AbstractDBIO2 {
 
 
 
-  public void update(Object o) {
+  public int update(Object o) {
+    int updaterow=0;
     if(o instanceof Member m) {
       try {
         sb.append("UPDATE member SET ").append("password = '").append(m.getPassWord()).append("', ")
@@ -125,12 +127,14 @@ public class MemberManagementDao extends AbstractDBIO2 {
         String query = sb.toString();
         sb.delete(0, sb.length());
         PreparedStatement ps = getConnection().prepareStatement(query);
-        int updaterow = ps.executeUpdate();
+        updaterow = ps.executeUpdate();
         close(getConnection(), ps);
+        commit();
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
     }
+    return  updaterow;
   }
 
 
@@ -142,6 +146,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -155,6 +160,7 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -168,20 +174,38 @@ public class MemberManagementDao extends AbstractDBIO2 {
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
   }
 
-  @Override
-  public void delete(int id) {
+
+  public void delete(int id, String BRN) {
     try {
-      sb.append("DELETE FROM member WHERE id = ").append(id);
+      if(BRN.equals("null"))
+        sb.append("DELETE FROM member WHERE id = ").append(id);
+      else
+        sb.append("DELETE FROM member WHERE id = ").append(id).append(" AND BRN = '").append(BRN).append("'");
       String query = sb.toString();
       sb.delete(0, sb.length());
       PreparedStatement ps = getConnection().prepareStatement(query);
       ps.executeUpdate();
       close(getConnection(),ps);
+      commit();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void commit() {
+
+    try {
+      String query = "commit";
+      PreparedStatement ps = null;
+      ps = getConnection().prepareStatement(query);
+      ps.executeUpdate();
+      close(getConnection(), ps);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

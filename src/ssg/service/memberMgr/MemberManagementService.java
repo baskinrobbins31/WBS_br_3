@@ -132,8 +132,8 @@ public class MemberManagementService implements MemberManagementInterface {
 
   /** 회원 삭제 */
   @Override
-  public void deleteMember(int id) {
-    memberManagementDao.delete(id);
+  public void deleteMember(int id, String brn) {
+    memberManagementDao.delete(id, brn);
   }
 
   /** 화원 찾기 */
@@ -188,7 +188,10 @@ public class MemberManagementService implements MemberManagementInterface {
           .address(updateAddress.equals(noUpdate) ? Main.loginOnMember.getAddress() : updateAddress)
           .email(updateEmail.equals(noUpdate) ? Main.loginOnMember.getEmail() : updateEmail).build();
 
-      memberManagementDao.update(temp);
+      int update = memberManagementDao.update(temp);
+      if (update == 1) {
+        System.out.println("수정성공");
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

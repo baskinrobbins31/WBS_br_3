@@ -12,13 +12,15 @@ import java.util.Optional;
 public class ProductController {
 
   private final ProductService productService;
+  private final BufferedReader br;
 
-  public ProductController(ProductService productService) {
+  public ProductController(ProductService productService, BufferedReader br) {
     this.productService = productService;
+    this.br = br;
   }
 
   public void processProducts() {
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+    try {
       while (true) {
         StringBuilder menu = new StringBuilder();
         menu.append("1.상품 등록\t\t")
@@ -81,7 +83,7 @@ public class ProductController {
       System.out.println("조회된 상품 목록:");
       for (Product product : similarProducts) {
         System.out.println(
-                  product.getMajorName() + "> "
+            product.getMajorName() + "> "
                 + product.getMiddleName() + "> "
                 + product.getSubclassName() + ">\t"
                 + "\t상품명: " + product.getProductName()
@@ -89,7 +91,7 @@ public class ProductController {
                 + "\t상품정보: " + product.getProductInfo());
       }
 
-      System.out.println("관리할 상품의 이름을 입력하세요: ");
+      System.out.print("관리할 상품의 이름을 입력하세요: ");
       String manageProductName = br.readLine();
       Optional<Product> productOpt = productService.getProductsByName(manageProductName);
 
@@ -103,7 +105,7 @@ public class ProductController {
         int manageChoice = Integer.parseInt(br.readLine());
         switch (manageChoice) {
           case 1 -> updateProduct(br, product);
-          case 2 -> deleteProduct(br ,product.getProductName());
+          case 2 -> deleteProduct(br, product.getProductName());
           case 3 -> System.out.println("취소되었습니다.");
           default -> System.out.println("잘못된 선택입니다.");
         }
@@ -126,17 +128,21 @@ public class ProductController {
   }
 
   // 상품 삭제 메서드
-  private void deleteProduct(BufferedReader br, String productName) throws IOException, SQLException {
+  private void deleteProduct(BufferedReader br, String productName)
+      throws IOException, SQLException {
     System.out.println("정말로 상품정보를 삭제하시겠습니까?");
     System.out.println("1.예\t\t2.아니오");
     System.out.print("선택: ");
     int choice = Integer.parseInt(br.readLine());
-    if(choice == 1) {
+    if (choice == 1) {
       productService.deleteProduct(productName);
-    } else if(choice ==2){
+    } else if (choice == 2) {
       System.out.println("상품정보 삭제를 취소하셨습니다.");
     } else {
       System.out.println("옳지않은 입력입니다.");
     }
   }
 }
+
+//입고 테이ㅏ블에는 전부 들어가있는데?
+//입고 요청테이블에 전부다 들어가ㅗ 요청테이블에서 상태를 바꿔서~~
