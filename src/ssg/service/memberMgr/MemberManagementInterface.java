@@ -9,7 +9,7 @@ public interface MemberManagementInterface {
   void listAdmin(UserType type);
   void listBRN(String brn);
   void updateAuthority(BufferedReader br);
-  void deleteMember(int id);
+  void deleteMember(int id, String brn);
   void findMember();
   void showInformation();
   void updateMember(BufferedReader br);

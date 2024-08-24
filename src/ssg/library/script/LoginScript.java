@@ -14,10 +14,10 @@ public class LoginScript extends Script{
 
   /** 처음 실행시 뜨는 화면 */
   public void printStartMenu() {
-    sb.append("\t창고천국에 오신 것을 환영합니다!\n").
+    sb.append("\n\t\t\t창고천국에 오신 것을 환영합니다!\n").
         append("============================================================================\n")
-        .append("\t").append("1.회원등록\t").append("2.로그인\t").append("3.운송장 조회\t").append("4.고객 센터\n")
-        .append("\t").append("5.아이디 찾기\t").append("6.비밀번호 찾기\t").append("7.종료\n").
+        .append("\t").append("1.회원등록\t\t").append("2.로그인\t\t").append("3.운송장 조회\t\t").append("4.고객 센터\n")
+        .append("\t").append("5.아이디 찾기\t\t").append("6.비밀번호 찾기\t\t").append("7.종료\n").
         append("============================================================================\n");
     printString(sb);
     printInputNumber();
@@ -62,15 +62,15 @@ public class LoginScript extends Script{
 
   /** 메인 메뉴 */
   public void printMainMenu() {
-    StringBuilder append = sb.append("---메인 메뉴---\n")
+    StringBuilder append = sb.append("\n---메인 메뉴---\n")
             .append("\t")
-            .append("1.회원관리\t")
-            .append("2.상품관리\t")
-            .append("3.입고관리\t")
-            .append("4.재고관리\t")
-            .append("5.출고관리\t")
-            .append("6.창고관리\t")
-            .append("7.고객센터\t")
+            .append("1.회원관리\t\t")
+            .append("2.상품관리\t\t")
+            .append("3.입고관리\t\t")
+            .append("4.재고관리\n\t")
+            .append("5.출고관리\t\t")
+            .append("6.창고관리\t\t")
+            .append("7.고객센터\t\t")
             .append("8.로그아웃\n");
     printString(sb);
     printInputNumber();
@@ -111,8 +111,8 @@ public class LoginScript extends Script{
   /** ID 찾기 매뉴 */
   public void printFindIDMenu() {
     index =1;
-    sb.append("---아이디 찾기---\n").append("\t").append(index++).append(". 전화번호\t").append(index++).append(". 이메일\t").
-        append(index++).append(". 사업자번호\n");
+    sb.append("\n---아이디 찾기---\n")
+        .append("\t").append("1.전화번호\t\t").append("2.이메일\t\t").append("3.사업자번호\n");
     printString(sb);
     printInputNumber();
   }
