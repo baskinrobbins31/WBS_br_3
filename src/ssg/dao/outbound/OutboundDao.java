@@ -166,15 +166,14 @@ public class OutboundDao extends AbstractDBIO2 {
     }
   }
 
-  /* 출고요청서 상태에 따른 조회 : 대기상태, 미승인상태,승인상태 등등 */
-  public int update(int id, OutboundState state){
+  /* 출고요청서 상태 업데이트: 대기상태, 미승인상태,승인상태 등등 */
+  public void update(int id, OutboundState state){
     try {
       PreparedStatement ps = getConnection().prepareStatement("UPDATE outbound_request SET out_request_state = ? WHERE out_id = ?");
       ps.setString(1, state.toString());
       ps.setInt(2, id);
-      int updaterow = ps.executeUpdate();
+      ps.executeUpdate();
       close(getConnection(), ps);
-      return updaterow;
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

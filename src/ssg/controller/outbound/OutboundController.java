@@ -29,39 +29,39 @@ public class OutboundController {
     }
   }
 
-  /** 출고관리 (관리자) */
+  /** 출고관리 (관리자) 메뉴 */
   private void outboundMenuAdmin() {
-    boolean isOn = true;
-    while (isOn) {
+    boolean loop = true;
+    while (loop) {
       try {
-        String menu = ms.printOutboundMenuMain();
-        switch (menu) {
-          case "1" -> {
+        switch (ms.printOutboundMenuMain()) {
+          case 1 -> {
             //1-1 출고 요청서 관리
             switch (ms.printOutMenu1()) {
               case 1 -> {processOutboundRequestManager();} //출고 요청서 승인/미승인 처리
               case 2 -> {} //출고 요청서 상태 수정
-              case 3 -> {} //나가기
+              case 3 -> {continue;} //나가기
             }
           }
-          case "2" -> {
+          case 2 -> {
             //1-2 출고 지시서 관리
           }
-          case "3" -> {
+          case 3 -> {
             //1-3 출고 조회
           }
-          default -> isOn = false;
+          default -> loop = false;
         }
       } catch (IOException e) {
         System.out.println("입력 중 문제가 발생했습니다." + e.getMessage());
       }
+      loop = false;
     }
   }
 
-  /** 출고관리(회원) */
+  /** 출고관리(회원) 메뉴*/
   private void outboundMenuMember() {
-    boolean isOn = true;
-    while (isOn) {
+    boolean loop = true;
+    while (loop) {
       try {
         switch (us.printOutboundMenuMain()) {
           case 1 -> outboundRequest();
@@ -75,7 +75,7 @@ public class OutboundController {
             }
           }
           case 3 -> System.out.println("운송장 조회");
-          default -> {isOn = false;}
+          default -> {loop = false;}
         }
       } catch (IOException | NumberFormatException e) {
         System.out.println(e.getMessage());
@@ -83,12 +83,14 @@ public class OutboundController {
     }
   }
 
-  //출고 요청서 승인/미승인 처리하기
+  /*출고 요청서 승인/미승인 처리하기*/
   private void processOutboundRequestManager() throws IOException {
     System.out.print("\n<출고 요청서 대기 처리>\n");
     service.getOutboundRequestListAll(OutboundState.OUTBOUND_WAIT); //대기 리스트 출력
-    service.okOutboundRequest(ms.printOutMenu1_1(), OutboundState.OUTBOUND_OK);
-    service.okOutboundRequest(ms.printOutMenu1_2(), OutboundState.OUTBOUND_DENIED);
+    String ids = ms.printOutMenu1_1();
+    service.okOutboundRequest(ids, OutboundState.OUTBOUND_OK);
+    String ids2 = ms.printOutMenu1_2();
+    service.okOutboundRequest(ids2, OutboundState.OUTBOUND_DENIED);
   }
 
   /** 출고 요청 */
@@ -102,7 +104,7 @@ public class OutboundController {
     service.getOutboundListAll();
   }
 
-
+  /*출고요청서 작성*/
   public OutboundRequest createOutboundUserRequest() throws IOException {
     int userid;
     int stockID;
