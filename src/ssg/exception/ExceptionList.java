@@ -3,67 +3,69 @@ package ssg.exception;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ssg.enums.errorcode.ErrorCode;
 
-public class ExceptionList {
+public class ExceptionList implements ExceptionListInterface{
 
-  public static boolean isValidString(String name) {
-    String regex = "^[a-zA-Z가-힣()\\s]+$";
-    Pattern p = Pattern.compile(regex);
-    Matcher m = p.matcher(name);
-    return !m.matches();
-  }
-
-  public static boolean isValidText(String text) {
-    String regex = "^[a-zA-Z가-힣,()\\s]+$";
-    Pattern p = Pattern.compile(regex);
-    Matcher m = p.matcher(text);
-    return !m.matches();
-  }
-
-  public static boolean isValidNumber(String number) {
-    String regex = "^[0-9]+$";
-    Pattern p = Pattern.compile(regex);
-    Matcher m = p.matcher(number);
-    return !m.matches();
-  }
-
-  public static boolean isNumberRange1To3(String number) {
-    try {
-      int num = Integer.parseInt(number);
-      return num < 1 || num > 3;
-    } catch (NumberFormatException e) {
-      return true;
+  @Override
+  public void throwInvalidNumberRange(String number, int max) {
+    if (isValidNumber(number) || isCorrectNumberRange(number, max)) {
+      throwExceptionInvalidInputNumber();
     }
   }
 
-  public static boolean isNumberRange1To6(String number) {
-    try {
-      int num = Integer.parseInt(number);
-      return num < 1 || num > 6;
-    } catch (NumberFormatException e) {
-      return true;
+  @Override
+  public void throwInvalidNumber(String number) {
+    if (isValidNumber(number)) {
+      throwExceptionInvalidInputNumber();
     }
   }
 
-  public static boolean isNumberRange1To7(String number) {
-    try {
-      int num = Integer.parseInt(number);
-      return num < 1 || num > 7;
-    } catch (NumberFormatException e) {
-      return true;
+  @Override
+  public void throwInvalidInputLength(String input) {
+    if (isValidText(input) || isLength50(input)) {
+      throwExceptionInvalidInputLength();
     }
   }
 
-  public static boolean isNumberRange1To10(String number) {
-    try {
-      int num = Integer.parseInt(number);
-      return num < 1 || num > 10;
-    } catch (NumberFormatException e) {
-      return true;
+  @Override
+  public void throwInvalidInputAddress(String address) {
+    if (isValidAddress(address) || isLength50(address)) {
+      throwExceptionInvalidInputAddress();
     }
   }
 
-  public static boolean isNumberInRange(String number, int max) {
+  @Override
+  public void throwInvalidFloat(String number) {
+    if (isValidFloat(number)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
+    }
+  }
+
+  @Override
+  public void throwInvalidOkay(String ok) {
+    if (isValidOk(ok)) {
+      throw new Exception(ErrorCode.INVALID_INPUT_OKAY);
+    }
+  }
+
+  private void throwExceptionInvalidInputNumber(){
+    throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
+  }
+
+  private void throwExceptionInvalidInputLength() {
+    throw new Exception(ErrorCode.INVALID_INPUT_LENGTH);
+  }
+
+  private void throwExceptionInvalidInputAddress(){
+    throw new Exception(ErrorCode.INVALID_INPUT_ADDRESS);
+  }
+
+  private boolean isLength50(String s) {
+    return (s.length() > 50);
+  }
+
+  private boolean isCorrectNumberRange(String number, int max) {
     try {
       int num = Integer.parseInt(number);
       return num < 1 || num > max;
@@ -72,14 +74,28 @@ public class ExceptionList {
     }
   }
 
-  public static boolean isValidAddress(String address) {
+  private boolean isValidNumber(String number) {
+    String regex = "^[0-9]+$";
+    Pattern p = Pattern.compile(regex);
+    Matcher m = p.matcher(number);
+    return !m.matches();
+  }
+
+  private boolean isValidText(String text) {
+    String regex = "^[a-zA-Z가-힣,()\\s]+$";
+    Pattern p = Pattern.compile(regex);
+    Matcher m = p.matcher(text);
+    return !m.matches();
+  }
+
+  private boolean isValidAddress(String address) {
     String regex = "^[a-zA-Z가-힣()0-9 _-]*$";
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(address);
     return !m.matches();
   }
 
-  public static boolean isValidFloat(String number) {
+  private boolean isValidFloat(String number) {
     try {
       float f = Float.parseFloat(number);
       return (f < 0.0) || (f > Float.MAX_VALUE);
@@ -88,7 +104,7 @@ public class ExceptionList {
     }
   }
 
-  public static boolean isValidSmallInt(String number) {
+  private boolean isValidSmallInt(String number) {
     try {
       int i = Integer.parseInt(number);
       return i < 0 || i > 32767;
@@ -97,23 +113,18 @@ public class ExceptionList {
     }
   }
 
-  public static boolean isValidEmail(String email) {
+  private boolean isValidEmail(String email) {
     String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(email);
     return !m.matches();
   }
 
-
-  public static boolean isValidOk(String ok) {
+  private boolean isValidOk(String ok) {
     String regex = "^[YyNn]$";
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(ok);
     return (!m.matches() || ok.length() != 1);
-  }
-
-  public static boolean isLength50(String s) {
-    return (s.length() > 50);
   }
 
   public static boolean isValidPhoneNumber(String number) {
@@ -136,17 +147,5 @@ public class ExceptionList {
     }
     return true;
   }
-
-//  public static boolean isExistName(String name, Map<String, Address> people) {
-//    Set<String> keySet = people.keySet();
-//    for (String a : keySet) {
-//      if (name.equals(people.get(a).getName())) {
-//        return true;
-//      }
-//    }
-//
-//    return false;
-//  }
-
 
 }

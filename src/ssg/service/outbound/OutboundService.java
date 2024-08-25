@@ -1,5 +1,6 @@
 package ssg.service.outbound;
 
+import java.util.Arrays;
 import java.util.List;
 import ssg.Main;
 import ssg.dao.outbound.OutboundDao;
@@ -16,19 +17,20 @@ public class OutboundService implements OutboundServiceInterface {
     List<OutboundRequest> list = dao.readAll(state);
     StringBuilder sb = new StringBuilder();
     for (OutboundRequest o : list) {
-      sb.append("Outbound ID: ").append(o.getOutboundID()).append("\t")
-          .append("출고아이디: ").append(o.getUserid()).append("\t")
-          .append("재고아이디: ").append(o.getStockID()).append("\t")
-          .append("창고아이디: ").append(o.getWssID()).append("\t")
-          .append("출고수량: ").append(o.getOutboundAmount()).append("\t")
-          .append("배송지주소: ").append(o.getDeliveryAddress()).append("\t")
-          .append("주소코드: ").append(o.getLocationID()).append("\t")
-          .append("받는이: ").append(o.getRecipient()).append("\t")
-          .append("받는이연락처: ").append(o.getRecipientPhoneNumber()).append("\t")
-          .append("생성일: ").append(o.getCreateAt()).append("\t")
-          .append("출고요청상태: ").append(o.getOutboundState()).append("\t")
-          .append("출고요청상태기타: ").append(o.getOutboundExplain()).append("\n")
-          .append("--------------------------------------------").append("\n");
+      sb.append("-".repeat(50)).append("출고아이디\t재고아이디\t창고아이디\t출고수량\t배송지주소\t\t주소코드\t받는이\t연락처\t생성일\t출고요청상태\t기타").append("\n")
+          .append(o.getOutboundID()).append("\t")
+          .append(o.getUserid()).append("\t")
+          .append(o.getStockID()).append("\t")
+          .append(o.getWssID()).append("\t")
+          .append(o.getOutboundAmount()).append("\t")
+          .append(o.getDeliveryAddress()).append("\t")
+          .append(o.getLocationID()).append("\t")
+          .append(o.getRecipient()).append("\t")
+          .append(o.getRecipientPhoneNumber()).append("\t")
+          .append(o.getCreateAt()).append("\t")
+          .append(o.getOutboundState()).append("\t")
+          .append(o.getOutboundExplain()).append("\n")
+          .append("-".repeat(50)).append("\n");
     }
     System.out.print(sb.toString());
   }
@@ -51,10 +53,10 @@ public class OutboundService implements OutboundServiceInterface {
   /** 출고 요청 승인 */
   @Override
   public void okOutboundRequest(String ids, OutboundState state) {
-    String[] idArray = ids.split(",");
+    String[] split = ids.split(",");
     System.out.println(state.toString() + "처리를 시작합니다.");
-    for (String idStr : idArray) {
-      int id = Integer.parseInt(idStr.trim());
+    for (String s : split) {
+      int id = Integer.parseInt(s.trim());
       dao.update(id, state);
     }
     System.out.println(state.toString() + "처리가 끝났습니다.");

@@ -32,7 +32,4 @@ public class OutboundUserScript extends Script {
     return Integer.parseInt(menu);
   }
 
-
-
-
 }

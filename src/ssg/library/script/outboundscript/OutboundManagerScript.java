@@ -1,34 +1,31 @@
 package ssg.library.script.outboundscript;
 
+import static ssg.Main.brInstance;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import ssg.enums.errorcode.ErrorCode;
-import ssg.exception.Exception;
 import ssg.exception.ExceptionList;
 
 public class OutboundManagerScript {
 
   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+  ExceptionList el = new ExceptionList();
 
-  /** 출고관리 메뉴(관리자) */
-  public String printOutboundMenuMain() throws IOException {
+
+  /** 출고관리 메뉴 */
+  public int printOutboundMenuMain() throws IOException {
     System.out.print("\n<출고 관리 메뉴>\n1. 출고 요청서 관리\t\t\t2. 출고 지시서 관리\t\t\t3. 출고 조회\t\t\t4. 이전화면\n\n메뉴 입력 : ");
-    String menu = reader.readLine();
-    if (ExceptionList.isNumberInRange(menu,4)) {
-      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
-    }
-    return menu;
+    String menu = brInstance.readLine();
+    el.throwIncorrectNumberRange(menu, 4);
+    return Integer.parseInt(menu);
   }
 
   /** 출고 요청서 관리 */
   public int printOutMenu1() throws IOException {
-    System.out.print("\n<출고 요청서 관리>\n1. 출고 요청서 대기 처리\t\t\t2. 출고 요청서 상태 수정3. 이전화면\n\n메뉴 입력 : ");
-    String menu = reader.readLine();
-    if (ExceptionList.isNumberInRange(menu,3)) {
-      throw new Exception(ErrorCode.INVALID_INPUT_NUMBER);
-    }
+    System.out.print("\n<출고 요청서 관리>\n1. 출고 요청서 대기 처리\t\t\t2. 출고 요청서 상태 수정\t\t\t3. 이전화면\n\n메뉴 입력 : ");
+    String menu = brInstance.readLine();
+    el.throwIncorrectNumberRange(menu, 3);
     return Integer.parseInt(menu);
   }
 
@@ -41,16 +38,6 @@ public class OutboundManagerScript {
     System.out.print("\n미승인하실 요청서의 번호를 입력해주세요 : ");
     return reader.readLine();
   }
-
-
-
-  /** 출고 지시서 관리 */
-  public void printOutMenu2() throws IOException {}
-
-
-
-
-
 
 /*
   public void printAdminVehicleAssignmentMenu() {
